@@ -37,12 +37,8 @@ public class MypageService {
         // 중복확인
         User user = userRepository.findByUserId(userId);
         Optional<Contact> findContact = contactRepository.findContact(userId, number);
-        System.out.println("findContact = " + findContact);
         if (findContact.isEmpty()) {
             contactRepository.save(new Contact(name, number, LocalDateTime.now(), user));
-            System.out.println(" ============== ");
-            System.out.println(user.getContacts().get(0).toString());
-            System.out.println(" ============== ");
             return user.getContacts();
         } else {
             return null;

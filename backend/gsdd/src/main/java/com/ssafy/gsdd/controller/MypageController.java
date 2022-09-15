@@ -28,11 +28,9 @@ public class MypageController {
     public ResponseEntity<HashMap<String,Object>> userInfo(@PathVariable int userId) {
         HashMap<String, Object> result = new HashMap<>();
         User user = mypageService.getUser(userId);
-        result.put("User",user.getName());
+        result.put("user",user.getName());
         result.put("contacts", user.getContacts().stream().map(c -> new ContactResDTO(c.getContactId(),c.getName(),c.getContact())));
         result.put("routes", user.getRoutes().stream().map(r -> new RouteResDTO(r.getRouteId(),r.getName(),r.getAddress())));
-        System.out.println("user.getContacts() = " + user.getContacts().get(0));
-        System.out.println("여기까지 !!!!"  );
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -40,7 +38,6 @@ public class MypageController {
     @PostMapping("/contact")
     public ResponseEntity<HashMap> createContact(@RequestBody ContactDTO dto){
         HashMap<String, Object> result = new HashMap<>();
-        System.out.println("dto = " + dto);
         List<Contact> list = mypageService.contactSave(dto.getUserId(), dto.getName(), dto.getNumber());
         if(list == null){
             result.put("message", "fail");
