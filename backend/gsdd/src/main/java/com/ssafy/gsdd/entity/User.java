@@ -1,9 +1,6 @@
 package com.ssafy.gsdd.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,19 +9,22 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@ToString(exclude = "contacts")
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    @Id @GeneratedValue
-    int id;
+    @Id
+    @GeneratedValue
+    @Column(name = "user_Id")
+    private int userId;
     @Column(name = "name", nullable = false)
-    String name;
+    private  String name;
     @Column(name = "provider", nullable = false)
-    String provider;
+    private String provider;
 
-    @OneToMany(mappedBy = "userId")
-    List<Contact> contacts = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private  List<Contact> contacts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userId")
-    List<Route> routes = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Route> routes = new ArrayList<>();
 }
