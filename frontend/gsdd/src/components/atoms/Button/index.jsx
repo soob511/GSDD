@@ -1,6 +1,8 @@
 import React from 'react';
-import { ChangeBg } from './Button.styled';
-
+import { ChangeBg, Login } from './Button.styled';
+import kakao from '../../../assets/icons/kakao.png';
+import naver from '../../../assets/icons/kakao.png';
+import google from '../../../assets/icons/kakao.png';
 const Button = ({children}) => {
     return(
         <>
@@ -10,6 +12,15 @@ const Button = ({children}) => {
 
 }
 
+const LoginBtn = ({children, ...props}) => {
+    return(
+        
+        <>
+        <Login {...props} icons={props}>
+            {children}
+        </Login>
+        </>
+    );
+}
 
-
-export default Button;
+export default LoginBtn;
