@@ -3,7 +3,7 @@ import styled, {css} from "styled-components";
 import Image from '../../atoms/Image';
 import move from "../../../common/move";
 import theme from "../../../common/theme";
-
+import logo_txt from "../../../assets/logo_txt.png"
 
 
 const flexRow = css`
@@ -37,7 +37,7 @@ const Navbar = ({navigate, isLogin, setIsLogin, imgSize, fontSize, mode, fontWei
         console.log("ji");
     }
     return <StyledNavbar {...imgSize}>
-        <Image src='./logo_txt.png' alt='logo_txt.png' size={imgSize} onClick={moveToHome} style={{cursor: 'pointer'}}/>
+        <Image src={logo_txt} alt='logo_txt.png' size={imgSize} onClick={moveToHome} style={{cursor: 'pointer'}}/>
     </StyledNavbar>
 }
 
