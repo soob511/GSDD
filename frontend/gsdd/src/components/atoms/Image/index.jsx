@@ -1,25 +1,25 @@
 import React from "react";
-import styled, {css} from "styled-components";
-
-// width 길이만 설정해서 원본 비율은 유지
-const size = css`
-    ${({theme, size}) => 
-        css`
-            width: ${theme.contentSizes[size]};
-        `
-    }
-`
+import styled from "styled-components";
+import {prop} from "styled-tools";
 
 const StyledImage = styled.img`
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    ${size};
+    // width: 100%;
+    // height:100%;
+    // background: blue;
+    cursor: pointer;
+    width: ${prop('width')}px;
+    height:${prop('height')}px;
 `
 
-const Image = ({size}) => {
+const Image = ({width, height, src}) => {
+    const props = {
+        src,
+        width,
+        height
+    }
+
     return(
-        <StyledImage size={size} />
+        <StyledImage {...props} />
     )
 }
 
