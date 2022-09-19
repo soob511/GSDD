@@ -1,6 +1,18 @@
-FROM adoptopenjdk/openjdk11
-CMD ["./mvnw", "clean", "package"]
-ARG JAR_FILE_PATH=target/*.jar
-COPY ${JAR_FILE_PATH} app.jar
+
+FROM openjdk:11
+
+# set arg
+ARG WORKSPACE=/var/jenkins_home/workspace/GSDD/backend/gsdd/
+ARG BUILD_TARGET=${WORKSPACE}/build/libs
+WORKDIR ${WORKSPACE}
+
+# copy code & build
+COPY . .
+RUN ./gradlew clean bootJar
+
+WORKDIR ${BUILD_TARGET}
+RUN jar -xf *.jar
+
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","org.springframework.boot.loader.JarLauncher"]
+

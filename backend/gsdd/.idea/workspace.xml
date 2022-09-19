@@ -2,7 +2,71 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b75686a-e374-4264-8b25-e9f51ad7591a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/DTO/ContactDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/DTO/ContactResDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/DTO/RouteDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/DTO/RouteResDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/GsddApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/controller/MypageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/entity/Area.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/entity/Contact.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/entity/Route.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/entity/Safe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/repository/ContactRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/repository/RouteRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/gsdd/service/MypageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/ssafy/gsdd/GsddApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/.vscode/launch.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/public/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/public/logo512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/App.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/App.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/App.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/assets/icons/google.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/assets/icons/kakao.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/assets/icons/naver.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/assets/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/assets/logo_txt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/common/move.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/common/theme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/components/atoms/Button/Button.styled.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/components/atoms/Button/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/components/atoms/Image/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/components/atoms/Link/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/components/atoms/Link/styles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/components/molecules/Navbar/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/components/molecules/Navbar/styles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/components/pages/Home/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/components/pages/Information/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/components/pages/Login/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/components/pages/MyPage/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/reportWebVitals.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../frontend/gsdd/src/setupTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +176,7 @@
       <workItem from="1663205178836" duration="876000" />
       <workItem from="1663206073734" duration="1375000" />
       <workItem from="1663208068681" duration="579000" />
-      <workItem from="1663208662690" duration="31458000" />
+      <workItem from="1663208662690" duration="32062000" />
     </task>
     <servers />
   </component>
