@@ -11,7 +11,7 @@ export const Login = styled.div`
     height: 40px;
     border-radius: 20px;
     display: flex;
-    
+    justify-content: center;
     align-items: center;
     margin-bottom: 8px;
     cursor: pointer;
@@ -31,7 +31,7 @@ ${(props) => props.naver &&
         background: #00bf19;
         border: 1px solid #00bf19;
     `}
-    
+
 ${(props) => props.google &&
     css`
         border: 1px solid #d9d9d9;
