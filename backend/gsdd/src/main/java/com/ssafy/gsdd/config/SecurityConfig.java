@@ -25,9 +25,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf().disable();
         httpSecurity.httpBasic().disable();
-<<<<<<< Updated upstream
-        httpSecurity.csrf().disable();
-=======
         httpSecurity.authorizeRequests()
                 .anyRequest().permitAll()
                 .and()
@@ -41,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
->>>>>>> Stashed changes
+
     }
 
 }
