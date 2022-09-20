@@ -1,19 +1,19 @@
 import React from 'react';
-import { ChangeBg, Login } from './Button.styled';
-const Button = ({children}) => {
-    return(
+import { ChangeBg, Login } from './styles';
+const Button = ({ children }) => {
+    return (
         <>
-        <ChangeBg>{children}</ChangeBg>
+            <ChangeBg>{children}</ChangeBg>
         </>
     );
 }
 
-const LoginBtn = ({children, ...props}) => {
-    return(
+const LoginBtn = ({ children, ...props }) => {
+    return (
         <>
-        <Login {...props}>
-            {children}
-        </Login>
+            <Login {...props}>
+                {children}
+            </Login>
         </>
     );
 }
