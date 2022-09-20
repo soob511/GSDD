@@ -1,12 +1,22 @@
 package com.ssafy.gsdd.entity;
 
+<<<<<<< Updated upstream
 import lombok.*;
+=======
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+>>>>>>> Stashed changes
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.sql.Timestamp;
 
 @Entity
+<<<<<<< Updated upstream
 @Getter
 @Setter
 @ToString(exclude = "contacts")
@@ -27,4 +37,35 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Route> routes = new ArrayList<>();
+=======
+@Data
+@NoArgsConstructor
+public class User{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private int id;
+    private String username;
+    private String password;
+    private String email;
+    private String role;
+
+    private String provider;
+    private String providerId;
+
+    @CreationTimestamp
+    private Timestamp createDate;
+
+
+    @Builder
+    public User(String username, String password, String email, String role, String provider, String providerId, Timestamp createDate) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.provider = provider;
+        this.providerId = providerId;
+        this.createDate = createDate;
+    }
+>>>>>>> Stashed changes
 }
