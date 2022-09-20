@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Navbar from '../../molecules/Navbar';
 import MapConfig from '../../molecules/MapConfig';
-
+import Sidebar from '../../molecules/Sidebar';
 // const flex = css`
 //   background: white;
 //   position: relative;
@@ -18,6 +18,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
+      <Sidebar />
       <MapConfig />
     </>
   );
