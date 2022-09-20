@@ -16,6 +16,11 @@ const Navbar = () => {
         </Link>
         <RiAlarmWarningFill size="40" color="red" />
       </S.StyledNavbar>
+      <div
+        style={{
+          height: '4rem',
+        }}
+      ></div>
     </>
   );
 };

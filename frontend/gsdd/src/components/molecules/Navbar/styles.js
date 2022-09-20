@@ -27,5 +27,4 @@ export const StyledNavbar = styled.div`
   height: 3.5rem;
   position: fixed;
   top: 0;
-  z-index: 10;
 `;

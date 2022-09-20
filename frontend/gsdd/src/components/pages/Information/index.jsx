@@ -1,13 +1,14 @@
 import React from 'react';
 import Button from '../../atoms/Button';
+import Navbar from '../../molecules/Navbar';
 
 const Information = () => {
-    return(
-        <>
-        <Button>This is Information</Button>
-        </>
-    );
-
-}
+  return (
+    <>
+      <Navbar />
+      <Button>This is Information</Button>
+    </>
+  );
+};
 
 export default Information;
