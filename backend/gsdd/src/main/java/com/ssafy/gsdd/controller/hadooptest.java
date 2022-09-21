@@ -15,7 +15,7 @@ public class hadooptest {
     @GetMapping("")
     public ResponseEntity<String> hadooptest(){
         System.out.println(" asdfjiaosdjfiaso");
-        String cmd = "sh test.sh";
+        String cmd = "sh /home/ubuntu/test.sh";
         String result = execCmd(cmd);
 
         return new ResponseEntity<>(result, HttpStatus.OK
