@@ -15,15 +15,16 @@ public class hadooptest {
     @GetMapping("")
     public ResponseEntity<String> hadooptest(){
         System.out.println(" asdfjiaosdjfiaso");
-        String cmd = "sh /home/ubuntu/test.sh";
+        String[] cmd = new String[] { "sh", "/home/ubuntu/test.sh"};
+
         String result = execCmd(cmd);
 
         return new ResponseEntity<>(result, HttpStatus.OK
         );
     }
-    public String execCmd(String cmd) {
+    public String execCmd(String[] cmd) {
         try {
-            Process process = Runtime.getRuntime().exec("cmd /c " + cmd);
+            Process process = Runtime.getRuntime().exec(cmd);
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(process.getInputStream()));
             String line = null;
