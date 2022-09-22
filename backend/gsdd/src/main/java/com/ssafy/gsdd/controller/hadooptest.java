@@ -23,16 +23,21 @@ public class hadooptest {
         );
     }
     public String execCmd(String[] cmd) {
+        System.out.println("execCmd 시작");
         try {
             Process process = Runtime.getRuntime().exec(cmd);
+            System.out.println("getRuntime 시작");
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(process.getInputStream()));
             String line = null;
+            System.out.println("line = " + line);
             StringBuffer sb = new StringBuffer();
             while ((line = reader.readLine()) != null) {
+                System.out.println("line = " + line);
                 sb.append(line);
                 sb.append("\n");
             }
+            System.out.println("sb.toString() = " + sb.toString());
             return sb.toString();
         } catch (Exception e) {
             e.printStackTrace();
