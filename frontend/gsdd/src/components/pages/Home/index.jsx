@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Navbar from '../../molecules/Navbar';
-import MapConfig from '../../molecules/MapConfig';
+import MapContainer from '../../molecules/MapContainer';
 
 // const flex = css`
 //   background: white;
@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <MapConfig />
+      <MapContainer />
     </>
   );
 };

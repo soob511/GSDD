@@ -1,9 +1,17 @@
 import styled, { css } from "styled-components";
 
-export const ChangeBg = styled.div`
-    background : red;
-    width : 500px;
-    height: 500px;
+export const RoundButton = styled.button`
+    background: ${({ theme }) =>
+        css`
+    ${theme.colors['blue']}
+    `};
+    border-radius: 50%;
+    border
+    width : 50px;
+    height: 50px;
+    bottom : 10px;
+    right : 10px;
+    position: fixed;
 `
 
 export const Login = styled.div`
@@ -19,21 +27,21 @@ export const Login = styled.div`
         outline: none;
     }
 ${(props) => props.kakao &&
-    css`
+        css`
         color: #3e2723;
         background: #ffeb3b;
         border: 1px solid #ffeb3b;
     `}
 
 ${(props) => props.naver &&
-    css`
+        css`
         color: white;
         background: #00bf19;
         border: 1px solid #00bf19;
     `}
 
 ${(props) => props.google &&
-    css`
+        css`
         border: 1px solid #d9d9d9;
     `}
 `;

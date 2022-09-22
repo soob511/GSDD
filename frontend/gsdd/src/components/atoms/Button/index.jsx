@@ -1,9 +1,10 @@
 import React from 'react';
-import { ChangeBg, Login } from './styles';
-const Button = ({ children }) => {
+import * as S from './styles';
+
+const RoundButton = ({ children }) => {
     return (
         <>
-            <ChangeBg>{children}</ChangeBg>
+            <S.RoundButton>{children}</S.RoundButton>
         </>
     );
 }
@@ -11,11 +12,11 @@ const Button = ({ children }) => {
 const LoginBtn = ({ children, ...props }) => {
     return (
         <>
-            <Login {...props}>
+            <S.Login {...props}>
                 {children}
-            </Login>
+            </S.Login>
         </>
     );
 }
 
-export default LoginBtn;
+export default { RoundButton, LoginBtn };

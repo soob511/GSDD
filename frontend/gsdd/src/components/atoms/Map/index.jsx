@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { NewMap } from './styles';
 
 
-const MapContainer = () => {
+const Map = () => {
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -31,4 +31,4 @@ const MapContainer = () => {
 }
 
 
-export default MapContainer;
+export default Map;
