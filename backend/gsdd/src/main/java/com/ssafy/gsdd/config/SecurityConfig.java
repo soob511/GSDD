@@ -1,44 +1,38 @@
 package com.ssafy.gsdd.config;
 
-import com.ssafy.gsdd.config.oauth.PrincipalOauth2UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import com.ssafy.gsdd.config.oauth.provider.CustomOAuth2UserService;
+import com.ssafy.gsdd.entity.Role;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Configuration
+
+@RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public BCryptPasswordEncoder encodePwd(){
-        return new BCryptPasswordEncoder();
-    }
+    private final CustomOAuth2UserService customOAuth2UserService;
 
-//    @Autowired
-//    private PrincipalOauth2UserService principalOauth2UserService;
+
+
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception{
-        httpSecurity.csrf().disable();
-        httpSecurity.httpBasic().disable();
-        httpSecurity.authorizeRequests()
-                .anyRequest().permitAll()
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .headers().frameOptions().disable()
                 .and()
-                .formLogin()
-                .loginPage("/login")
+                .authorizeRequests()
+                .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2/**", "/h2-console/**").permitAll()
+                .antMatchers("/api/v1/**").hasRole(Role.USER.name())
+                .anyRequest().authenticated()
                 .and()
-                .oauth2Login()
-                .loginPage("/login")
-                .userInfoEndpoint();
-//                .userService(principalOauth2UserService);
-
-
-
-
+                .logout().logoutSuccessUrl("/")
+                .and()
+                .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
     }
-
 }
