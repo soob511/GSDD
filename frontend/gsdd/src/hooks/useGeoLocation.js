@@ -11,8 +11,8 @@ const useGeoLocation = () => {
         setLocation({
             loaded: true,
             coords: {
-                lat: location.coords.lat,
-                lng: location.coords.lng,
+                lat: location.coords.latatitude,
+                lng: location.coords.longitude,
             },
         });
     };
@@ -32,7 +32,9 @@ const useGeoLocation = () => {
             });
         }
 
+        console.log("1", location);
         navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        console.log("2", location);
     }, []);
 
     return location;
