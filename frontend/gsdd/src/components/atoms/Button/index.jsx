@@ -1,13 +1,13 @@
 import React from 'react';
 import * as S from './styles';
 
-export const Button = ({ styleType, onClick, children, ...props }) => {
+export const Button = ({ styleType, children, ...props }) => {
 
     switch (styleType) {
         case "round":
             return (
                 <>
-                    <S.RoundButton onClick={onClick}>{children}</S.RoundButton>
+                    <S.RoundButton {...props}>{children}</S.RoundButton>
                 </>
             );
         case "login":

@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -42,4 +43,14 @@
   width: 100%;
   height: 100vh;
   padding-top: 4rem;
+}
+
+.show-mode {
+  right: 60px;
+  transition: 1s;
+}
+
+.hide-mode {
+  right: -180px;
+  transition: 1s;
 }

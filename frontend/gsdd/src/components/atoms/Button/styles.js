@@ -1,17 +1,16 @@
 import styled, { css } from "styled-components";
 
 export const RoundButton = styled.button`
-    background: ${({ theme }) =>
-        css`
-    ${theme.colors['blue']}
-    `};
+    background : ${({ theme }) => css`${theme.colors['blue']}`};
     border-radius: 50%;
-    border
+    margin-bottom: 10px;
+    margin-right: 10px;
     width : 50px;
     height: 50px;
-    bottom : 10px;
-    right : 10px;
-    position: fixed;
+    ${(props) => props.active &&
+        css`
+        background: ${({ theme }) => css`${theme.colors['grayblue']}`};
+    `}
 `
 
 export const Login = styled.div`

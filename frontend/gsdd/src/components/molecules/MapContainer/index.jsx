@@ -1,22 +1,95 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 import Map from '../../atoms/Map';
 import Button from '../../atoms/Button';
-import useGeoLocation from '../../../hooks/useGeoLocation';
+import mapInfo from './mapInfo';
+import mapMarkers from './mapMarkers';
 
 const MapContainer = () => {
 
-  // const location = useGeoLocation();
+  const [mapInfos, setMapInfos] = useState({
+    TmapV2: '',
+    map: '',
+    position: '',
+    location: '',
+    marker: '',
+  });
+  const [markers, setMarkers] = useState({
+    lights: [],
+    cameras: [],
+    houses: [],
+  });
 
-  const getCurrentPosition = async () => {
-    console.log("clicked! ");
-  };
+  const [mode, setMode] = useState(false);
+  const [btnActive, setBtnActive] = useState({
+    lights: false,
+    cameras: false,
+    houses: false,
+  });
+
+  const getMapInfo = async () => {
+    setMapInfos(await mapInfo());
+    console.log(mapInfos);
+  }
+
+  const getLightsMarker = () => {
+    // setMarkers(mapMarkers('lights', mapInfos));
+  }
+
+  const getRoad = () => {
+    console.log("getRoad");
+  }
+
+  const getMode = () => {
+    setMode(!mode);
+  }
+
+  const getLights = () => {
+    console.log("getLights");
+    setBtnActive((prevState) => {
+      return { ...prevState, lights: !prevState.lights }
+    });
+    if (btnActive.lights) {
+      console.log("가로등 다 지운ㅏ");
+    } else {
+      console.log("가로등 표시한다");
+      getLightsMarker();
+    }
+
+  }
+
+  const getCameras = () => {
+    console.log("getCameras");
+    setBtnActive((prevState) => {
+      return { ...prevState, cameras: !prevState.cameras }
+    });
+  }
+
+  const getHouses = () => {
+    console.log("getHouses");
+    setBtnActive((prevState) => {
+      return { ...prevState, houses: !prevState.houses }
+    });
+  }
+
+  useEffect(() => {
+    getMapInfo();
+  }, []);
 
   return (
     <>
       <S.StyledMapContainer>
-        <Map />
-        <Button styleType='round' onClick={getCurrentPosition}>현위치</Button>
+        <Map map={mapInfos.map} />
+        <S.StyledButtonHorizontalContainer className={mode ? 'show-mode' : 'hide-mode'}>
+          <Button styleType='round' onClick={getLights} active={btnActive.lights}>가로등</Button>
+          <Button styleType='round' onClick={getCameras} active={btnActive.cameras}>CCTV</Button>
+          <Button styleType='round' onClick={getHouses} active={btnActive.houses}>안전집</Button>
+        </S.StyledButtonHorizontalContainer>
+        <S.StyledButtonVerticalContainer>
+          <Button styleType='round' onClick={getMapInfo}>현위치</Button>
+          <Button styleType='round' onClick={getRoad}>길찾기</Button>
+          <Button styleType='round' onClick={getMode}>모드</Button>
+        </S.StyledButtonVerticalContainer>
       </S.StyledMapContainer>
     </>
   );
