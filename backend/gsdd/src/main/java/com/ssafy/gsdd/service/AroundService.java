@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 public class AroundService {
     @Autowired
     LampRepository lampRepository;
-
     @Autowired
     CCTVRepository cctvRepository;
     @Autowired
@@ -36,15 +35,6 @@ public class AroundService {
                 houseRepository.findAll().stream().filter(l -> distance(Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon()), lat, lon, "K") <= 1).map(l -> new CCTVDTO(Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon()))).collect(Collectors.toList()),
                 cctvRepository.findAll().stream().filter(l -> distance(Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon()), lat, lon, "K") <= 1).map(l -> new HouseDTO(Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon()))).collect(Collectors.toList())
         );
-    }
-
-    public void test() {
-        List<Lamp> all = lampRepository.findAll();
-        for (Lamp l : all) {
-            if (l.getLat().isEmpty() || l.getLon().isEmpty()) {
-                System.out.println("l.toString() = " + l.toString());
-            }
-        }
     }
 
     private static double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
