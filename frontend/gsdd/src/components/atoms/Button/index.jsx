@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChangeBg, Login } from './styles';
+import { ChangeBg, Login, X } from './styles';
 const Button = ({ children }) => {
     return (
         <>
@@ -8,7 +8,7 @@ const Button = ({ children }) => {
     );
 }
 
-const LoginBtn = ({ children, ...props }) => {
+export const LoginBtn = ({ children, ...props }) => {
     return (
         <>
             <Login {...props}>
@@ -18,4 +18,10 @@ const LoginBtn = ({ children, ...props }) => {
     );
 }
 
-export default LoginBtn;
+export const XBtn = ({...props}) => {
+    return (
+        <>
+            <X {...props}>X</X>
+        </>
+    )
+}

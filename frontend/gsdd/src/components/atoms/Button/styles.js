@@ -37,3 +37,14 @@ ${(props) => props.google &&
         border: 1px solid #d9d9d9;
     `}
 `;
+
+export const X = styled.button`
+    width: 20px;
+    height: 20px;
+    padding: 20px;
+    border: none;
+    background-color: white;
+    color: ${({theme}) => css`
+        ${theme.colors['gray2']}
+    `}
+`
