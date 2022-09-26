@@ -5,13 +5,23 @@ import logo_txt from '../../../assets/logo_txt.png';
 import Link from '../../atoms/Link';
 import { IoIosMenu } from 'react-icons/io';
 import { RiAlarmWarningFill } from 'react-icons/ri';
+import Sidebar from '../Sidebar/index.jsx';
+import Active from '../../atoms/Active';
 
-const Navbar = () => {
+const Navbar = (props) => {
+  console.log(props);
+  // console.log(props.childRef.current.toggleMenu)
+  // this.onToggleMenu = this.onToggleMenu.bind(this);
+  const onToggleMenu = () => {
+    props.childRef.current.toggleMenu();
+  };
   return (
     <>
       <S.StyledNavbar>
-        <IoIosMenu size="40" color="#FFFFFF" />
-        <Link styleType="NextLink" href="/">
+        <Active>
+          <IoIosMenu size="40" color="#FFFFFF" />
+        </Active>
+        <Link styleType="NextLink" href="/mypage">
           <Image src={logo_txt} width="100" height="50" />
         </Link>
         <RiAlarmWarningFill size="40" color="red" />

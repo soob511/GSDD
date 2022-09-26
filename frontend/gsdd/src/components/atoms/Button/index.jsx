@@ -1,21 +1,30 @@
 import React from 'react';
-import { ChangeBg, Login } from './styles';
-const Button = ({ children }) => {
-    return (
-        <>
-            <ChangeBg>{children}</ChangeBg>
-        </>
-    );
+import * as S from './styles';
+
+export const Button = ({ styleType, children, ...props }) => {
+
+    switch (styleType) {
+        case "round":
+            return (
+                <>
+                    <S.RoundButton {...props}>{children}</S.RoundButton>
+                </>
+            );
+        case "login":
+            return (
+                <>
+                    <S.Login {...props}>
+                        {children}
+                    </S.Login>
+                </>
+            );
+        case "x":
+            return (
+                <>
+                    <S.X {...props}>X</S.X>
+                </>
+            );
+    }
 }
 
-const LoginBtn = ({ children, ...props }) => {
-    return (
-        <>
-            <Login {...props}>
-                {children}
-            </Login>
-        </>
-    );
-}
-
-export default LoginBtn;
+export default Button;
