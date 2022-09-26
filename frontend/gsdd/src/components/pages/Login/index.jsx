@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginBtn from '../../atoms/Button';
+import { LoginBtn } from '../../atoms/Button';
 import logo from '../../../assets/logo.png';
 import * as S from './styles';
 import kakao from '../../../assets/icons/kakao.png';
