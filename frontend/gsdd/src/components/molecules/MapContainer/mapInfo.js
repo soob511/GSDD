@@ -1,5 +1,5 @@
 import pos from '../../../assets/pos.png';
-
+import Geolocation from 'react-native-geolocation-service';
 
 const mapInfo = async () => {
 
@@ -10,7 +10,8 @@ const mapInfo = async () => {
         };
 
         return new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject, gpsOptions);
+            // navigator.geolocation.getCurrentPosition(resolve, reject, gpsOptions);
+            Geolocation.getCurrentPosition(resolve, reject, gpsOptions);
         });
     }
 
