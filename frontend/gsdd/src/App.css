@@ -32,14 +32,23 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
+.background {
+  background-color: #c9d0e0;
+  height: 100vh;
+}
 
-.Login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.show-mode {
+  right: 60px;
+  transition: 1s;
+}
+
+.hide-mode {
+  right: -180px;
+  transition: 1s;
 }
