@@ -3,7 +3,7 @@ import * as S from './styles';
 import Map from '../../atoms/Map';
 import Button from '../../atoms/Button';
 import mapInfo from './mapInfo';
-import mapMarkers from './mapMarkers';
+import getMarkers from './getMarkers';
 
 const MapContainer = () => {
 
@@ -32,28 +32,24 @@ const MapContainer = () => {
     console.log(mapInfos);
   }
 
-  const getLightsMarker = () => {
-    // setMarkers(mapMarkers('lights', mapInfos));
-  }
-
   const getRoad = () => {
     console.log("getRoad");
   }
 
   const getMode = () => {
     setMode(!mode);
+    setMarkers(getMarkers(mapInfos.TmapV2, mapInfos.map, mapInfos.position.coords.latitude, mapInfos.position.coords.longitude));
   }
 
   const getLights = () => {
-    console.log("getLights");
     setBtnActive((prevState) => {
       return { ...prevState, lights: !prevState.lights }
     });
     if (btnActive.lights) {
-      console.log("가로등 다 지운ㅏ");
+      console.log("가로등 다 지운다");
     } else {
       console.log("가로등 표시한다");
-      getLightsMarker();
+
     }
 
   }

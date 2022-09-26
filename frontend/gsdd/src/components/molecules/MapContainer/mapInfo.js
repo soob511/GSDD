@@ -1,5 +1,6 @@
 import pos from '../../../assets/pos.png';
 
+
 const mapInfo = async () => {
 
     function getMyGps() {
