@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const HOST = 'http://j7b209.p.ssafy.io:80/api/';
+const HOST = 'http://j7b209.p.ssafy.io:8080/api/';
 
 const AUTH = 'login/';
 const MYPAGE = 'mypage/';
