@@ -18,6 +18,12 @@ export const Button = ({ styleType, children, ...props }) => {
                     </S.Login>
                 </>
             );
+        case "x":
+            return (
+                <>
+                    <S.X {...props}>X</S.X>
+                </>
+            );
     }
 }
 

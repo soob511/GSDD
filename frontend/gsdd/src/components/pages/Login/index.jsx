@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginBtn from '../../atoms/Button';
+import Button from '../../atoms/Button';
 import logo from '../../../assets/logo.png';
 import * as S from './styles';
 import kakao from '../../../assets/icons/kakao.png';
@@ -32,18 +32,18 @@ const Login = () => {
             <br />
           </span>
         </S.Text>
-        <LoginBtn kakao>
+        <Button styleType='login' kakao>
           <S.BtnLogo src={kakao}></S.BtnLogo>
           <S.BtnText>카카오톡으로 시작하기</S.BtnText>
-        </LoginBtn>
-        <LoginBtn naver>
+        </Button>
+        <Button styleType='login' naver>
           <S.BtnLogo src={naver}></S.BtnLogo>
           <S.BtnText>네이버로 시작하기</S.BtnText>
-        </LoginBtn>
-        <LoginBtn google>
+        </Button>
+        <Button styleType='login' google>
           <S.BtnLogo src={google}></S.BtnLogo>
           <S.BtnText>구글로 시작하기</S.BtnText>
-        </LoginBtn>
+        </Button>
       </S.Login>
     </>
   );

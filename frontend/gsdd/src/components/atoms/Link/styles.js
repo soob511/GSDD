@@ -10,6 +10,26 @@ export const Styles = css`
 //   }
 `;
 
+export const Text = css`
+  cursor: pointer;  
+  text-decoration: none;
+    color: ${({ theme }) =>
+    css`
+      ${theme.colors['blue']}
+    `};
+  font-size: 20px;
+  ${(props) => (props.href === '/logout') && css`
+    color: ${({theme}) =>
+    css`
+      ${theme.colors['red']}
+    `};
+    flex-direction: column-reverse; 
+  `}  
+`
 export const NextLink = styled.a`
   ${Styles};
 `;
+
+export const TextLink = styled.a`
+  ${Text};
+`
