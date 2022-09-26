@@ -11,7 +11,7 @@ const Navbar = () => {
     <>
       <S.StyledNavbar>
         <IoIosMenu size="40" color="#FFFFFF" />
-        <Link styleType="NextLink" href="/mypage">
+        <Link styleType="NextLink" href="/">
           <Image src={logo_txt} width="100" height="50" />
         </Link>
         <RiAlarmWarningFill size="40" color="red" />

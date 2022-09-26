@@ -14,7 +14,6 @@ const flex2 = css`
 
 export const MainCardContainer = styled.div`
   ${flex1}
-  //   justify-content: space-around;
   margin-top: -30px;
 `;
 
@@ -36,4 +35,8 @@ export const Count = styled.div`
 export const Space = styled.div`
   height: 100%;
   width: 3px;
+`;
+
+export const FontSize = styled.div`
+  font-size: 1.5rem;
 `;
