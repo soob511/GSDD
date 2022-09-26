@@ -7,24 +7,22 @@ const MypageCard = () => {
 
   const clickedNumbers = () => {
     setType('비상연락망');
-    console.log(type);
   };
 
   const clickedDestinations = () => {
     setType('즐겨찾는 목적지');
-    console.log(type);
   };
   return (
     <>
       <S.MainCardContainer>
         <S.CardWrapper onClick={clickedNumbers}>
           비상연락망
-          <div>5</div>
+          <S.FontSize>5</S.FontSize>
         </S.CardWrapper>
         <S.Space />
         <S.CardWrapper onClick={clickedDestinations}>
           즐겨찾는 목적지
-          <div>3</div>
+          <S.FontSize> 3</S.FontSize>
         </S.CardWrapper>
       </S.MainCardContainer>
       <MyPageListCard type={type} />

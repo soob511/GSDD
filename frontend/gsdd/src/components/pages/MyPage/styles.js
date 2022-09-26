@@ -9,8 +9,8 @@ const flex = css`
 export const ArticleCard = styled.div`
   ${flex}
   width: 100%;
-  height: 8rem;
+  height: 10rem;
   background: white;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 20px;
 `;

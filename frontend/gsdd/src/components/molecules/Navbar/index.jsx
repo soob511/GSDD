@@ -9,12 +9,12 @@ import Sidebar from '../Sidebar/index.jsx';
 import Active from '../../atoms/Active';
 
 const Navbar = (props) => {
-  console.log(props)
+  console.log(props);
   // console.log(props.childRef.current.toggleMenu)
   // this.onToggleMenu = this.onToggleMenu.bind(this);
   const onToggleMenu = () => {
-    props.childRef.current.toggleMenu()
-  }
+    props.childRef.current.toggleMenu();
+  };
   return (
     <>
       <S.StyledNavbar>

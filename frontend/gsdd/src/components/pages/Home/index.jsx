@@ -5,9 +5,8 @@ import MapContainer from '../../molecules/MapContainer';
 import Sidebar from '../../molecules/Sidebar';
 
 const Home = () => {
-
   const side = useRef(null);
-  console.log(side)
+  console.log(side);
   // const onSidebarToggle = useCallback(() => {
   //   sidebarToggle.current.toggleMenu()
   // })
