@@ -67,7 +67,7 @@ const deviceSizes = {
 };
 
 const colors = {
-  yellow : '#FFD557',
+  yellow: '#FFD557',
   // green1: '#D7E029',
   // green2: '#CBCC2C',
   // green3: '#0F9749',
@@ -96,6 +96,7 @@ const colors = {
   black: '#404040',
   white: '#FFFFFF',
   blue: '#02588B',
+  grayblue: '#7D9FB2',
   background: 'linear-gradient(35deg, #CBCC2C 25%, #508E47 90%)'
 };
 
