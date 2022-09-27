@@ -17,28 +17,26 @@ public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = true)
     private String name;
+
     @Column(nullable = true)
     private String email;
-    @Column
-    private String picture;
+
+    @Column(nullable = false)
+    private String provider;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;  // Role: 직접 만드는 클래스
 
     @Builder
-    public User(String name, String email, String picture, Role role) {
+    public User(String name, String email, String provider, Role role) {
         this.name = name;
         this.email = email;
-        this.picture = picture;
+        this.provider = provider;
         this.role = role;
-    }
-
-    public User update(String name, String picture) {
-        this.name = name;
-        this.picture = picture;
-        return this;
     }
 
     public String getRoleKey() {

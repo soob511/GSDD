@@ -7,6 +7,10 @@ server:
       enabled: true
       force: true
 
+jwt:
+  header: Authorization
+  secret-key: 236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

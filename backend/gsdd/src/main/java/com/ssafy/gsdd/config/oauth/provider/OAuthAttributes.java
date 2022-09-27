@@ -1,6 +1,5 @@
 package com.ssafy.gsdd.config.oauth.provider;
 
-
 import com.ssafy.gsdd.entity.Role;
 import com.ssafy.gsdd.entity.User;
 import lombok.Builder;
@@ -11,20 +10,19 @@ import java.util.Map;
 @Getter
 public class OAuthAttributes {
     private Map<String, Object> attributes;
-    private String nameAttributeKey, name, email, picture;
+    private String nameAttributeKey, name, email, provider;
     @Builder
     public OAuthAttributes(Map<String, Object> attributes,
                            String nameAttributeKey,
-                           String name, String email, String picture) {
+                           String name, String email, String provider) {
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
         this.name = name;
         this.email = email;
-        this.picture = picture;
+        this.provider = provider;
     }
-    public static OAuthAttributes of(String registrationId,
-                                     String userNameAttributeName,
-                                     Map<String, Object> attributes) {
+
+    public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
         switch (registrationId) {
             case "naver":
                 return ofNaver("id", attributes);
@@ -36,38 +34,27 @@ public class OAuthAttributes {
     }
 
 
-    public static OAuthAttributes ofGoogle(String userNameAttributeName,
-                                           Map<String, Object> attributes) {
+    public static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes) {
         return OAuthAttributes.builder()
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
-                .picture((String) attributes.get("picture"))
+                .provider("google")
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }
-    public User toEntity() {
-        return User.builder()
-                .name(name)
-                .email(email)
-                .picture(picture)
-                .role(Role.GUEST)
-                .build();
-    }
-    public static OAuthAttributes ofNaver(String userNameAttributeName,
-                                          Map<String, Object> attributes) {
+
+    public static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
         return OAuthAttributes.builder()
                 .name((String) response.get("name"))
                 .email((String) response.get("email"))
-                .picture((String) response.get("profile_image"))
+                .provider("naver")
                 .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }
-    public static OAuthAttributes ofKakao(String userNameAttributeName,
-                                          Map<String, Object> attributes) {
-
+    public static OAuthAttributes ofKakao(String userNameAttributeName, Map<String, Object> attributes) {
         // kakao는 kakao_account에 유저정보가 있다. (email)
         Map<String, Object> kakaoAccount = (Map<String, Object>)attributes.get("kakao_account");
         // kakao_account안에 또 profile이라는 JSON객체가 있다. (nickname, profile_image)
@@ -75,8 +62,18 @@ public class OAuthAttributes {
         return OAuthAttributes.builder()
                 .name((String) kakaoProfile.get("nickname"))
                 .email((String) kakaoAccount.get("email"))
+                .provider("kakao")
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
+                .build();
+    }
+
+    public User toEntity() {
+        return User.builder()
+                .name(name)
+                .email(email)
+                .provider(provider)
+                .role(Role.USER)
                 .build();
     }
 }
