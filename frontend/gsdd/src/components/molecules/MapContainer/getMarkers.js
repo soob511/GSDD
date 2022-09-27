@@ -1,8 +1,8 @@
 import axios from 'axios';
 import apiPath from '../../../common/apiPath';
-import light from '../../../assets/light.png';
+import streetlight from '../../../assets/streetlight.png';
 
-const getMarkers = async (Tmapv2, map, lat, lng) => {
+const getMarkers = async (Tmapv2, savedMap, lat, lng) => {
     // try {
     //     const { data } = await axios({
     //         method: 'GET',
@@ -90,29 +90,33 @@ const getMarkers = async (Tmapv2, map, lat, lng) => {
     markers.cameras = [];
     markers.houses = [];
 
-    for (const val of data.lights) {
-        const location = new Tmapv2.LatLng(val.lat, val.lng);
-        console.log(location);
-        const marker = new Tmapv2.Marker({
-            icon: light,
+    for (const val in data.lights) {
+        const location = new window.Tmapv2.LatLng(val.lat, val.lng);
+        const marker = new window.Tmapv2.Marker({
+            icon: streetlight,
             position: location,
+            map: savedMap,
         });
         markers.lights.push(marker);
-        marker.setMap(map);
     }
-
-    // data.lights.forEach(function (lat, lng) {
-    //     const location = new Tmapv2.LatLng(lat, lng);
-    //     console.log(location);
-    //     const marker = new Tmapv2.Marker({
-    //         icon: light,
-    //         position: location,
-    //     });
-    //     markers.lights.push(
-    //         marker
-    //     );
-    //     marker.setMap(map);
-    // });
+    for (const val in data.cameras) {
+        const location = new window.Tmapv2.LatLng(val.lat, val.lng);
+        const marker = new window.Tmapv2.Marker({
+            icon: streetlight,
+            position: location,
+            map: savedMap,
+        });
+        markers.cameras.push(marker);
+    }
+    for (const val in data.houses) {
+        const location = new window.Tmapv2.LatLng(val.lat, val.lng);
+        const marker = new window.Tmapv2.Marker({
+            icon: streetlight,
+            position: location,
+            map: savedMap,
+        });
+        markers.houses.push(marker);
+    }
     return markers;
 };
 

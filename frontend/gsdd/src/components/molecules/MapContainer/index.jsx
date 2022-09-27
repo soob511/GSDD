@@ -21,6 +21,7 @@ const MapContainer = () => {
   });
 
   const [mode, setMode] = useState(false);
+
   const [btnActive, setBtnActive] = useState({
     lights: false,
     cameras: false,
@@ -36,20 +37,35 @@ const MapContainer = () => {
     console.log("getRoad");
   }
 
-  const getMode = () => {
+  const getMode = async () => {
     setMode(!mode);
-    setMarkers(getMarkers(mapInfos.TmapV2, mapInfos.map, mapInfos.position.coords.latitude, mapInfos.position.coords.longitude));
+    setMarkers(await getMarkers(mapInfos.TmapV2, mapInfos.map, mapInfos.position.coords.latitude, mapInfos.position.coords.longitude));
+  }
+
+  function markerVisible(type) {
+    for (const val of type) {
+      val.setMap(mapInfos.map);
+      val.setVisible(true);
+    }
+  }
+
+  function markerInvisible(type) {
+    for (const val of type) {
+      val.setVisible(false);
+    }
   }
 
   const getLights = () => {
     setBtnActive((prevState) => {
       return { ...prevState, lights: !prevState.lights }
     });
+    console.log(markers);
     if (btnActive.lights) {
-      console.log("가로등 다 지운다");
+      console.log('가로등 끈다');
+      markerInvisible(markers.lights);
     } else {
-      console.log("가로등 표시한다");
-
+      console.log('가로등 켠다');
+      markerVisible(markers.lights);
     }
 
   }

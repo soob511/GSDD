@@ -1,5 +1,7 @@
-import pos from '../../../assets/pos.png';
 import Geolocation from 'react-native-geolocation-service';
+import pos from '../../../assets/pos.png';
+import streetlight from '../../../assets/streetlight.png';
+
 
 const mapInfo = async () => {
 
@@ -18,6 +20,7 @@ const mapInfo = async () => {
     const { Tmapv2 } = window;
 
     const position = await getMyGps();
+    console.log("position:", position)
 
     //지도에 표시할 위치의 위도와 경도 좌표를 파라미터로 넣어주기
     const location = new Tmapv2.LatLng(position.coords.latitude, position.coords.longitude);
@@ -31,6 +34,12 @@ const mapInfo = async () => {
     const marker = new Tmapv2.Marker({
         icon: pos,
         position: location,
+        map: map
+    });
+    const location2 = new Tmapv2.LatLng(36.33655, 127.33074);
+    const marker2 = new Tmapv2.Marker({
+        icon: streetlight,
+        position: location2,
         map: map
     });
 
