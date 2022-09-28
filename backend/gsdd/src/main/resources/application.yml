@@ -14,9 +14,9 @@ jwt:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/security?serverTimezone=Asia/Seoul
-    username: cos
-    password: cos1234
+    url: jdbc:mysql://j7b209.p.ssafy.io/gsdd?serverTimezone=Asia/Seoul
+    username: gsdd
+    password: gsdd2725
 
   mvc:
     view:
@@ -57,11 +57,11 @@ spring:
               - email
             client-name: Naver
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/naver
+            redirect-uri: http://j7b209.p.ssafy.io:8080/login/oauth2/code/naver
 
           kakao:
             client-id: 2fae505092f63e7cee07b8cbf05c0c1e
-            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            redirect-uri: http://j7b209.p.ssafy.io:8080/login/oauth2/code/kakao
             client-authentication-method: POST
             client-secret: IGBEYECpvtQx4pzFM1WEHdXlRaAhHcCo
             authorization-grant-type: authorization_code
