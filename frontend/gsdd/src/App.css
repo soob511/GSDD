@@ -45,10 +45,10 @@
 
 .show-mode {
   right: 60px;
-  transition: 1s;
+  /* transition: 1s; */
 }
 
 .hide-mode {
   right: -180px;
-  transition: 1s;
+  /* transition: 1s; */
 }

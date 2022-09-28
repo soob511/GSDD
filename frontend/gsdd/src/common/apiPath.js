@@ -1,11 +1,10 @@
 const HOST = "http://j7b209.p.ssafy.io:8080/api/";
 
-const AUTH = "auth/";
-const USER = "user/";
-const MARKERS = "markers/";
-const MYPAGE = "mypage/";
-const ROUTE = "route/";
-const CONTACT = "contact/";
+const AUTH = 'auth/';
+const USER = 'user/';
+const MYPAGE = 'mypage/';
+const ROUTE = 'route/';
+const CONTACT = 'contact/';
 
 const apiPath = {
   auth: {
@@ -13,7 +12,7 @@ const apiPath = {
     logout: () => HOST + AUTH + "logout/",
   },
   markers: {
-    get: (lat, lng) => HOST + MARKERS + `${lat}/` + `${lng}/`,
+    get: (lat, lng) => HOST + `${lat}/` + `${lng}/`,
   },
 };
 
