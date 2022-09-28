@@ -14,6 +14,7 @@ const MapContainer = () => {
     location: '',
     marker: '',
   });
+
   const [markers, setMarkers] = useState({
     lights: [],
     cameras: [],
@@ -44,7 +45,6 @@ const MapContainer = () => {
 
   function markerVisible(type) {
     for (const val of type) {
-      val.setMap(mapInfos.map);
       val.setVisible(true);
     }
   }
@@ -59,7 +59,6 @@ const MapContainer = () => {
     setBtnActive((prevState) => {
       return { ...prevState, lights: !prevState.lights }
     });
-    console.log(markers);
     if (btnActive.lights) {
       console.log('가로등 끈다');
       markerInvisible(markers.lights);
@@ -75,6 +74,13 @@ const MapContainer = () => {
     setBtnActive((prevState) => {
       return { ...prevState, cameras: !prevState.cameras }
     });
+    if (btnActive.cameras) {
+      console.log('시시티비 끈다');
+      markerInvisible(markers.cameras);
+    } else {
+      console.log('시시티비 켠다');
+      markerVisible(markers.cameras);
+    }
   }
 
   const getHouses = () => {
@@ -82,6 +88,13 @@ const MapContainer = () => {
     setBtnActive((prevState) => {
       return { ...prevState, houses: !prevState.houses }
     });
+    if (btnActive.houses) {
+      console.log('안심집 끈다');
+      markerInvisible(markers.houses);
+    } else {
+      console.log('안심집 켠다');
+      markerVisible(markers.houses);
+    }
   }
 
   useEffect(() => {

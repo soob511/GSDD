@@ -1,6 +1,5 @@
 import Geolocation from 'react-native-geolocation-service';
 import pos from '../../../assets/pos.png';
-import streetlight from '../../../assets/streetlight.png';
 
 
 const mapInfo = async () => {
@@ -34,12 +33,6 @@ const mapInfo = async () => {
     const marker = new Tmapv2.Marker({
         icon: pos,
         position: location,
-        map: map
-    });
-    const location2 = new Tmapv2.LatLng(36.33655, 127.33074);
-    const marker2 = new Tmapv2.Marker({
-        icon: streetlight,
-        position: location2,
         map: map
     });
 
