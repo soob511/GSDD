@@ -18,7 +18,7 @@ public class UserDetailsImpl implements UserDetails, OAuth2User {
 
     private final String username; //이메일
     private final String password; //비밀번호
-    private final Long id; //사용자 고유번호
+    private final int id; //사용자 고유번호
     private final String nickname; //사용자 닉네임
     private final String provider; //제공자
     private final Collection<? extends GrantedAuthority> authorities;
@@ -33,7 +33,7 @@ public class UserDetailsImpl implements UserDetails, OAuth2User {
         return password;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
