@@ -16,8 +16,9 @@ const Home = () => {
   // }, []);
   return (
     <>
-      <Sidebar ref={side} />
-      <Navbar />
+      {/* <Sidebar ref={side} /> */}
+      <Sidebar/>
+      {/* <Navbar /> */}
       <MapContainer />
     </>
   );
