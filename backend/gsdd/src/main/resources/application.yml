@@ -1,0 +1,32 @@
+server:
+  servlet:
+    context-path: /api
+  tomcat:
+    remoteip:
+      protocol-header: x-forwarded-proto
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://j7b209.p.ssafy.io:3306/gsdd?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: gsdd
+    password: gsdd2725
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+
+logging:
+  level:
+    org.hibernate:
+      type:
+        descriptor:
+          sql: trace
+      SQL: debug

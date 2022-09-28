@@ -95,7 +95,8 @@ const colors = {
   // black : '#324034',
   black: '#404040',
   white: '#FFFFFF',
-  blue: '#02588B',
+  blue: '#FF0000',
+  //blue: '#02588B',
   grayblue: '#7D9FB2',
   background: 'linear-gradient(35deg, #CBCC2C 25%, #508E47 90%)'
 };
