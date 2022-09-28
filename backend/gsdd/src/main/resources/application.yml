@@ -8,7 +8,7 @@ server:
   tomcat:
     remoteip:
       protocol-header: x-forwarded-proto
-  port: 443
+  port: 8443
 spring:
   mvc:
     pathmatch:
