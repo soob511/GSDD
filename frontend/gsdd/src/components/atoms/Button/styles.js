@@ -51,6 +51,9 @@ export const X = styled.button`
     padding: 20px;
     border: none;
     background-color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
     color: ${({theme}) => css`
         ${theme.colors['gray2']}
     `}
