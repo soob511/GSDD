@@ -1,4 +1,4 @@
-package com.ssafy.gsdd.config;
+package com.ssafy.gsdd.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,9 @@
 package com.ssafy.gsdd.config;
 
 import com.ssafy.gsdd.entity.User;
+import com.ssafy.gsdd.exception.UserNotFoundException;
 import com.ssafy.gsdd.repository.UserRepository;
+import com.ssafy.gsdd.security.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -22,7 +23,7 @@ import java.util.Date;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public final class JwtProvider {
+public class JwtProvider {
 
     private final UserRepository userRepository;
     private final UserDetailsService userDetailsService;
@@ -70,20 +71,18 @@ public final class JwtProvider {
     public String generateJwtToken(Authentication authentication) {
 
         Claims claims;
-
+        if(authentication instanceof OAuth2AuthenticationToken) {//oauth2
             System.out.println("generateJwtToken: userDetailsImpl입니다: authentication"+authentication.toString());
-            claims = Jwts.claims().setSubject(String.valueOf(((UserDetailsImpl) authentication.getPrincipal()).getEmail()));
-
+            claims = Jwts.claims().setSubject(String.valueOf(((UserDetailsImpl) authentication.getPrincipal()).getUsername()));
+        } else{ //dipping
             System.out.println("generateJwtToken: userDetailsImpl 아닙니다: authentication"+authentication.toString());
             claims = Jwts.claims().setSubject(String.valueOf(authentication.getPrincipal()));
+        }
 
-        System.out.println("generateJwtToken: userDetailsImpl입니다: authentication"+authentication.toString());
-
-        System.out.println("제발제발제발:"+claims.getSubject());
         User user = userRepository.findByEmail(claims.getSubject()).orElseThrow(UserNotFoundException::new);
         claims.put("id", user.getId());
-        claims.put("name", user.getName());
         claims.put("email", user.getEmail());
+        claims.put("name", user.getName());
         claims.put("provider", user.getProvider());
         claims.put("roles", authentication.getAuthorities());
         Date now = new Date();
@@ -111,7 +110,7 @@ public final class JwtProvider {
     public User getUser(String token) {
         Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
         String userId = String.valueOf(claims.getBody().get("userId"));
-        return userRepository.findById(Integer.parseInt(userId)).orElse(null);
+        return userRepository.findById((int) Long.parseLong(userId)).orElse(null);
     }
 
 

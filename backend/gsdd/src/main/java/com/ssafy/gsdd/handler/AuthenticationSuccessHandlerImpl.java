@@ -1,6 +1,6 @@
 package com.ssafy.gsdd.handler;
 
-import com.ssafy.gsdd.config.ApiResponse;
+import com.ssafy.gsdd.common.ApiResponse;
 import com.ssafy.gsdd.config.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -30,13 +30,18 @@ public class AuthenticationSuccessHandlerImpl extends SimpleUrlAuthenticationSuc
         // JWT Token 발급
         final String token = jwtProvider.generateJwtToken(authentication);
         // Response
-        String url = makeRedirectUrl(token);
-        getRedirectStrategy().sendRedirect(request, response, url);
+        if(authentication instanceof OAuth2AuthenticationToken){
+            String url = makeRedirectUrl(token);
+            getRedirectStrategy().sendRedirect(request, response, url);
+        } else{
+            ApiResponse.token(response, token);
+        }
 
     }
 
     private String makeRedirectUrl(String token) {
-        return UriComponentsBuilder.fromUriString("http://localhost:8080/oauth2/redirect?token="+token).build().toUriString();
+        return UriComponentsBuilder.fromUriString("http://localhost:8080/oauth2/redirect?token="+token)
+                .build().toUriString();
     }
 
 }

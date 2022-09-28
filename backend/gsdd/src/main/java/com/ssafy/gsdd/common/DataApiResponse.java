@@ -1,4 +1,4 @@
-package com.ssafy.gsdd.config;
+package com.ssafy.gsdd.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

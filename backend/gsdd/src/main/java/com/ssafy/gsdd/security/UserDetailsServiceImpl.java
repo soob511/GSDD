@@ -1,4 +1,4 @@
-package com.ssafy.gsdd.config;
+package com.ssafy.gsdd.security;
 
 import com.ssafy.gsdd.entity.User;
 import com.ssafy.gsdd.repository.UserRepository;
@@ -23,10 +23,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         System.out.println("loadUserByUsername: "+username);
         User user = userRepository.findByEmail(username).orElseThrow(() -> new RuntimeException("Not Found User"));
-        return (UserDetails) new UserDetailsImpl(
+        return new UserDetailsImpl(
+                user.getEmail(),
+                user.getPw(),
                 user.getId(),
                 user.getName(),
-                user.getEmail(),
                 user.getProvider(),
                 Collections.singleton(new SimpleGrantedAuthority(user.getRole().getKey()))
         );

@@ -1,4 +1,4 @@
-package com.ssafy.gsdd.config;
+package com.ssafy.gsdd.exception;
 
 public class UserNotFoundException extends RuntimeException {
 

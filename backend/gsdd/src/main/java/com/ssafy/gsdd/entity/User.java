@@ -22,6 +22,9 @@ public class User extends BaseTimeEntity {
     private String name;
 
     @Column(nullable = true)
+    private String pw;
+
+    @Column(nullable = true)
     private String email;
 
     @Column(nullable = false)
@@ -32,14 +35,18 @@ public class User extends BaseTimeEntity {
     private Role role;  // Role: 직접 만드는 클래스
 
     @Builder
-    public User(String name, String email, String provider, Role role) {
+    public User(String name, String pw, String email, String provider, Role role) {
         this.name = name;
+        this.pw = pw;
         this.email = email;
         this.provider = provider;
         this.role = role;
     }
 
+
     public String getRoleKey() {
         return this.role.getKey();
     }
+
+
 }
