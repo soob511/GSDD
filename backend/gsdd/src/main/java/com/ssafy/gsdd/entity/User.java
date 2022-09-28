@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -47,6 +49,10 @@ public class User extends BaseTimeEntity {
     public String getRoleKey() {
         return this.role.getKey();
     }
+    @OneToMany(mappedBy = "user")
+    private List<Contact> contacts = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<Route> routes = new ArrayList<>();
 
 }
