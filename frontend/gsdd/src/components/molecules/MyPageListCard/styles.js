@@ -26,7 +26,6 @@ export const ListCard = styled.div`
   border-radius: 10px;
   background: white;
   overflow: auto;
-  position: absolute;
 `;
 
 export const TitleWrapper = styled.div`
@@ -45,27 +44,24 @@ export const PlusBtn = styled.button`
   border: none;
   font-size: 1.5rem;
   background: white;
-  position: fixed;
-  width: 80%;
+  width: 100%;
   border-radius: 10px;
-  height: 5%;
-  bottom: 80px;
+  height: 10%;
 `;
 
 export const MainWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 80%;
-  height: 6%;
-  position: fixed;
+  width: 100%;
+  height: 11%;
+  margin: 1% 0;
   border-radius: 10px;
   background: white;
 `;
 
 export const Line = styled.hr`
-  width: 70%;
-  position: fixed;
-  margin: 0 0 0 5%;
+  width: 80%;
+  margin: 0 0 0 10%;
 `;
 
 export const AddressWrapper = styled.div`
