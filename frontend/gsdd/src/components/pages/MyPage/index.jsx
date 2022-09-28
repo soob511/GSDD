@@ -3,6 +3,7 @@ import * as S from './styles';
 import { FcLike } from 'react-icons/fc';
 import MypageCard from '../../molecules/MypageCard';
 import Navbar from '../../molecules/Navbar';
+import Sidebar from '../../molecules/Sidebar';
 import API from '../../../common/api';
 
 const MyPage = () => {
@@ -24,7 +25,7 @@ const MyPage = () => {
   // 여기서 axios 통신
   return (
     <>
-      <Navbar />
+      <Sidebar />
       <S.ArticleCard>
         {username}님! 오늘도 안전길 다니세요
         <FcLike size="2rem" />

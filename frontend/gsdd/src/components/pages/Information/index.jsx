@@ -40,8 +40,8 @@ const Information = () => {
   console.log(selectDistrict)
   return (
     <>
-      {/* <Sidebar /> */}
-      <Navbar />
+      <Sidebar />
+      {/* <Navbar /> */}
       <S.Container>
         <S.Header>
           <S.RowBox>

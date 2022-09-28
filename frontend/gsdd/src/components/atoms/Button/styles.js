@@ -56,16 +56,18 @@ ${(props) =>
 `;
 
 export const X = styled.button`
-  width: 20px;
-  height: 20px;
-  padding: 20px;
-  border: none;
-  background-color: white;
-  color: ${({ theme }) => css`
-    ${theme.colors['gray2']}
-  `};
-`;
-
+    width: 20px;
+    height: 20px;
+    padding: 20px;
+    border: none;
+    background-color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: ${({theme}) => css`
+        ${theme.colors['gray2']}
+    `}
+`
 export const ModalBtn = styled.button`
   //   -webkit-appearance: none;
   //   -moz-appearance: none;
