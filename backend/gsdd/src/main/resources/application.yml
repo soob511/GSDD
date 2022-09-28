@@ -1,5 +1,4 @@
 server:
-  port: 443
   ssl:
     key-store: classpath:keystore.p12
     key-store-type: PKCS12
@@ -9,6 +8,7 @@ server:
   tomcat:
     remoteip:
       protocol-header: x-forwarded-proto
+  port: 443
 spring:
   mvc:
     pathmatch:
