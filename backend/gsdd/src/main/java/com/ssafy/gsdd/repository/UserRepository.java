@@ -3,16 +3,16 @@ package com.ssafy.gsdd.repository;
 import com.ssafy.gsdd.entity.User;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-@Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+import java.util.Optional;
 
-    // 생성
+public interface UserRepository extends JpaRepository<User,Integer> {
 
-    // 조회
     @EntityGraph(attributePaths = {"contacts"})
     User findByUserId(int id);
+
+    Optional<User> findByEmail(String email);
+
 }
