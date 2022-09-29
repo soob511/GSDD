@@ -24,7 +24,7 @@ public class Route {
     @Column(nullable = false)
     private String address;
 
-    public Route(String name, String address,  User user) {
+    public Route(String name, String address, User user) {
         this.name = name;
         this.address = address;
         this.addRoute(user);

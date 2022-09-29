@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Contact {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int contactId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -31,7 +31,7 @@ public class Contact {
     @Column(nullable = false)
     private LocalDateTime regDate;
 
-    public Contact(String name, String contact, LocalDateTime regDate,User user) {
+    public Contact(String name, String contact, LocalDateTime regDate, User user) {
         this.name = name;
         this.contact = contact;
         this.regDate = regDate;
