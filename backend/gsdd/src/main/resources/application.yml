@@ -14,7 +14,7 @@ jwt:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://j7b209.p.ssafy.io/gsdd?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://j7b209.p.ssafy.io:3306/gsdd?serverTimezone=Asia/Seoul
     username: gsdd
     password: gsdd2725
 
@@ -25,7 +25,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create #create update none
+      ddl-auto: update #create update none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
@@ -42,13 +42,6 @@ spring:
               - profile
 
 
-#          facebook:
-#            client-id: 454165336481013
-#            client-secret: 93ebfb2a45e9d7b9cbc2b284f70159e1
-#            scope:
-#              - email
-#              - public_profile
-#
           naver:
             client-id: MWXhw_1noM0PEjefFt2k
             client-secret: 4jjtN3KVJS
@@ -57,11 +50,11 @@ spring:
               - email
             client-name: Naver
             authorization-grant-type: authorization_code
-            redirect-uri: http://j7b209.p.ssafy.io:8080/login/oauth2/code/naver
+            redirect-uri: http://j7b209.p.ssafy.io/login/oauth2/code/naver
 
           kakao:
             client-id: 2fae505092f63e7cee07b8cbf05c0c1e
-            redirect-uri: http://j7b209.p.ssafy.io:8080/login/oauth2/code/kakao
+            redirect-uri: http://j7b209.p.ssafy.io/login/oauth2/code/kakao
             client-authentication-method: POST
             client-secret: IGBEYECpvtQx4pzFM1WEHdXlRaAhHcCo
             authorization-grant-type: authorization_code

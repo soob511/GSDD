@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Contact {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int contactId;
 
     @ManyToOne(fetch = FetchType.LAZY)
