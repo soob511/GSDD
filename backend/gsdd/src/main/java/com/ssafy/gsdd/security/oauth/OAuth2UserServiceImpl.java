@@ -38,7 +38,7 @@ public class OAuth2UserServiceImpl implements OAuth2UserService<OAuth2UserReques
         return new UserDetailsImpl(
                 user.getEmail(),
                 user.getPw(),
-                user.getId(),
+                user.getUserId(),
                 user.getName(),
                 user.getProvider(),
                 Collections.singleton(new SimpleGrantedAuthority(user.getRole().getKey())));

@@ -80,7 +80,7 @@ public class JwtProvider {
         }
 
         User user = userRepository.findByEmail(claims.getSubject()).orElseThrow(UserNotFoundException::new);
-        claims.put("id", user.getId());
+        claims.put("id", user.getUserId());
         claims.put("email", user.getEmail());
         claims.put("name", user.getName());
         claims.put("provider", user.getProvider());
@@ -109,8 +109,8 @@ public class JwtProvider {
 
     public User getUser(String token) {
         Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
-        String userId = String.valueOf(claims.getBody().get("userId"));
-        return userRepository.findById((int) Long.parseLong(userId)).orElse(null);
+        String userId = String.valueOf(claims.getBody().get("user_Id"));
+        return userRepository.findByUserId(Integer.parseInt(userId));
     }
 
 
