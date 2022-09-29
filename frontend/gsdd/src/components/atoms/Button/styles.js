@@ -20,7 +20,7 @@ export const RoundButton = styled.button`
     `}
 `;
 
-export const Login = styled.div`
+export const Login = styled.a`
   width: 320px;
   height: 40px;
   border-radius: 20px;
@@ -29,6 +29,7 @@ export const Login = styled.div`
   align-items: center;
   margin-bottom: 8px;
   cursor: pointer;
+  text-decoration: none;
   &:focus {
     outline: none;
   }
@@ -51,21 +52,24 @@ export const Login = styled.div`
 ${(props) =>
     props.google &&
     css`
+      color: black;
       border: 1px solid #d9d9d9;
     `}
 `;
 
 export const X = styled.button`
-  width: 20px;
-  height: 20px;
-  padding: 20px;
-  border: none;
-  background-color: white;
-  color: ${({ theme }) => css`
-    ${theme.colors['gray2']}
-  `};
-`;
-
+    width: 20px;
+    height: 20px;
+    padding: 20px;
+    border: none;
+    background-color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: ${({theme}) => css`
+        ${theme.colors['gray2']}
+    `}
+`
 export const ModalBtn = styled.button`
   //   -webkit-appearance: none;
   //   -moz-appearance: none;

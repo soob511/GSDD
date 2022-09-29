@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import * as S from './styles';
 import Image from '../../atoms/Image';
 import logo_txt from '../../../assets/logo_txt.png';
@@ -9,16 +9,13 @@ import Sidebar from '../Sidebar/index.jsx';
 import Active from '../../atoms/Active';
 
 const Navbar = (props) => {
-  console.log(props);
-  // console.log(props.childRef.current.toggleMenu)
-  // this.onToggleMenu = this.onToggleMenu.bind(this);
-  const onToggleMenu = () => {
-    props.childRef.current.toggleMenu();
-  };
+  
   return (
     <>
       <S.StyledNavbar>
-        <Active>
+        <Active onClick={() => {
+            props.setBool(!props.bool);
+          }}>
           <IoIosMenu size="40" color="#FFFFFF" />
         </Active>
         <Link styleType="NextLink" href="/mypage">
