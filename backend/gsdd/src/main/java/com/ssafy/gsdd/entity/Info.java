@@ -6,9 +6,11 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@Table(name="info")
 public class Info {
     @Id
     @GeneratedValue
+    @Column(name = "infoId")
     int id;
 
     @ManyToOne(fetch = FetchType.LAZY)

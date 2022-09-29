@@ -7,10 +7,11 @@ import java.util.List;
 
 @Entity
 @Data
+@Table(name="area")
 public class Area {
     @Id
     @GeneratedValue
-    @Column(name = "area_id")
+    @Column(name = "areaId")
     int id;
 
     @Column(name = "si")

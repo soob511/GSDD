@@ -9,9 +9,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name = "lamp")
+@Table(name="lamp")
 public class Lamp {
     @Id @GeneratedValue
+    @Column(name = "lampId")
     int id;
     @Column(name = "lat")
     String lat;

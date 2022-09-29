@@ -6,10 +6,11 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@Table(name="safe")
 public class Safe {
     @Id
     @GeneratedValue
-    @Column(name = "safe_id")
+    @Column(name = "safeId")
     int id;
 
     @OneToOne

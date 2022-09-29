@@ -12,10 +12,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter @Setter
 @ToString(exclude = "user")
+@Table(name="contact")
 public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "contactId")
     private int contactId;
 
     @ManyToOne(fetch = FetchType.LAZY)
