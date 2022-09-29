@@ -20,7 +20,7 @@ export const RoundButton = styled.button`
     `}
 `;
 
-export const Login = styled.div`
+export const Login = styled.a`
   width: 320px;
   height: 40px;
   border-radius: 20px;
@@ -29,6 +29,7 @@ export const Login = styled.div`
   align-items: center;
   margin-bottom: 8px;
   cursor: pointer;
+  text-decoration: none;
   &:focus {
     outline: none;
   }
@@ -51,6 +52,7 @@ export const Login = styled.div`
 ${(props) =>
     props.google &&
     css`
+      color: black;
       border: 1px solid #d9d9d9;
     `}
 `;

@@ -1,7 +1,8 @@
 import React from 'react';
 import * as S from './styles';
 
-export const Button = ({ styleType, children, ...props }) => {
+export const Button = ({ styleType, href, children, ...props }) => {
+  
   switch (styleType) {
     case 'round':
       return (
@@ -12,7 +13,7 @@ export const Button = ({ styleType, children, ...props }) => {
     case 'login':
       return (
         <>
-          <S.Login {...props}>{children}</S.Login>
+          <S.Login href={href} {...props}>{children}</S.Login>
         </>
       );
     case 'x':
