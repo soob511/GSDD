@@ -18,11 +18,12 @@ export const Content = styled.div`
     border-radius: 10px;
     height: 160px;
     ${(props) => props.news && css`
-        height: 230px;
+        display: block;
         justify-content: flex-start;
         flex-direction: column;
         margin-top: 4px;
         overflow-y: scroll;
+        height: 230px;
     `}
     ${(props) => props.info && css`
         display: inline;
@@ -84,12 +85,14 @@ export const Item = styled.div`
 export const Article = styled.div`
     padding: 8px 4px 8px;
     margin: 0 8px 0;
+    height: 25px;
     text-overflow:ellipsis;
     white-space:nowrap;
     overflow:hidden;
     border-bottom: 1px solid ${({theme}) => css`
         ${theme.colors['gray3']}
     `}
+    
 `
 
 export const Button = styled.button`
