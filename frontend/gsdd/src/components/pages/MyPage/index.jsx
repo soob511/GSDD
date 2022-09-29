@@ -4,7 +4,6 @@ import { FcLike } from 'react-icons/fc';
 import MypageCard from '../../molecules/MypageCard';
 import Navbar from '../../molecules/Navbar';
 import Sidebar from '../../molecules/Sidebar';
-import API from '../../../common/api';
 
 const MyPage = () => {
   const username = '싸피';

@@ -1,28 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 import { AiFillMinusCircle } from 'react-icons/ai';
-import API from '../../../common/api';
+import apiPath from '../../../common/apiPath';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { SET_USER } from '../../../reducers/userReducer';
 
 const MyPageListCard = ({ type }) => {
   const [userData, setUserData] = useState(null);
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   try {
+  //     const getUserData = async (userId) => {
+  //       // await API.get(`mypage/${userId}`).then((response) => {
+  //       //   setUserData(response.data);
+  //       // });
+  //     };
+  //     getUserData(1);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  //   // Redux 에서 userId 받아와서 넣을 예정
+  // }, []);
 
   useEffect(() => {
     try {
       const getUserData = async (userId) => {
-        await API.get(`mypage/${userId}`).then((response) => {
-          setUserData(response.data);
+        const { data } = await axios({
+          method: 'GET',
+          url: apiPath.mypage.get(userId),
         });
+        setUserData(data);
+        dispatch(SET_USER(data));
       };
       getUserData(1);
     } catch (e) {
       console.log(e);
     }
-    // Redux 에서 userId 받아와서 넣을 예정
   }, []);
-
-  // useEffect(() => {
-  //   console.log(userData);
-  // }, []);
 
   const handleOpenModal = (modalType) => {
     if (modalType === '비상연락망') {
