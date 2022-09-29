@@ -14,14 +14,9 @@ jwt:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://j7b209.p.ssafy.io:3306/gsdd?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://j7b209.p.ssafy.io:3306/gsdd?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: gsdd
     password: gsdd2725
-
-  mvc:
-    view:
-      prefix: /templates/
-      suffix: .mustache
 
   jpa:
     hibernate:

@@ -17,6 +17,7 @@ import java.util.Optional;
 @Service
 @Transactional
 public class MypageService {
+    
     @Autowired
     ContactRepository contactRepository;
     @Autowired
