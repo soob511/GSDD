@@ -5,23 +5,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "cctv")
 public class CCTV {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
+    @Column(name = "cctvId")
     int id;
 
     @Column(name = "lat")
     String lat;
 
-    @Column(name ="lon")
+    @Column(name = "lon")
     String lon;
 
     @Column(name = "si")
