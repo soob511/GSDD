@@ -18,5 +18,5 @@ const apiPath = {
     get: (userId) => HOST + `${userId}`,
   },
 };
-
+console.log('git test');
 export default apiPath;
