@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 import { AiFillMinusCircle } from 'react-icons/ai';
-import apiPath from '../../../common/apiPath';
+import apiPath from '../../../api/apiPath';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { SET_USER } from '../../../reducers/userReducer';
