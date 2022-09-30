@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../../atoms/Button';
 import logo from '../../../assets/logo.png';
 import * as S from './styles';
@@ -32,11 +33,11 @@ const Login = () => {
             <br />
           </span>
         </S.Text>
-        <Button styleType="login" kakao href="http://j7b209.p.ssafy.io/oauth2/authorization/kakao">
+        <Button styleType="login" kakao href="https://j7b209.p.ssafy.io/oauth2/authorization/kakao">
           <S.BtnLogo src={kakao}></S.BtnLogo>
           <S.BtnText>카카오톡으로 시작하기</S.BtnText>
         </Button>
-        <Button styleType="login" naver href="http://j7b209.p.ssafy.io/oauth2/authorization/naver">
+        <Button styleType="login" naver href="https://j7b209.p.ssafy.io/oauth2/authorization/naver">
           <S.BtnLogo src={naver}></S.BtnLogo>
           <S.BtnText>네이버로 시작하기</S.BtnText>
         </Button>

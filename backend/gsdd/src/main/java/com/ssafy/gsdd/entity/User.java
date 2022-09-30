@@ -15,11 +15,9 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name="user")
 public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId")
     private int userId;
 
     @Column(nullable = true)

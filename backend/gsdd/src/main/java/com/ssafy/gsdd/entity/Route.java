@@ -9,11 +9,10 @@ import javax.persistence.*;
 @Entity
 @Getter @Setter
 @NoArgsConstructor
-@Table(name="route")
 public class Route {
     @Id
     @GeneratedValue
-    @Column(name = "routeId")
+    @Column(name = "Route_id")
     private int routeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
