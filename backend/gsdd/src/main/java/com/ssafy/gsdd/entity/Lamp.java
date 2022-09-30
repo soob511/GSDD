@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "lamp")
 public class Lamp {
     @Id @GeneratedValue
+    @Column(name = "lampId")
     int id;
     @Column(name = "lat")
     String lat;
