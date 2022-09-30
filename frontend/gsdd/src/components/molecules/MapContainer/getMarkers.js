@@ -8,7 +8,7 @@ const getMarkers = async (Tmapv2, map, lat, lng) => {
     try {
         const { data } = await axios({
             method: 'GET',
-            url: apiPath.marker.get(lat, lng),
+            url: apiPath.markers.get(lat, lng),
         });
 
         // const data = {
@@ -118,6 +118,7 @@ const getMarkers = async (Tmapv2, map, lat, lng) => {
             });
             markers.houses.push(marker);
         }
+
         return markers;
 
     } catch (error) {
