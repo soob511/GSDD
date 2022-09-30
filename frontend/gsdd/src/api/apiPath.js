@@ -18,5 +18,5 @@ const apiPath = {
     get: (userId) => HOST + `${userId}`,
   },
 };
-
+console.log('깃 테스트 중이다');
 export default apiPath;
