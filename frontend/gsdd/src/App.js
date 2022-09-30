@@ -18,8 +18,7 @@ function App() {
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/information" element={<Information />} />
-            {/* <Route path="/oauth2/redirect" element={<OauthRedirect />} /> */}
-            {/* <Route path="/oauth2/authorization/kakao" element={<Information />} /> */}
+            <Route path="/oauth2/redirect" element={<OauthRedirect />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
