@@ -1,5 +1,4 @@
 import axios from 'axios';
-import apiPath from '../../../common/apiPath';
 
 const getPlaces = async (newInput) => {
     try {
@@ -14,11 +13,9 @@ const getPlaces = async (newInput) => {
                 "reqCoordType": "WGS84GEO",
                 "count": 10,
             },
-        })
-            .then(
+        }).then(
 
-        )
-            .catch();
+        ).catch();
         return data;
 
     } catch (error) {

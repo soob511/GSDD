@@ -2,7 +2,7 @@ import React from 'react';
 import * as S from './styles';
 
 export const Button = ({ styleType, href, children, ...props }) => {
-  
+
   switch (styleType) {
     case 'round':
       return (
