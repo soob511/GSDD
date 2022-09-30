@@ -20,15 +20,18 @@ export const userReducer = createSlice({
         contacts,
       };
     },
+    SET_NAME: (state, { payload: name }) => {
+      return { ...state, name };
+    },
     PUSH_USER_CONTACT: (state, { payload: contact }) => {
       return {
         ...state,
         contacts: [...state.contacts, ...contact],
       };
     },
-    DELETE_USER_CONTACT: (state, action) => {},
-    SET_USER_ROUTE: (state, action) => {},
-    DELETE_USER_ROUTE: (state, action) => {},
+    DELETE_USER_CONTACT: (state, action) => { },
+    SET_USER_ROUTE: (state, action) => { },
+    DELETE_USER_ROUTE: (state, action) => { },
   },
 });
 

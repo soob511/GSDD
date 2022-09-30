@@ -66,7 +66,7 @@ export const X = styled.button`
     display:flex;
     justify-content: center;
     align-items: center;
-    color: ${({theme}) => css`
+    color: ${({ theme }) => css`
         ${theme.colors['gray2']}
     `}
 `
