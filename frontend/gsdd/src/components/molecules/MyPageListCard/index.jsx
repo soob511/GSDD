@@ -10,22 +10,22 @@ const MyPageListCard = ({ type }) => {
   const [userData, setUserData] = useState(null);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    try {
-      const getUserData = async (userId) => {
-        await authAxios
-          .get(apiPath.mypage.get(userId), {})
-          .then((res) => {
-            setUserData(res.data);
-            console.log(res.data);
-          })
-          .catch((err) => console.log(err));
-      };
-      getUserData(1);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     const getUserData = async (userId) => {
+  //       await authAxios
+  //         .get(apiPath.mypage.get(userId), {})
+  //         .then((res) => {
+  //           setUserData(res.data);
+  //           console.log(res.data);
+  //         })
+  //         .catch((err) => console.log(err));
+  //     };
+  //     getUserData(4);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }, []);
 
   const handleOpenModal = (modalType) => {
     if (modalType === '비상연락망') {

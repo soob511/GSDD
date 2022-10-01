@@ -6,10 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 import { configureStore } from '@reduxjs/toolkit';
-
+import { composeWithDevTools } from '@redux-devtools/extension';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const store = configureStore({ reducer: rootReducer });
+const store = configureStore({ reducer: rootReducer, composeWithDevTools });
 root.render(
   <React.StrictMode>
     <Provider store={store}>
