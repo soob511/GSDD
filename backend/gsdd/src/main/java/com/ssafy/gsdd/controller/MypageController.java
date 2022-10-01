@@ -30,6 +30,7 @@ public class MypageController {
         HashMap<String, Object> result = new HashMap<>();
         User user = mypageService.getUser(userId);
         result.put("user",user.getName());
+        result.put("userId", user.getUserId());
         result.put("contacts", user.getContacts().stream().map(c -> new ContactResDTO(c.getContactId(),c.getName(),c.getContact())));
         result.put("routes", user.getRoutes().stream().map(r -> new RouteResDTO(r.getRouteId(),r.getName(),r.getAddress())));
         return new ResponseEntity<>(result, HttpStatus.OK);
