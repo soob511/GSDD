@@ -5,11 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { composeWithDevTools } from '@redux-devtools/extension';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const store = configureStore({ reducer: rootReducer, composeWithDevTools });
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
+  composeWithDevTools,
+});
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
