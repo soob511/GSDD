@@ -8,19 +8,6 @@ import Sidebar from '../../molecules/Sidebar';
 const MyPage = () => {
   const username = '싸피';
 
-  // useEffect(() => {
-  //   const getUserData = async (userId) => {
-  //     const { data } = await API.get(`mypage/${userId}`);
-  //     // setUserData(data);
-  //     // console.log(data);
-  //     return data;
-  //   };
-  //   // Redux 에서 userId 받아와서 넣을 예정
-  //   const d = getUserData(1);
-  //   setUserData(d);
-  //   console.log(d);
-  // }, []);
-
   // 여기서 axios 통신
   return (
     <>

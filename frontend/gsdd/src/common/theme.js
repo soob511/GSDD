@@ -1,4 +1,4 @@
-const calcRem = size => `${size / 16}rem`;
+const calcRem = (size) => `${size / 16}rem`;
 
 const fontSizes = {
   xxs: calcRem(10),
@@ -13,9 +13,9 @@ const fontSizes = {
 };
 
 const fontWeights = {
-  normal: "400",
-  bold: "700",
-  heavy: "900", // 현재 heavy 사용이 안됨
+  normal: '400',
+  bold: '700',
+  heavy: '900', // 현재 heavy 사용이 안됨
 };
 
 const contentSizes = {
@@ -27,7 +27,7 @@ const contentSizes = {
   xl: calcRem(190),
   xxl: calcRem(230),
   xxxl: calcRem(280),
-}
+};
 
 const paddings = {
   sm: calcRem(8),
@@ -59,11 +59,11 @@ const verticalInterval = {
 };
 
 const deviceSizes = {
-  mobileS: "320px",
-  mobileM: "375px",
-  mobileL: "450px",
-  tablet: "768px",
-  tabletL: "1024px",
+  mobileS: '320px',
+  mobileM: '375px',
+  mobileL: '450px',
+  tablet: '768px',
+  tabletL: '1024px',
 };
 
 const colors = {
@@ -95,10 +95,9 @@ const colors = {
   // black : '#324034',
   black: '#404040',
   white: '#FFFFFF',
-  blue: '#FF0000',
-  //blue: '#02588B',
+  blue: '#02588B',
   grayblue: '#7D9FB2',
-  background: 'linear-gradient(35deg, #CBCC2C 25%, #508E47 90%)'
+  background: 'linear-gradient(35deg, #CBCC2C 25%, #508E47 90%)',
 };
 
 const device = {
@@ -122,7 +121,6 @@ const flex = {
     align-items: center;
   `,
 };
-
 
 const theme = {
   fontSizes,
