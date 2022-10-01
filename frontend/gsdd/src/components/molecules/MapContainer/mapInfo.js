@@ -19,7 +19,6 @@ const mapInfo = async () => {
     const { Tmapv2 } = window;
 
     const position = await getMyGps();
-    console.log("position:", position)
 
     //지도에 표시할 위치의 위도와 경도 좌표를 파라미터로 넣어주기
     const location = new Tmapv2.LatLng(position.coords.latitude, position.coords.longitude);
@@ -36,7 +35,7 @@ const mapInfo = async () => {
         map: map
     });
 
-    return { TmapV2: Tmapv2, map: map, position: position, location: location, marker: marker };
+    return { TmapV2: Tmapv2, map: map, latitude: position.coords.latitude, longitude: position.coords.longitude, location: location, marker: marker };
 }
 
 export default mapInfo;
