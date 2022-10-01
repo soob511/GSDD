@@ -1,17 +1,63 @@
-import axios from 'axios';
 import apiPath from '../../../api/apiPath';
 import light from '../../../assets/light.png';
 import camera from '../../../assets/camera.png';
 import house from '../../../assets/house.png';
+import { authAxios } from '../../../api/common';
 
 
-const getMarkers = async (Tmapv2, map, lat, lng) => {
+const getMarkers = async (Tmapv2, map, latitude, longitude) => {
 
-    try {
-        const { data } = await axios({
-            method: 'GET',
-            url: apiPath.markers.get(lat, lng),
-        });
+    console.log(latitude, longitude);
+
+    const markers = {};
+
+    authAxios
+        .get(apiPath.markers.get(latitude, longitude))
+        .then(res => setInfo(res))
+        .catch(err => console.log(err));
+
+    function setInfo(data) {
+        markers.lights = [];
+        markers.cameras = [];
+        markers.houses = [];
+
+        for (const val in data.lights) {
+            const location = new Tmapv2.LatLng(val.lat, val.lng);
+            const marker = new Tmapv2.Marker({
+                icon: light,
+                position: location,
+                map: map,
+                visible: false,
+            });
+            markers.lights.push(marker);
+        }
+        for (const val in data.cameras) {
+            const location = new Tmapv2.LatLng(val.lat, val.lng);
+            const marker = new Tmapv2.Marker({
+                icon: camera,
+                position: location,
+                map: map,
+                visible: false,
+            });
+            markers.cameras.push(marker);
+        }
+        for (const val in data.houses) {
+            const location = new Tmapv2.LatLng(val.lat, val.lng);
+            const marker = new Tmapv2.Marker({
+                icon: house,
+                position: location,
+                map: map,
+                visible: false,
+            });
+            markers.houses.push(marker);
+        }
+    }
+
+    return markers;
+
+};
+
+export default getMarkers;
 
         // const data = {
         //     lights: [
@@ -84,49 +130,3 @@ const getMarkers = async (Tmapv2, map, lat, lng) => {
         //         { lat: 36.344977, lng: 127.304819, name: 'GS25 한밭대후문점', contact: '042-826-6931' },
         //     ],
         // };
-
-        const markers = {};
-        markers.lights = [];
-        markers.cameras = [];
-        markers.houses = [];
-
-        for (const val in data.lights) {
-            const location = new Tmapv2.LatLng(val.lat, val.lng);
-            const marker = new Tmapv2.Marker({
-                icon: light,
-                position: location,
-                map: map,
-                visible: false,
-            });
-            markers.lights.push(marker);
-        }
-        for (const val in data.cameras) {
-            const location = new Tmapv2.LatLng(val.lat, val.lng);
-            const marker = new Tmapv2.Marker({
-                icon: camera,
-                position: location,
-                map: map,
-                visible: false,
-            });
-            markers.cameras.push(marker);
-        }
-        for (const val in data.houses) {
-            const location = new Tmapv2.LatLng(val.lat, val.lng);
-            const marker = new Tmapv2.Marker({
-                icon: house,
-                position: location,
-                map: map,
-                visible: false,
-            });
-            markers.houses.push(marker);
-        }
-
-        return markers;
-
-    } catch (error) {
-        console.log(error);
-    }
-
-};
-
-export default getMarkers;
