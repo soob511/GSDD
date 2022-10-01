@@ -8,12 +8,21 @@ export const tokenReducer = createSlice({
     authenticated: false, // 현재 로그인 여부
     accessToken: null, // 토큰
     expireTime: 0, // 토큰 만료시간
+    userId: 0,
   },
   reducers: {
-    SET_TOKEN: (state, action) => {
-      state.authenticated = true;
-      state.accessToken = action.payload;
-      state.expireTime = new Date().getTime() + TOKEN_TIME_OUT;
+    SET_TOKEN: (state, { payload }) => {
+      // state.authenticated = true;
+      // state.accessToken = payload.token;
+      // state.expireTime = new Date().getTime() + TOKEN_TIME_OUT;
+      // state.userId = payload.userId;
+      return {
+        ...state,
+        userId: payload.userId,
+        authenticated: true,
+        accessToken: payload.token,
+        expireTime: new Date().getTime() + TOKEN_TIME_OUT,
+      };
     },
     DELETE_TOKEN: (state) => {
       state.authenticated = false;

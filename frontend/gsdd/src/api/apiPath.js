@@ -15,7 +15,7 @@ const apiPath = {
     get: (lat, lng) => HOST + `${lat}/` + `${lng}`,
   },
   mypage: {
-    get: (userId) => HOST + `${userId}`,
+    get: (userId) => HOST + MYPAGE + `${userId}`,
   },
 };
 

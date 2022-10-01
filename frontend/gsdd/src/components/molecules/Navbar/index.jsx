@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import * as S from './styles';
 import Image from '../../atoms/Image';
 import logo_txt from '../../../assets/logo_txt.png';
@@ -9,16 +9,17 @@ import Sidebar from '../Sidebar/index.jsx';
 import Active from '../../atoms/Active';
 
 const Navbar = (props) => {
-  
   return (
     <>
       <S.StyledNavbar>
-        <Active onClick={() => {
+        <Active
+          onClick={() => {
             props.setBool(!props.bool);
-          }}>
+          }}
+        >
           <IoIosMenu size="40" color="#FFFFFF" />
         </Active>
-        <Link styleType="NextLink" href="/mypage">
+        <Link styleType="NextLink" href="/">
           <Image src={logo_txt} width="100" height="50" />
         </Link>
         <RiAlarmWarningFill size="40" color="red" />

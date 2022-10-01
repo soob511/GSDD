@@ -2,42 +2,30 @@ import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 import { AiFillMinusCircle } from 'react-icons/ai';
 import apiPath from '../../../api/apiPath';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { SET_USER } from '../../../reducers/userReducer';
+import { authAxios } from '../../../api/common';
 
 const MyPageListCard = ({ type }) => {
   const [userData, setUserData] = useState(null);
   const dispatch = useDispatch();
+
   // useEffect(() => {
   //   try {
   //     const getUserData = async (userId) => {
-  //       // await API.get(`mypage/${userId}`).then((response) => {
-  //       //   setUserData(response.data);
-  //       // });
+  //       await authAxios
+  //         .get(apiPath.mypage.get(userId), {})
+  //         .then((res) => {
+  //           setUserData(res.data);
+  //           console.log(res.data);
+  //         })
+  //         .catch((err) => console.log(err));
   //     };
-  //     getUserData(1);
+  //     getUserData(4);
   //   } catch (e) {
   //     console.log(e);
   //   }
-  //   // Redux 에서 userId 받아와서 넣을 예정
   // }, []);
-
-  useEffect(() => {
-    try {
-      const getUserData = async (userId) => {
-        const { data } = await axios({
-          method: 'GET',
-          url: apiPath.mypage.get(userId),
-        });
-        setUserData(data);
-        dispatch(SET_USER(data));
-      };
-      getUserData(1);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
 
   const handleOpenModal = (modalType) => {
     if (modalType === '비상연락망') {
