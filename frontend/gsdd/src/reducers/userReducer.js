@@ -4,18 +4,17 @@ export const userReducer = createSlice({
   name: 'userInfo',
   initialState: {
     userId: 0,
-    name: '',
+    user: '',
     routes: [],
     contacts: [],
-    contact: '',
   },
   reducers: {
     SET_USER: (state, { payload }) => {
-      const { userId, name, routes, contacts } = payload;
+      const { userId, user, routes, contacts } = payload;
       return {
         ...state,
         userId,
-        name,
+        user,
         routes,
         contacts,
       };
@@ -29,9 +28,9 @@ export const userReducer = createSlice({
         contacts: [...state.contacts, ...contact],
       };
     },
-    DELETE_USER_CONTACT: (state, action) => { },
-    SET_USER_ROUTE: (state, action) => { },
-    DELETE_USER_ROUTE: (state, action) => { },
+    DELETE_USER_CONTACT: (state, action) => {},
+    SET_USER_ROUTE: (state, action) => {},
+    DELETE_USER_ROUTE: (state, action) => {},
   },
 });
 
