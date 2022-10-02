@@ -7,25 +7,25 @@ import { SET_TOKEN } from '../../../reducers/tokenReducer';
 const OauthRedirect = () => {
   let token = useLocation().search.split('=')[1];
   let role = parseJwt(token).roles[0].authority;
-  let userId = parseJwt(token);
+  let userId = parseJwt(token).id;
   // let email = parseJwt(token).sub;
   console.log(parseJwt(token));
-
-  const action = {
-    token,
-    userId,
-  };
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const data = {
+    token,
+    userId,
+  };
+
   useEffect(() => {
-    dispatch(SET_TOKEN(action));
+    dispatch(SET_TOKEN(data));
 
     console.log('role' + role);
     if (role === 'ROLE_USER') {
       localStorage.setItem('accessToken', token);
-      window.location.href = '/';
+      navigate('/');
     } else {
       navigate('/process', {
         state: token,
