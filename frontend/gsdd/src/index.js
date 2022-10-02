@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { composeWithDevTools } from '@redux-devtools/extension';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -18,10 +20,14 @@ const store = configureStore({
   composeWithDevTools,
 });
 
+const persistor = persistStore(store);
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );
