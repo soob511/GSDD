@@ -11,7 +11,6 @@ export const authAxios = axios.create({
     // 'Access-Control-Allow-Origin': '*',
     // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
   },
-
 });
 
 // authAxios.defaults.withCredentials = true;
