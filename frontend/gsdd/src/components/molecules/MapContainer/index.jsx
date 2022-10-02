@@ -78,14 +78,13 @@ const MapContainer = () => {
 
   const getMapInfo = async () => {
     const { Tmapv2, map, latitude, longitude, location, marker } = await mapInfo();
-    console.log(latitude);
-    console.log(longitude);
     dispatch(SET_TMAPV2(Tmapv2));
     dispatch(SET_MAP(map));
     dispatch(SET_LATITUDE(latitude));
     dispatch(SET_LONGITUDE(longitude));
     dispatch(SET_LOCATION(location));
     dispatch(SET_MARKER(marker));
+    map.panTo(location);
   };
 
   const getMode = async () => {
