@@ -12,7 +12,7 @@ const apiPath = {
     logout: () => HOST + AUTH + 'logout/',
   },
   markers: {
-    get: (lat, lng) => HOST + `${lat}/` + `${lng}`,
+    get: (lat, lng) => HOST + `${lat}/${lng}`,
   },
   mypage: {
     get: (userId) => HOST + MYPAGE + `${userId}`,
