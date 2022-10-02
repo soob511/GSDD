@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import * as S from './styles';
 import MyPageListCard from '../MyPageListCard';
+import { useSelector } from 'react-redux';
 
 const MypageCard = () => {
   const [type, setType] = useState('비상연락망');
+
+  const routes = useSelector((state) => state.userReducer.routes);
+  const contacts = useSelector((state) => state.userReducer.contacts);
 
   const clickedNumbers = () => {
     setType('비상연락망');
@@ -17,12 +21,12 @@ const MypageCard = () => {
       <S.MainCardContainer>
         <S.CardWrapper onClick={clickedNumbers}>
           비상연락망
-          <S.FontSize>5</S.FontSize>
+          <S.FontSize>{contacts.length}</S.FontSize>
         </S.CardWrapper>
         <S.Space />
         <S.CardWrapper onClick={clickedDestinations}>
           즐겨찾는 목적지
-          <S.FontSize> 3</S.FontSize>
+          <S.FontSize> {routes.length}</S.FontSize>
         </S.CardWrapper>
       </S.MainCardContainer>
       <MyPageListCard type={type} />

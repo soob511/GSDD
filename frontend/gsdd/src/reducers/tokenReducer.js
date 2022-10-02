@@ -12,10 +12,7 @@ export const tokenReducer = createSlice({
   },
   reducers: {
     SET_TOKEN: (state, { payload }) => {
-      // state.authenticated = true;
-      // state.accessToken = payload.token;
-      // state.expireTime = new Date().getTime() + TOKEN_TIME_OUT;
-      // state.userId = payload.userId;
+      console.log(payload);
       return {
         ...state,
         userId: payload.userId,

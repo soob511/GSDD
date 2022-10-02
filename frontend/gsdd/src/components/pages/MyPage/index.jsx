@@ -6,12 +6,12 @@ import Navbar from '../../molecules/Navbar';
 import Sidebar from '../../molecules/Sidebar';
 import { authAxios } from '../../../api/common';
 import apiPath from '../../../api/apiPath';
-import { useDispatch } from 'react-redux/es/exports';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { SET_USER } from '../../../reducers/userReducer';
 
 const MyPage = () => {
-  const username = '싸피';
   const dispatch = useDispatch();
+  const userId = useSelector((state) => state.tokenReducer.userId);
 
   useEffect(() => {
     try {
@@ -24,13 +24,13 @@ const MyPage = () => {
           })
           .catch((err) => console.log(err));
       };
-      getUserData(4);
+      getUserData(userId);
     } catch (e) {
       console.log(e);
     }
   }, []);
 
-  // 여기서 axios 통신
+  const username = useSelector((state) => state.userReducer.user);
   return (
     <>
       <Sidebar />
