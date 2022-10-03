@@ -26,7 +26,9 @@ const mapInfo = async () => {
         center: location,
         width: "100%",
         height: "100%",
+        zoomControl: true,
         zoom: 15,
+        scrollwheel: true
     }
     const map = new Tmapv2.Map("TMapApp", mapOptions);
     const marker = new Tmapv2.Marker({
