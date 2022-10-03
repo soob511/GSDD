@@ -5,6 +5,7 @@ const USER = 'user/';
 const MYPAGE = 'mypage/';
 const ROUTE = 'route/';
 const CONTACT = 'contact/';
+const INFO = 'info/';
 
 const apiPath = {
   auth: {
@@ -16,6 +17,9 @@ const apiPath = {
   },
   mypage: {
     get: (userId) => HOST + MYPAGE + `${userId}`,
+  },
+  info: {
+    get: (city, district) => HOST + INFO + `${city}/` + `${district}`,
   },
 };
 

@@ -2,6 +2,8 @@ import React, {useEffect, useRef, useState} from 'react';
 import Select from 'react-select'
 import Navbar from '../../molecules/Navbar';
 import Sidebar from '../../molecules/Sidebar';
+import { defaultAxios } from '../../../api/common';
+import apiPath from '../../../api/apiPath';
 import * as S from './styles'
 import imgInfo from '../../../assets/info.png'
 
@@ -18,12 +20,13 @@ const district = [
 ];
 
 const Information = () => {
-  const [ visible, setVisible ] = useState(false)
-  const onVisible = () => {
-    if (visible) {
-      setVisible(false)
+
+  const [ infoVisible, setInfoVisible ] = useState(false)
+  const onInfoVisible = () => {
+    if (infoVisible) {
+      setInfoVisible(false)
     } else {
-      setVisible(true)
+      setInfoVisible(true)
     }
   }
   const infoRef = useRef(null)
@@ -31,16 +34,35 @@ const Information = () => {
   // {district: provided => ({...provided, width: 108, height: 40})}
   const [selectCity, setSelectCity] = useState(null);
   const [selectDistrict, setSelectDistrict] = useState(null);
-
+  const [safetyValue, setSafetyValue] = useState(null);
+  
+  const safetyRef = useRef(0);
   // 구 바뀔때마다 해당 구 내의 데이터 불러오는 API 실행 예정
   useEffect(() => {
+    setSelectCity(selectCity)
+    setSelectDistrict(selectDistrict)
+    setSafetyValue(safetyRef.current.innerText)
     console.log(selectCity)     // 안전지수 및 그 외 정보 load API 실행
     console.log(selectDistrict) // 해당 지역 뉴스 기사 load API 실행
-  },[selectDistrict])
+    console.log(safetyValue)
+    
+    fetchArea(selectCity, selectDistrict)
+  },[selectCity, selectDistrict])
 
   useEffect(() => {
 
-  }, [onVisible])
+  }, [onInfoVisible])
+
+  const fetchArea = async (selectCity, selectDistrict) => {
+    try {
+      const response = await defaultAxios
+      .get(apiPath.info.get((selectCity, selectDistrict)), {})
+      console.log(response.data)
+    }
+    catch (e){
+      console.log(e)
+    }
+  }
   const news = [
     {title : "뉴스 기사1 뉴스 기사1 뉴스 기사1 뉴스 기사1 뉴스 기사1", content: "내용1"},
     {title : "뉴스 기사2", content: "내용2"},
@@ -62,6 +84,7 @@ const Information = () => {
 
   const newsList = news.map((article) => <S.Article onClick={() => console.log(article.content)}>{article.title}</S.Article>)
   const infoList = info.map((text) => <S.InfoText>{text}</S.InfoText>)
+
   return (
     <>
       <Sidebar />
@@ -74,28 +97,28 @@ const Information = () => {
           </S.RowBox>
           <S.RowBox>
             <span style={{fontSize:'13px'}}>안전지수란?</span>
-            <S.Button onClick={onVisible}><img src={imgInfo} style={{alignItems: 'center'}}></img></S.Button>
+            <S.Button onClick={onInfoVisible}><img src={imgInfo} style={{alignItems: 'center'}}></img></S.Button>
           </S.RowBox>
         </S.Header>
-          <S.Content info visible={visible}>
+          <S.Content info visible={infoVisible}>
             {infoList}
           </S.Content>
         <S.Content>
           <S.ColumnBox>
             <S.Item>안전지수</S.Item>
-            <S.Item safety>3</S.Item>
+            <S.Item safety ref={safetyRef} value={safetyValue}>{selectCity == null ? "0" : "3"}</S.Item>
           </S.ColumnBox>
           <S.ColumnBox>
             <S.Item>가로등</S.Item>
-            <S.Item number>3,795</S.Item>
+            <S.Item number>{selectCity == null ? "0" : "3,795"}</S.Item>
           </S.ColumnBox>
           <S.ColumnBox>
             <S.Item>CCTV</S.Item>
-            <S.Item number>780</S.Item>
+            <S.Item number>{selectCity == null ? "0" : "780"}</S.Item>
           </S.ColumnBox>
           <S.ColumnBox>
             <S.Item>안전지킴이집</S.Item>
-            <S.Item number>83</S.Item>
+            <S.Item number>{selectCity == null ? "0" : "83"}</S.Item>
           </S.ColumnBox>
         </S.Content>
 
