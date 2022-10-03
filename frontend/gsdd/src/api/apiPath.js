@@ -5,6 +5,7 @@ const USER = 'user/';
 const MYPAGE = 'mypage/';
 const ROUTE = 'route/';
 const CONTACT = 'contact';
+const AROUND = 'around/';
 
 const apiPath = {
   auth: {
@@ -12,7 +13,7 @@ const apiPath = {
     logout: () => HOST + AUTH + 'logout/',
   },
   markers: {
-    get: (lat, lng) => HOST + `${lat}/${lng}`,
+    get: (lat, lng) => HOST + AROUND + `${lat}/${lng}`,
   },
   mypage: {
     get: (userId) => HOST + MYPAGE + `${userId}`,

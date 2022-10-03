@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_TMAPV2, SET_MAP, SET_MARKER, SET_LATITUDE, SET_LONGITUDE, SET_LOCATION, SET_MARKERS, SET_PLACES, SET_ORIGIN, SET_DESTINATION } from '../../../reducers/tmapReducer';
+import { SET_TMAPV2, SET_MAP, SET_MARKER, SET_LATITUDE, SET_LONGITUDE, SET_LOCATION, SET_MARKERS, SET_OPLACES, SET_DPLACES, SET_ORIGIN, SET_DESTINATION, SET_OMARKER, SET_DMARKER, SET_LINES } from '../../../reducers/tmapReducer';
 import * as S from './styles';
 import Map from '../../atoms/Map';
-import Button from '../../atoms/Button';
+import { Button as Btn } from '../../atoms/Button';
 import mapInfo from './mapInfo';
 import getMarkers from './getMarkers';
 import getPlaces from './getPlaces';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import { TextField, Autocomplete } from '@mui/material';
+import { Button, TextField, Autocomplete } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import getShortestPath from './getShortestPath';
 
@@ -24,9 +24,13 @@ const MapContainer = () => {
   const latitude = useSelector(state => state.tmapReducer.latitude);
   const longitude = useSelector(state => state.tmapReducer.longitude);
   const markers = useSelector(state => state.tmapReducer.markers);
-  const places = useSelector(state => state.tmapReducer.places);
+  const oplaces = useSelector(state => state.tmapReducer.oplaces);
+  const dplaces = useSelector(state => state.tmapReducer.dplaces);
   const origin = useSelector(state => state.tmapReducer.origin);
   const destination = useSelector(state => state.tmapReducer.destination);
+  const omarker = useSelector(state => state.tmapReducer.omarker);
+  const dmarker = useSelector(state => state.tmapReducer.dmarker);
+  const lines = useSelector(state => state.tmapReducer.lines);
 
   const [mode, setMode] = useState(false);
 
@@ -48,17 +52,39 @@ const MapContainer = () => {
     console.log("목적지", destination);
     dispatch(SET_DESTINATION(destination));
 
-    setOpen(false);
-
-    const data = await getShortestPath(map, origin, destination);//최단 경로 탐색
-
-    data.omarker.setVisible(true);
-    data.dmarker.setVisible(true);
-    for (let k in data.lines) {
-      data.lines[k].setVisible(true);
+    //새로운 경로 이전 기존 경로 제거
+    if (omarker) {
+      console.log("set omarker null");
+      omarker.setMap(null);
+      dispatch(SET_OMARKER(null));
+    }
+    if (dmarker) {
+      console.log("set dmarker null");
+      dmarker.setMap(null);
+      dispatch(SET_DMARKER(null));
+    }
+    if (lines) {
+      console.log("set lines null");
+      for (let k in lines) {
+        lines[k].setMap(null);
+      }
+      dispatch(SET_LINES(null));
     }
 
-    console.log(data);
+    setOpen(false);
+
+    const data = await getShortestPath(origin, destination);//최단 경로 탐색
+    data.omarker.setMap(map);
+    data.dmarker.setMap(map);
+    for (let k in data.lines) {
+      data.lines[k].setMap(map);
+    }
+    dispatch(SET_OMARKER(data.omarker));
+    dispatch(SET_DMARKER(data.dmarker));
+    dispatch(SET_LINES(data.lines));
+
+    console.log("최단 경로 결과");
+    console.log(omarker, dmarker, lines);
 
   }
 
@@ -150,8 +176,12 @@ const MapContainer = () => {
     getMapInfo();
   }, []);
 
-  const defaultProps = {
-    options: places,
+  const defaultOProps = {
+    options: oplaces,
+    getOptionLabel: (option) => option.name,
+  };
+  const defaultDProps = {
+    options: dplaces,
     getOptionLabel: (option) => option.name,
   };
 
@@ -164,33 +194,33 @@ const MapContainer = () => {
       <S.StyledMapContainer>
         <Map map={map} />
         <S.StyledButtonHorizontalContainer className={mode ? 'show-mode' : 'hide-mode'}>
-          <Button styleType="round" onClick={getLights} active={btnActive.lights}>
+          <Btn styleType="round" onClick={getLights} active={btnActive.lights}>
             가로등
-          </Button>
-          <Button styleType="round" onClick={getCameras} active={btnActive.cameras}>
+          </Btn>
+          <Btn styleType="round" onClick={getCameras} active={btnActive.cameras}>
             CCTV
-          </Button>
-          <Button styleType="round" onClick={getHouses} active={btnActive.houses}>
+          </Btn>
+          <Btn styleType="round" onClick={getHouses} active={btnActive.houses}>
             안전집
-          </Button>
+          </Btn>
         </S.StyledButtonHorizontalContainer>
         <S.StyledButtonVerticalContainer>
-          <Button styleType="round" onClick={getMapInfo}>
+          <Btn styleType="round" onClick={getMapInfo}>
             현위치
-          </Button>
-          <Button styleType="round" onClick={handleOpen}>
+          </Btn>
+          <Btn styleType="round" onClick={handleOpen}>
             길찾기
-          </Button>
-          <Button styleType="round" onClick={getMode}>
+          </Btn>
+          <Btn styleType="round" onClick={getMode}>
             모드
-          </Button>
+          </Btn>
         </S.StyledButtonVerticalContainer>
       </S.StyledMapContainer>
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={style}>
           <Typography id="modal-modal-title">
-            <Autocomplete id="clear-on-escape" {...defaultProps}
-              options={places ? places : []}
+            <Autocomplete id="clear-on-escape" {...defaultOProps}
+              options={oplaces ? oplaces : []}
               getOptionLabel={option => option.name}
               renderInput={(params) => (
                 <TextField {...params} label="출발지" variant="standard" />
@@ -200,12 +230,12 @@ const MapContainer = () => {
                 dispatch(SET_ORIGIN(newOrigin));
               }}
               onInputChange={async (_event, newInput) => {
-                dispatch(SET_PLACES(await getPlaces(newInput)));
+                dispatch(SET_OPLACES(await getPlaces(newInput)));
 
               }}
             />
-            <Autocomplete id="clear-on-escape" {...defaultProps}
-              options={places ? places : []}
+            <Autocomplete id="clear-on-escape" {...defaultDProps}
+              options={dplaces ? dplaces : []}
               getOptionLabel={option => option.name}
               renderInput={(params) => (
                 <TextField {...params} label="목적지" variant="standard" />
@@ -215,13 +245,19 @@ const MapContainer = () => {
                 dispatch(SET_DESTINATION(newDestination));
               }}
               onInputChange={async (_event, newInput) => {
-                dispatch(SET_PLACES(await getPlaces(newInput)));
+                dispatch(SET_DPLACES(await getPlaces(newInput)));
               }}
             />
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 3 }}>
-            <Button styleType="modal" onClick={handleNext}>검색</Button>
-            <Button styleType="modal" onClick={handleClose}>취소</Button>
+          <Typography id="modal-modal-description" sx={{ mt: 4 }}>
+            <S.ButtonWrapper>
+              <Button variant="contained" color="primary" onClick={handleNext}>
+                검색
+              </Button>
+              <Button variant="contained" color="primary" onClick={handleClose}>
+                취소
+              </Button>
+            </S.ButtonWrapper>
           </Typography>
         </Box>
       </Modal>
