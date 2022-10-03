@@ -5,11 +5,12 @@ import { useSelector } from 'react-redux';
 import ContactModal from '../ContactModal';
 import apiPath from '../../../api/apiPath';
 import { authAxios } from '../../../api/common';
+import RouteModal from '../RouteModal';
 
 const MyPageListCard = ({ type }) => {
   const userData = useSelector((state) => state.userReducer);
 
-  const handleDeleteClick = async (contactId) => {
+  const handleContactDeleteClick = async (contactId) => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
         await authAxios
@@ -28,13 +29,31 @@ const MyPageListCard = ({ type }) => {
     }
   };
 
+  const handleRouteDeleteClick = async (routeId) => {
+    if (window.confirm('정말 삭제하시겠습니까?')) {
+      try {
+        await authAxios
+          .delete(apiPath.mypage.routeDel(routeId))
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => console.log(err));
+      } catch (e) {
+        console.log(e);
+      }
+      window.location.href = '/mypage';
+    } else {
+      alert('취소되었습니다.');
+    }
+  };
+
   const tags = (data, margin) => {
     if (type === '비상연락망') {
       return (
         <S.TitleWrapper key={data.id} margin={margin}>
           <span>{data.name}</span>
           <span>{data.contact}</span>
-          <div onClick={() => handleDeleteClick(data.id)}>
+          <div onClick={() => handleContactDeleteClick(data.id)}>
             <AiFillMinusCircle color="red" />
           </div>
         </S.TitleWrapper>
@@ -44,7 +63,7 @@ const MyPageListCard = ({ type }) => {
         <S.TitleWrapper key={data.id} margin={margin}>
           <span>{data.name}</span>
           <S.AddressWrapper>{data.address}</S.AddressWrapper>
-          <div onClick={() => handleDeleteClick(data.id)}>
+          <div onClick={() => handleRouteDeleteClick(data.id)}>
             <AiFillMinusCircle color="red" />
           </div>
         </S.TitleWrapper>
@@ -73,7 +92,7 @@ const MyPageListCard = ({ type }) => {
           ) : (
             <S.Error>내용이 없습니다.</S.Error>
           )}
-          {type === '비상연락망' ? <ContactModal type={type}></ContactModal> : <h3>주은이가 만든 모달 추가 예정</h3>}
+          {type === '비상연락망' ? <ContactModal type={type}></ContactModal> : <RouteModal />}
         </S.ListCard>
       </S.Container>
     </>
