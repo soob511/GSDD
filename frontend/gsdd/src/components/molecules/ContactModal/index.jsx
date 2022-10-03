@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import * as S from './styles';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { Typography, TextField } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import apiPath from '../../../api/apiPath';
 import { authAxios } from '../../../api/common';
 
@@ -54,9 +54,7 @@ const ContactModal = () => {
       <Modal open={open} onClose={handleClose}>
         <Box sx={S.style}>
           <S.TextWrapper>
-            {/* <S.Input placeholder="이름" name="name" onChange={handleChange} /> */}
-            {/* <S.Input placeholder="전화번호" name="phoneNumber" onChange={handleChange} /> */}
-            <TextField id="filled-basic" name="name" label="이름" maxlength="3" onChange={handleChange} />
+            <TextField id="filled-basic" name="name" label="이름" maxLength="3" onChange={handleChange} />
             <div
               style={{
                 height: '10px',
