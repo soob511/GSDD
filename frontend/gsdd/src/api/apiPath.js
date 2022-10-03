@@ -4,6 +4,8 @@ const AUTH = 'auth/';
 const USER = 'user/';
 const MYPAGE = 'mypage/';
 const ROUTE = 'route/';
+const INFO = 'info/';
+const NEWS = 'news/';
 const CONTACT = 'contact';
 const AROUND = 'around/';
 
@@ -20,6 +22,12 @@ const apiPath = {
     post: () => HOST + MYPAGE + CONTACT,
     del: (contactId) => HOST + MYPAGE + CONTACT + `/${contactId}`,
   },
+  info: {
+    get: (city, district) => HOST + INFO + `${city}` + `/${district}`,
+  },
+  news: {
+    get: (city, district) => HOST + NEWS + `${city}` + `/${district}`
+  }
 };
 
 export default apiPath;
