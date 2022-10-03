@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const getShortestPath = async (origin, destination) => {
+const getShortestPath = async (map, origin, destination) => {
 
     const { Tmapv2 } = window;
 
@@ -47,6 +47,7 @@ const getShortestPath = async (origin, destination) => {
     }).then(res => {
 
         const resultData = res.data.features;
+        console.log(resultData);
 
         //결과 출력
         const tDistance = "총 거리 : " + ((resultData[0].properties.totalDistance) / 1000).toFixed(1) + "km,";
@@ -54,23 +55,93 @@ const getShortestPath = async (origin, destination) => {
 
         console.log(tDistance, tTime);
 
-        for (let i in resultData) {
-            const geometry = resultData[i].geometry;
+        // for (let i in resultData) {
+        //     const geometry = resultData[i].geometry;
 
-            if (geometry.type === "LineString") {
-                for (let j in geometry.coordinates) {
+        //     if (geometry.type === "LineString") {
+        //         for (let j in geometry.coordinates) {
+        //             // 경로들의 결과값(구간)들을 포인트 객체로 변환 
+        //             const latlng = new Tmapv2.Point(geometry.coordinates[j][0], geometry.coordinates[j][1]);
+        //             // 포인트 객체를 받아 좌표값으로 변환
+        //             var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(latlng);
+        //             // 포인트객체의 정보로 좌표값 변환 객체로 저장
+        //             var convertChange = new Tmapv2.LatLng(convertPoint._lat, convertPoint._lng);
+        //             // 배열에 담기
+        //             drawInfoArr.push(convertChange);
+        //         }
+        //     }
+        // }
+
+        // drawLine(drawInfoArr);
+
+        for (var i in resultData) { //for문 [S]
+            var geometry = resultData[i].geometry;
+            var properties = resultData[i].properties;
+
+
+            if (geometry.type == "LineString") {
+                for (var j in geometry.coordinates) {
                     // 경로들의 결과값(구간)들을 포인트 객체로 변환 
-                    const latlng = new Tmapv2.Point(geometry.coordinates[j][0], geometry.coordinates[j][1]);
+                    var latlng = new Tmapv2.Point(
+                        geometry.coordinates[j][0],
+                        geometry.coordinates[j][1]);
                     // 포인트 객체를 받아 좌표값으로 변환
-                    var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(latlng);
+                    var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
+                        latlng);
                     // 포인트객체의 정보로 좌표값 변환 객체로 저장
-                    var convertChange = new Tmapv2.LatLng(convertPoint._lat, convertPoint._lng);
+                    var convertChange = new Tmapv2.LatLng(
+                        convertPoint._lat,
+                        convertPoint._lng);
                     // 배열에 담기
                     drawInfoArr.push(convertChange);
                 }
-            }
-        }
+            } else {
+                var markerImg = "";
+                var pType = "";
+                var size;
 
+                if (properties.pointType == "S") { //출발지 마커
+                    markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png";
+                    pType = "S";
+                    size = new Tmapv2.Size(24, 38);
+                } else if (properties.pointType == "E") { //도착지 마커
+                    markerImg = "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png";
+                    pType = "E";
+                    size = new Tmapv2.Size(24, 38);
+                } else { //각 포인트 마커
+                    markerImg = "http://topopen.tmap.co.kr/imgs/point.png";
+                    pType = "P";
+                    size = new Tmapv2.Size(8, 8);
+                }
+
+                // 경로들의 결과값들을 포인트 객체로 변환 
+                var latlon = new Tmapv2.Point(
+                    geometry.coordinates[0],
+                    geometry.coordinates[1]);
+
+                // 포인트 객체를 받아 좌표값으로 다시 변환
+                var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
+                    latlon);
+
+                var routeInfoObj = {
+                    markerImage: markerImg,
+                    lng: convertPoint._lng,
+                    lat: convertPoint._lat,
+                    pointType: pType
+                };
+
+                // Marker 추가
+                const marker_p = new Tmapv2.Marker(
+                    {
+                        position: new Tmapv2.LatLng(
+                            routeInfoObj.lat,
+                            routeInfoObj.lng),
+                        icon: routeInfoObj.markerImage,
+                        iconSize: size,
+                        map: map
+                    });
+            }
+        }//for문 [E]
         drawLine(drawInfoArr);
 
     }).catch(res => console.log(res));
