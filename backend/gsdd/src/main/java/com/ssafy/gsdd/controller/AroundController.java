@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/around")
 public class AroundController {
 
     @Autowired
     AroundService aroundService;
     @GetMapping("/{lat}/{lon}")
-    public ResponseEntity<HashMap> getList(@PathVariable double lat, @PathVariable double lon){
+    public ResponseEntity<HashMap> getList(@PathVariable String lat, @PathVariable String lon){
         HashMap<String , Object> result = new HashMap<>();
-        AroundDTO list = aroundService.getList(lat, lon);
+        AroundDTO list = aroundService.getList(Double.parseDouble(lat), Double.parseDouble(lon));
         result.put("lights",list.getLamps());
         result.put("cameras",list.getCctvs());
         result.put("houses",list.getHouses());
