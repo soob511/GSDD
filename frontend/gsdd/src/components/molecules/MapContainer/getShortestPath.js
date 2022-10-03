@@ -10,7 +10,7 @@ const getShortestPath = async (origin, destination) => {
     //출발지 마커
     const marker_o = new Tmapv2.Marker(
         {
-            position: new Tmapv2.LatLng(origin.lat, destination.lng),
+            position: new Tmapv2.LatLng(origin.lat, origin.lng),
             icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png",
             iconSize: new Tmapv2.Size(24, 38),
         });
