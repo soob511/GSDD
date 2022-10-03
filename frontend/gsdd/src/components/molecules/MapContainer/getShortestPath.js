@@ -13,6 +13,7 @@ const getShortestPath = async (map, origin, destination) => {
             position: new Tmapv2.LatLng(origin.lat, origin.lng),
             icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png",
             iconSize: new Tmapv2.Size(24, 38),
+            map: map,
         });
 
     //도착지 마커
@@ -21,6 +22,7 @@ const getShortestPath = async (map, origin, destination) => {
             position: new Tmapv2.LatLng(destination.lat, destination.lng),
             icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png",
             iconSize: new Tmapv2.Size(24, 38),
+            map: map,
         });
 
 
@@ -133,13 +135,12 @@ const getShortestPath = async (map, origin, destination) => {
                 // Marker 추가
                 const marker_p = new Tmapv2.Marker(
                     {
-                        position: new Tmapv2.LatLng(
-                            routeInfoObj.lat,
-                            routeInfoObj.lng),
+                        position: new Tmapv2.LatLng(routeInfoObj.lat, routeInfoObj.lng),
                         icon: routeInfoObj.markerImage,
                         iconSize: size,
                         map: map
                     });
+                console.log("marker", marker_p);
             }
         }//for문 [E]
         drawLine(drawInfoArr);
@@ -154,8 +155,10 @@ const getShortestPath = async (map, origin, destination) => {
                 path: arrPointList[k],
                 strokeColor: "#DD0000",
                 strokeWeight: 6,
+                map: map,
             });
             resultdrawArr.push(polyline_);
+            console.log("polyline", polyline_);
         }
 
     }
