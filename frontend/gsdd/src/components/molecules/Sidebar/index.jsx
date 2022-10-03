@@ -3,9 +3,16 @@ import Link from '../../atoms/Link';
 import * as S from './styles';
 import Button from '../../atoms/Button'
 import Navbar from '../Navbar'
-
-
+import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { useNavigate } from 'react-router-dom';
 const Sidebar = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const logout = () => {
+        dispatch(DELETE_TOKEN());
+        console.log('logout');
+        navigate('/');
+    };
     const [isOpen, setOpen] = useState(false);
     const [xPosition, setX] = useState(200);
     
