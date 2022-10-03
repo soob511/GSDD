@@ -28,7 +28,6 @@ public class MypageService {
     // 회원 정보 조회 ( 회원 이름, 비상 연락, 즐겨찾는 목적지)
     public User getUser(int userId) {
         User findbyId = userRepository.findByUserId(userId);
-
         findbyId.getRoutes();
         return findbyId;
     }
@@ -53,13 +52,13 @@ public class MypageService {
     }
 
     // 즐겨찾는 목적지 추가
-    public List<Route> routeSave(int userId, String name, String address) {
+    public List<Route> routeSave(int userId, String name, String address, String lat, String lon) {
         // 중복확인
         User user = userRepository.findByUserId(userId);
         user.getRoutes();
         Optional<Route> findRoute = routeRepository.findRoute(userId, address);
         if (findRoute.isEmpty()) {
-            routeRepository.save(new Route(name, address, user));
+            routeRepository.save(new Route(name, address, user, lat, lon));
             return user.getRoutes();
         } else {
             return null;
