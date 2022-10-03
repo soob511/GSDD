@@ -75,10 +75,24 @@ export const Item = styled.div`
     margin-top: 30px;
     font-weight: normal;
     `}
-    ${(props) => props.safety && css`
+    ${(props) => props.safety && css `
     font-size: 50px;
-    color: #339933;
     font-weight: normal;
+    `}
+    ${(props) => props.value == "1" && css `
+        color: #0000ff;
+    `}
+    ${(props) => props.value == "2" && css `
+        color: #00acff;
+    `}
+    ${(props) => props.value == "3" && css `
+        color: #339933;
+    `}
+    ${(props) => props.value == "4" && css `
+        color: #ffa500;
+    `}
+    ${(props) => props.value == "5" && css `
+        color: #ff0000;
     `}
 `
 
