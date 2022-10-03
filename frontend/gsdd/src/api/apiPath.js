@@ -4,6 +4,7 @@ const AUTH = 'auth/';
 const USER = 'user/';
 const MYPAGE = 'mypage/';
 const ROUTE = 'route/';
+const ROAD = 'road/';
 const INFO = 'info/';
 const NEWS = 'news/';
 const CONTACT = 'contact';
@@ -27,6 +28,9 @@ const apiPath = {
   },
   news: {
     get: (city, district) => HOST + NEWS + `${city}` + `/${district}`
+  },
+  road: {
+    get: (olat, olng, dlat, dlng) => HOST + ROAD + `${olat}/${olng}/${dlat}/${dlng}`,
   }
 };
 
