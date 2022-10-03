@@ -9,4 +9,6 @@ public class RouteDTO {
     int userId;
     String name;
     String address;
+    String lat;
+    String lon;
 }
