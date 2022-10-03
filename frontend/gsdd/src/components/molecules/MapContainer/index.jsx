@@ -105,6 +105,7 @@ const MapContainer = () => {
 
   const getMapInfo = async () => {
     const { Tmapv2, map, latitude, longitude, location, marker } = await mapInfo();
+    map.panTo(location);
     dispatch(SET_TMAPV2(Tmapv2));
     dispatch(SET_MAP(map));
     dispatch(SET_LATITUDE(latitude));
@@ -112,7 +113,7 @@ const MapContainer = () => {
     dispatch(SET_LOCATION(location));
     dispatch(SET_MARKER(marker));
     console.log("location:", location);
-    map.setCenter(location);
+
   };
 
   const getMode = async () => {
@@ -176,7 +177,7 @@ const MapContainer = () => {
 
   useEffect(() => {
     getMapInfo();
-  }, []);
+  }, [map]);
 
   const defaultOProps = {
     options: oplaces,
