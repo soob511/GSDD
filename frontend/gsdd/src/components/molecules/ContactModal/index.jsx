@@ -4,21 +4,21 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { Typography, TextField } from '@mui/material';
-// import { Button as Btn } from '../../atoms/Button';
 import { useSelector, useDispatch } from 'react-redux';
+import apiPath from '../../../api/apiPath';
+import { authAxios } from '../../../api/common';
 
 const ContactModal = () => {
-  const [open, setOpen] = useState(false);
+  const userId = useSelector((state) => state.userReducer.userId);
 
+  const [open, setOpen] = useState(false);
   const [info, setInfo] = useState({
     name: '',
     phoneNumber: '',
   });
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClose = () => setOpen(false);
 
   const handleChange = (e) => {
     setInfo({
@@ -27,10 +27,27 @@ const ContactModal = () => {
     });
   };
 
-  const test = () => {
+  const handleSetContact = async () => {
     console.log(info.name);
     console.log(info.phoneNumber);
+    try {
+      await authAxios
+        .post(apiPath.mypage.post(), {
+          userId: userId,
+          name: info.name,
+          number: info.phoneNumber,
+        })
+        .then((res) => {
+          console.log(res);
+          window.location.href = '/mypage';
+        })
+        .catch((err) => console.log(err));
+    } catch (e) {
+      console.log(e);
+    }
+    handleClose();
   };
+
   return (
     <>
       <S.PlusBtn onClick={handleOpen}>+</S.PlusBtn>
@@ -39,7 +56,7 @@ const ContactModal = () => {
           <S.TextWrapper>
             {/* <S.Input placeholder="이름" name="name" onChange={handleChange} /> */}
             {/* <S.Input placeholder="전화번호" name="phoneNumber" onChange={handleChange} /> */}
-            <TextField id="filled-basic" name="name" label="이름" onChange={handleChange} />
+            <TextField id="filled-basic" name="name" label="이름" maxlength="3" onChange={handleChange} />
             <div
               style={{
                 height: '10px',
@@ -49,7 +66,7 @@ const ContactModal = () => {
           </S.TextWrapper>
           <Typography id="modal-modal-description" sx={{ mt: 4 }}>
             <S.ButtonWrapper>
-              <Button variant="contained" color="primary" onClick={test}>
+              <Button variant="contained" color="primary" onClick={handleSetContact}>
                 추가
               </Button>
               <Button variant="contained" color="primary" onClick={handleClose}>
