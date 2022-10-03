@@ -12,7 +12,6 @@ import Box from '@mui/material/Box';
 import { Button, TextField, Autocomplete } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import getShortestPath from './getShortestPath';
-import { ifNotProp } from 'styled-tools';
 
 const MapContainer = () => {
 
@@ -55,14 +54,17 @@ const MapContainer = () => {
 
     //새로운 경로 이전 기존 경로 제거
     if (omarker) {
+      console.log("set omarker null");
       omarker.setMap(null);
       dispatch(SET_OMARKER(null));
     }
     if (dmarker) {
+      console.log("set dmarker null");
       dmarker.setMap(null);
       dispatch(SET_DMARKER(null));
     }
     if (lines) {
+      console.log("set lines null");
       for (let k in lines) {
         lines[k].setMap(null);
       }
@@ -71,14 +73,18 @@ const MapContainer = () => {
 
     setOpen(false);
 
-    const data = await getShortestPath(map, origin, destination);//최단 경로 탐색
-
-    dispatch(SET_OMARKER(data.omarker.setMap(map)));
-    dispatch(SET_DMARKER(data.dmarker.setMap(map)));
+    const data = await getShortestPath(origin, destination);//최단 경로 탐색
+    data.omarker.setMap(map);
+    data.dmarker.setMap(map);
     for (let k in data.lines) {
       data.lines[k].setMap(map);
     }
+    dispatch(SET_OMARKER(data.omarker));
+    dispatch(SET_DMARKER(data.dmarker));
     dispatch(SET_LINES(data.lines));
+
+    console.log("최단 경로 결과");
+    console.log(omarker, dmarker, lines);
 
   }
 

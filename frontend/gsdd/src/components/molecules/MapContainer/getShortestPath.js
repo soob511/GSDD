@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const getShortestPath = async (map, origin, destination) => {
+const getShortestPath = async (origin, destination) => {
 
     const { Tmapv2 } = window;
 
@@ -13,8 +13,6 @@ const getShortestPath = async (map, origin, destination) => {
             position: new Tmapv2.LatLng(origin.lat, destination.lng),
             icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png",
             iconSize: new Tmapv2.Size(24, 38),
-            map: map,
-            visible: false,
         });
 
     //도착지 마커
@@ -23,8 +21,6 @@ const getShortestPath = async (map, origin, destination) => {
             position: new Tmapv2.LatLng(destination.lat, destination.lng),
             icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png",
             iconSize: new Tmapv2.Size(24, 38),
-            map: map,
-            visible: false,
         });
 
 
@@ -87,8 +83,6 @@ const getShortestPath = async (map, origin, destination) => {
                 path: arrPointList[k],
                 strokeColor: "#DD0000",
                 strokeWeight: 6,
-                map: map,
-                visible: false,
             });
             resultdrawArr.push(polyline_);
         }
