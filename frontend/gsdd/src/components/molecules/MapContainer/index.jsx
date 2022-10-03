@@ -177,7 +177,7 @@ const MapContainer = () => {
 
   useEffect(() => {
     getMapInfo();
-  }, [map]);
+  }, []);
 
   const defaultOProps = {
     options: oplaces,
