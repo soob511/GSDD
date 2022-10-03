@@ -2,7 +2,8 @@ const HOST = 'https://j7b209.p.ssafy.io:8080/api/';
 
 const AUTH = 'auth/';
 const MYPAGE = 'mypage/';
-const ROUTE = 'route';
+const ROUTE = 'route/';
+const ROAD = 'road/';
 const INFO = 'info/';
 const NEWS = 'news/';
 const CONTACT = 'contact';
@@ -27,8 +28,11 @@ const apiPath = {
     get: (city, district) => HOST + INFO + `${city}` + `/${district}`,
   },
   news: {
-    get: (city, district) => HOST + NEWS + `${city}` + `/${district}`,
+    get: (city, district) => HOST + NEWS + `${city}` + `/${district}`
   },
+  road: {
+    get: (olat, olng, dlat, dlng) => HOST + ROAD + `${olat}/${olng}/${dlat}/${dlng}`,
+  }
 };
 
 export default apiPath;

@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import { Button, TextField, Autocomplete } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import getShortestPath from './getShortestPath';
+import getSafestPath from './getSafestPath';
 
 const MapContainer = () => {
 
@@ -86,6 +87,9 @@ const MapContainer = () => {
 
     console.log("최단 경로 결과");
     console.log(omarker, dmarker, lines);
+
+    const brightData = await getSafestPath(map, origin, destination);//밝은 길 탐색
+    console.log("brightData", brightData);
 
   }
 
