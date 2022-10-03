@@ -111,7 +111,8 @@ const MapContainer = () => {
     dispatch(SET_LONGITUDE(longitude));
     dispatch(SET_LOCATION(location));
     dispatch(SET_MARKER(marker));
-    map.panTo(location);
+    console.log("location:", location);
+    map.setCenter(location);
   };
 
   const getMode = async () => {
