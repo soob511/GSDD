@@ -3,9 +3,17 @@ import Link from '../../atoms/Link';
 import * as S from './styles';
 import Button from '../../atoms/Button'
 import Navbar from '../Navbar'
-
-
+import { useDispatch, useSelector  } from 'react-redux/es/exports';
+import { useNavigate } from 'react-router-dom';
+import { DELETE_TOKEN } from '../../../reducers/tokenReducer';
 const Sidebar = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const logout = () => {
+        console.log('logout');
+        dispatch(DELETE_TOKEN());
+        navigate('/');
+    };
     const [isOpen, setOpen] = useState(false);
     const [xPosition, setX] = useState(200);
     
@@ -50,7 +58,7 @@ const Sidebar = () => {
                     <S.Item><Link styleType="TextLink" href="/information" >지역</Link></S.Item>
                 </S.List>
                 <S.List bottom>
-                    <S.Item><Link styleType="TextLink" href="/logout">로그아웃</Link></S.Item>
+                    <S.Item><div style={{cursor: `pointer`, textDecoration: `none`, fontSize: `20px`, color:`red`}} onClick={() => logout()}>로그아웃</div></S.Item>
                 </S.List>
             </S.Nav>
             <Navbar bool={bool} setBool={setBool}/>
