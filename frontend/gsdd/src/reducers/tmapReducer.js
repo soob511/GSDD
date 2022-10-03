@@ -16,7 +16,7 @@ export const tmapReducer = createSlice({
         destination: null,
         omarker: null,
         dmarker: null,
-        lines: [],
+        lines: null,
     },
     reducers: {
         SET_TMAPV2: (state, { payload: Tmapv2 }) => {
