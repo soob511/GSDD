@@ -53,33 +53,33 @@ const MapContainer = () => {
     dispatch(SET_DESTINATION(destination));
 
     //새로운 경로 이전 기존 경로 제거
-    if (omarker) {
-      console.log("set omarker null");
-      omarker.setMap(null);
-      dispatch(SET_OMARKER(null));
-    }
-    if (dmarker) {
-      console.log("set dmarker null");
-      dmarker.setMap(null);
-      dispatch(SET_DMARKER(null));
-    }
-    if (lines) {
-      console.log("set lines null");
-      for (let k in lines) {
-        lines[k].setMap(null);
-      }
-      dispatch(SET_LINES(null));
-    }
+    // if (omarker) {
+    //   console.log("set omarker null");
+    //   omarker.setMap(null);
+    //   dispatch(SET_OMARKER(null));
+    // }
+    // if (dmarker) {
+    //   console.log("set dmarker null");
+    //   dmarker.setMap(null);
+    //   dispatch(SET_DMARKER(null));
+    // }
+    // if (lines) {
+    //   console.log("set lines null");
+    //   for (let k in lines) {
+    //     lines[k].setMap(null);
+    //   }
+    //   dispatch(SET_LINES(null));
+    // }
 
     setOpen(false);
 
-    const data = await getShortestPath(origin, destination);//최단 경로 탐색
-    data.omarker.setMap(map);
-    data.dmarker.setMap(map);
-    for (let k in data.lines) {
-      console.log(data.lines[k]);
-      data.lines[k].setMap(map);
-    }
+    const data = await getShortestPath(map, origin, destination);//최단 경로 탐색
+    // data.omarker.setMap(map);
+    // data.dmarker.setMap(map);
+    // for (let k in data.lines) {
+    //   console.log(data.lines[k]);
+    //   data.lines[k].setMap(map);
+    // }
     dispatch(SET_OMARKER(data.omarker));
     dispatch(SET_DMARKER(data.dmarker));
     dispatch(SET_LINES(data.lines));
@@ -111,7 +111,8 @@ const MapContainer = () => {
     dispatch(SET_LONGITUDE(longitude));
     dispatch(SET_LOCATION(location));
     dispatch(SET_MARKER(marker));
-    map.panTo(location);
+    console.log("location:", location);
+    map.setCenter(location);
   };
 
   const getMode = async () => {
