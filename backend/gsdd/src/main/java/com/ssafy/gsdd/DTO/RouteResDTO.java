@@ -11,4 +11,6 @@ public class RouteResDTO {
     int id;
     String name;
     String address;
+    String lat;
+    String lon;
 }

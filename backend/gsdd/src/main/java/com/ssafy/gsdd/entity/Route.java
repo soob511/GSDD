@@ -7,7 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "route")
 public class Route {
@@ -25,10 +26,15 @@ public class Route {
     @Column(nullable = false)
     private String address;
 
-    public Route(String name, String address, User user) {
+    private String lat;
+    private String lon;
+
+    public Route(String name, String address, User user, String lat, String lon) {
         this.name = name;
         this.address = address;
         this.addRoute(user);
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public void addRoute(User user) {

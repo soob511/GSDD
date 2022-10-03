@@ -31,7 +31,7 @@ public class MypageController {
         result.put("user",user.getName());
         result.put("userId", user.getUserId());
         result.put("contacts", user.getContacts().stream().map(c -> new ContactResDTO(c.getContactId(),c.getName(),c.getContact())));
-        result.put("routes", user.getRoutes().stream().map(r -> new RouteResDTO(r.getRouteId(),r.getName(),r.getAddress())));
+        result.put("routes", user.getRoutes().stream().map(r -> new RouteResDTO(r.getRouteId(),r.getName(),r.getAddress(),r.getLat(),r.getLon())));
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -59,12 +59,12 @@ public class MypageController {
     @PostMapping("/route")
     public ResponseEntity<HashMap> createRoute(@RequestBody RouteDTO dto){
         HashMap<String, Object> result = new HashMap<>();
-        List<Route> list = mypageService.routeSave(dto.getUserId(), dto.getName(), dto.getAddress());
+        List<Route> list = mypageService.routeSave(dto.getUserId(), dto.getName(), dto.getAddress(),dto.getLat(),dto.getLon());
         if(list == null){
             result.put("message", "fail");
             return new ResponseEntity<>(result, HttpStatus.NOT_ACCEPTABLE);
         }
-        result.put("contacts", list.stream().map(r -> new RouteResDTO(r.getRouteId(),r.getName(),r.getAddress())));
+        result.put("Routes", list.stream().map(r -> new RouteResDTO(r.getRouteId(),r.getName(),r.getAddress(),r.getLat(),r.getLon())));
         return new ResponseEntity<>(result , HttpStatus.OK);
     }
     // 즐겨찾는 목적지 삭제
