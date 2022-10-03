@@ -74,10 +74,10 @@ const MapContainer = () => {
     setOpen(false);
 
     const data = await getShortestPath(map, origin, destination);//최단 경로 탐색
+    console.log("data", data);
     // data.omarker.setMap(map);
     // data.dmarker.setMap(map);
     // for (let k in data.lines) {
-    //   console.log(data.lines[k]);
     //   data.lines[k].setMap(map);
     // }
     dispatch(SET_OMARKER(data.omarker));
