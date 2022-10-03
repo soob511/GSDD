@@ -8,7 +8,7 @@ export const authAxios = axios.create({
   baseURL: `${SERVER_ADDRESS}`,
   headers: {
     Authorization: 'Bearer ' + localStorage.getItem('accessToken') || '',
-    // 'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Origin': 'https://j7b209.p.ssafy.io:8080',
     // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
   },
 });
