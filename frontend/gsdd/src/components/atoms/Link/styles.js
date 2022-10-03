@@ -30,6 +30,6 @@ export const NextLink = styled.a`
   ${Styles};
 `;
 
-export const TextLink = styled.a`
+export const TextLink = styled.div`
   ${Text};
 `
