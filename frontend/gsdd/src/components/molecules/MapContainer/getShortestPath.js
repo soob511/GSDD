@@ -153,10 +153,13 @@ const getShortestPath = async (map, origin, destination) => {
         for (const k in arrPointList) {
             const polyline_ = new Tmapv2.Polyline({
                 path: arrPointList[k],
+                fillColor: "#DD0000",
                 strokeColor: "#DD0000",
                 strokeWeight: 6,
                 map: map,
             });
+            polyline_.setVisible(true);
+            console.log(polyline_.getPath());
             resultdrawArr.push(polyline_);
             console.log("polyline", polyline_);
         }
