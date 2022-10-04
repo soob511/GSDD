@@ -29,14 +29,7 @@ const Navbar = (props) => {
         <div onClick={handleClick}>
           <Image src={logo_txt} width="100" height="50" />
         </div>
-        <Active
-          onClick={() => {
-            setSiren(!siren);
-          }}
-        >
-          <RiAlarmWarningFill size="40" color="red" />
-          {siren ? <SirenModal siren={siren} setSiren={setSiren} /> : <></>}
-        </Active>
+        <SirenModal siren={siren}/>
       </S.StyledNavbar>
       <div
         style={{
