@@ -382,14 +382,14 @@ const getSafestPath = async (map, origin, destination) => {
 
     await setMapBound(); // 포인트에 따른 지도 바운드 설정
 
-    if (isValidate()) {
-        // 유효성 검사를 통과 했다면 할 작업
-        console.log("- LoadApi 요청 작업 시작 -");
-        console.log('------------------------------------------');
-        setTimeout(function () { // 지도를 띄우고 API 를 호출하기 위해 딜레이 줌
-            splitPoint(); // 포인트 데이터 나눠서 요청하기 ( LoadApi 한번에 요청 가능한 개수 100개 제한 )
-        }, 1000);
-    }
+    // if (isValidate()) {
+    //     // 유효성 검사를 통과 했다면 할 작업
+    //     console.log("- LoadApi 요청 작업 시작 -");
+    //     console.log('------------------------------------------');
+    //     setTimeout(function () { // 지도를 띄우고 API 를 호출하기 위해 딜레이 줌
+    //         splitPoint(); // 포인트 데이터 나눠서 요청하기 ( LoadApi 한번에 요청 가능한 개수 100개 제한 )
+    //     }, 1000);
+    // }
 
 }
 
