@@ -46,10 +46,15 @@ public class AroundService {
 
     public AroundDTO getNearList(double lat1, double lon1, double lat2, double lon2, double dis) {
 
+        double lat = (lat1 + lat2) / 2;
+        double lon = (lon1 + lon2) / 2;
+
+        double R = distance(lat, lon, lat1, lon1, "K");
+
         return new AroundDTO(
-                lampRepository.findAll().stream().filter(l -> nearDistance(lat1, lon1, lat2, lon2, Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon())) <= dis).map(l -> new LampDTO(Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon()))).collect(Collectors.toList()),
-                houseRepository.findAll().stream().filter(l -> nearDistance(lat1, lon1, lat2, lon2, Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon())) <= dis).map(l -> new CCTVDTO(Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon()))).collect(Collectors.toList()),
-                cctvRepository.findAll().stream().filter(l -> nearDistance(lat1, lon1, lat2, lon2, Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon())) <= dis).map(l -> new HouseDTO(Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon()))).collect(Collectors.toList())
+                lampRepository.findAll().stream().filter(l -> distance(Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon()), lat, lon, "K") <= R).filter(l -> nearDistance(lat1, lon1, lat2, lon2, Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon())) <= dis).map(l -> new LampDTO(Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon()))).collect(Collectors.toList()),
+                houseRepository.findAll().stream().filter(l -> distance(Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon()), lat, lon, "K") <= R).filter(l -> nearDistance(lat1, lon1, lat2, lon2, Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon())) <= dis).map(l -> new CCTVDTO(Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon()))).collect(Collectors.toList()),
+                cctvRepository.findAll().stream().filter(l -> distance(Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon()), lat, lon, "K") <= R).filter(l -> nearDistance(lat1, lon1, lat2, lon2, Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon())) <= dis).map(l -> new HouseDTO(Double.parseDouble(l.getLat()), Double.parseDouble(l.getLon()))).collect(Collectors.toList())
         );
     }
 
@@ -78,23 +83,23 @@ public class AroundService {
         double maxlon = Math.max(lon1, lon2);
         double minlon = Math.min(lon1, lon2);
 
-        if (maxlat == minlat) {
-            if (maxlon >= lon && lon >= minlon) {
-                return distance(lat, lon, lon1, lon, "K");
-            }
-            return Math.min(
-                    distance(lat, lon, lat1, lon1, "K"),
-                    distance(lat, lon, lat1, lon2, "K")
-            );
-        } else if (lon1 == lon2) {
-            if (maxlat >= lat && lat >= minlat) {
-                return distance(lat, lon, lat, lon1, "K");
-            }
-            return Math.min(
-                    distance(lat, lon, lat1, lon1, "K"),
-                    distance(lat, lon, lat1, lon2, "K")
-            );
-        }
+//        if (maxlat == minlat) {
+//            if (maxlon >= lon && lon >= minlon) {
+//                return distance(lat, lon, lon1, lon, "K");
+//            }
+//            return Math.min(
+//                    distance(lat, lon, lat1, lon1, "K"),
+//                    distance(lat, lon, lat1, lon2, "K")
+//            );
+//        } else if (lon1 == lon2) {
+//            if (maxlat >= lat && lat >= minlat) {
+//                return distance(lat, lon, lat, lon1, "K");
+//            }
+//            return Math.min(
+//                    distance(lat, lon, lat1, lon1, "K"),
+//                    distance(lat, lon, lat1, lon2, "K")
+//            );
+//        }
         double m = (lat1 - lat2) / (lon1 - lon2);
         double a = m;
         double b = -1;
