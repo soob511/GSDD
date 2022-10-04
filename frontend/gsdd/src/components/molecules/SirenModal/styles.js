@@ -19,3 +19,23 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
 `
+
+export const Button = styled.button`
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    border: none;
+    background-color: ${({ theme }) =>
+        css`
+          ${theme.colors['gray3']}
+        `};
+    ${(props) => props.mute && css `
+        background-color: ${({ theme }) =>
+        css`
+          ${theme.colors['gray2']}
+        `};
+    ` }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
