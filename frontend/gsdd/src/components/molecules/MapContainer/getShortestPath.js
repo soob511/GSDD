@@ -22,6 +22,20 @@ const getShortestPath = async (map, origin, destination) => {
     DrawLine.pointList = [];
     DrawLine.line = null;
 
+    DrawLine.setMapBound = function () {
+
+        console.log("setMapBound");
+        const positionBounds = new Tmapv2.LatLngBounds(); // bounds 인스턴스를 생성합니다.
+
+        const boundPosition1 = new Tmapv2.LatLng(origin.lat, origin.lng);
+        positionBounds.extend(boundPosition1);
+
+        const boundPosition2 = new Tmapv2.LatLng(destination.lat, destination.lng);
+        positionBounds.extend(boundPosition2);
+
+        DrawLine.map.panToBounds(positionBounds); // 매칭전 좌표가 한눈에 들어올 수 있는 지도 중심과 줌레벨 설정
+    }
+
     DrawLine.drawLine = function (arrPointList) {
         console.log("shortest", arrPointList);
         const polyline_ = new Tmapv2.Polyline({
@@ -32,8 +46,6 @@ const getShortestPath = async (map, origin, destination) => {
         });
         DrawLine.line = polyline_;
     }
-
-    console.log(origin, destination);
 
     const data = await axios({
         method: 'POST',
@@ -58,12 +70,6 @@ const getShortestPath = async (map, origin, destination) => {
         const resultData = res.data.features;
         console.log(resultData);
 
-        //결과 출력
-        const tDistance = "총 거리 : " + ((resultData[0].properties.totalDistance) / 1000).toFixed(1) + "km,";
-        const tTime = " 총 시간 : " + ((resultData[0].properties.totalTime) / 60).toFixed(0) + "분";
-
-        console.log(tDistance, tTime);
-
         for (let i in resultData) {
             const geometry = resultData[i].geometry;
 
@@ -81,9 +87,14 @@ const getShortestPath = async (map, origin, destination) => {
             }
         }
 
+        DrawLine.setMapBound();//polyline생성될 바운더리 지정
+
         DrawLine.drawLine(DrawLine.pointList); //polyline 생성
 
-
+        //결과 출력
+        const tDistance = "총 거리 : " + ((resultData[0].properties.totalDistance) / 1000).toFixed(1) + "km,";
+        const tTime = " 총 시간 : " + ((resultData[0].properties.totalTime) / 60).toFixed(0) + "분";
+        console.log(tDistance, tTime);
 
     }).catch(res => console.log(res));
 
