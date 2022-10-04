@@ -25,10 +25,11 @@ const Navbar = (props) => {
         <Link styleType="NextLink" href="/">
           <Image src={logo_txt} width="100" height="50" />
         </Link>
-        <Active onClick={() => {setSiren(!siren);}}>
+        {/* <Active onClick={() => {setSiren(!siren);}}>
           <RiAlarmWarningFill size="40" color="red" />
           {siren ? <SirenModal siren={siren} setSiren={setSiren}/> : <></>}
-        </Active>
+        </Active> */}
+        <SirenModal siren={siren}/>
       </S.StyledNavbar>
       <div
         style={{
