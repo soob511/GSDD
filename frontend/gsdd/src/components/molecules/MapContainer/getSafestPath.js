@@ -53,6 +53,7 @@ const getSafestPath = async (map, origin, destination) => {
                 console.log(res);
                 const arrays = res.data.road;
 
+                console.log(arrays);
                 for (let i = 0; i < arrays.length; i++) {
                     DrawLine.arrPoint.push(arrays[i].lon);
                     DrawLine.arrPoint.push(arrays[i].lat);
@@ -260,10 +261,12 @@ const getSafestPath = async (map, origin, destination) => {
                         }
                         // 2-2. 소스 포인트 리스트로 라인 그리기
                         // 요청한 좌표를 사용해 라인을 그려줍니다.(빨간색)
+                        console.log("arrPointForMarker", arrPointForMarker);
                         DrawLine.drawLine(arrPointForMarker, "#FF0000");
 
                         // 3-2. 매칭 포인트 리스트로 라인 그리기
                         // 요청한 좌표와 매칭되는 좌표를 사용해 라인을 그려줍니다.(파랑색)
+                        console.log("arrPointForLine", arrPointForLine);
                         DrawLine.drawLine(arrPointForLine, "#0000FF");
 
                         // 4. 매칭된 좌표의 거리 구하기
@@ -316,7 +319,7 @@ const getSafestPath = async (map, origin, destination) => {
     */
     DrawLine.drawLine = function (pointList, lineColor) {
         var polyline_;
-
+        console.log("safest", pointList);
         if (lineColor === "#FF0000") {
             polyline_ = new Tmapv2.Polyline({
                 path: pointList,
@@ -379,14 +382,14 @@ const getSafestPath = async (map, origin, destination) => {
 
     await setMapBound(); // 포인트에 따른 지도 바운드 설정
 
-    if (isValidate()) {
-        // 유효성 검사를 통과 했다면 할 작업
-        console.log("- LoadApi 요청 작업 시작 -");
-        console.log('------------------------------------------');
-        setTimeout(function () { // 지도를 띄우고 API 를 호출하기 위해 딜레이 줌
-            splitPoint(); // 포인트 데이터 나눠서 요청하기 ( LoadApi 한번에 요청 가능한 개수 100개 제한 )
-        }, 1000);
-    }
+    // if (isValidate()) {
+    //     // 유효성 검사를 통과 했다면 할 작업
+    //     console.log("- LoadApi 요청 작업 시작 -");
+    //     console.log('------------------------------------------');
+    //     setTimeout(function () { // 지도를 띄우고 API 를 호출하기 위해 딜레이 줌
+    //         splitPoint(); // 포인트 데이터 나눠서 요청하기 ( LoadApi 한번에 요청 가능한 개수 100개 제한 )
+    //     }, 1000);
+    // }
 
 }
 
