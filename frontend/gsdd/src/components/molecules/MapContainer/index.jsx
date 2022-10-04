@@ -83,10 +83,7 @@ const MapContainer = () => {
     // }
     dispatch(SET_OMARKER(shortData.omarker));
     dispatch(SET_DMARKER(shortData.dmarker));
-    dispatch(SET_LINES(shortData.lines));
-
-    console.log("최단 경로 결과");
-    console.log(omarker, dmarker, lines);
+    dispatch(SET_LINES(shortData.line));
 
     const brightData = await getSafestPath(map, origin, destination);//밝은 길 탐색
     console.log("brightData", brightData);
