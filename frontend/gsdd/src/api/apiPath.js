@@ -8,6 +8,7 @@ const INFO = 'info/';
 const NEWS = 'news/';
 const CONTACT = 'contact';
 const AROUND = 'around/';
+const MESSAGE = 'message';
 
 const apiPath = {
   auth: {
@@ -28,11 +29,14 @@ const apiPath = {
     get: (city, district) => HOST + INFO + `${city}` + `/${district}`,
   },
   news: {
-    get: (city, district) => HOST + NEWS + `${city}` + `/${district}`
+    get: (city, district) => HOST + NEWS + `${city}` + `/${district}`,
   },
   road: {
     get: (olat, olng, dlat, dlng) => HOST + ROAD + `${olat}/${olng}/${dlat}/${dlng}`,
-  }
+  },
+  message: {
+    post: () => HOST + MESSAGE,
+  },
 };
 
 export default apiPath;
