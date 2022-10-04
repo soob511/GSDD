@@ -30,4 +30,17 @@ public class AroundController {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    @GetMapping("/{lat}/{lon}/{dis}")
+    public ResponseEntity<HashMap> getList(@PathVariable String lat, @PathVariable String lon,@PathVariable String dis){
+        HashMap<String , Object> result = new HashMap<>();
+        AroundDTO list = aroundService.getListbyDis(Double.parseDouble(lat), Double.parseDouble(lon),Double.parseDouble(dis));
+        result.put("lights",list.getLamps());
+        result.put("cameras",list.getCctvs());
+        result.put("houses",list.getHouses());
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+
 }
