@@ -7,8 +7,11 @@ import { IoIosMenu } from 'react-icons/io';
 import { RiAlarmWarningFill } from 'react-icons/ri';
 import Sidebar from '../Sidebar/index.jsx';
 import Active from '../../atoms/Active';
-
+import SirenModal from '../SirenModal';
 const Navbar = (props) => {
+  const [ siren, setSiren ] = useState(false);
+
+
   return (
     <>
       <S.StyledNavbar>
@@ -22,7 +25,10 @@ const Navbar = (props) => {
         <Link styleType="NextLink" href="/">
           <Image src={logo_txt} width="100" height="50" />
         </Link>
-        <RiAlarmWarningFill size="40" color="red" />
+        <Active onClick={() => {setSiren(!siren);}}>
+          <RiAlarmWarningFill size="40" color="red" />
+          {siren ? <SirenModal siren={siren} setSiren={setSiren}/> : <></>}
+        </Active>
       </S.StyledNavbar>
       <div
         style={{
