@@ -20,7 +20,7 @@ const getShortestPath = async (map, origin, destination) => {
         map: DrawLine.map,
     });
     DrawLine.pointList = [];
-    DrawLine.lines = {};
+    DrawLine.line = null;
 
     DrawLine.drawLine = function (arrPointList) {
         console.log("shortest", arrPointList);
@@ -30,7 +30,7 @@ const getShortestPath = async (map, origin, destination) => {
             strokeWeight: 6,
             map: DrawLine.map,
         });
-        DrawLine.resultdrawArr.push(polyline_);
+        DrawLine.line = polyline_;
     }
 
     console.log(origin, destination);
@@ -83,9 +83,11 @@ const getShortestPath = async (map, origin, destination) => {
 
         DrawLine.drawLine(DrawLine.pointList); //polyline 생성
 
-        return { 'omarker': DrawLine.omarker, 'dmarker': DrawLine.dmarker, 'lines': DrawLine.lines };
+
 
     }).catch(res => console.log(res));
+
+    return { 'omarker': DrawLine.omarker, 'dmarker': DrawLine.dmarker, 'line': DrawLine.line };
 
 };
 
