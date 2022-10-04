@@ -83,23 +83,23 @@ public class AroundService {
         double maxlon = Math.max(lon1, lon2);
         double minlon = Math.min(lon1, lon2);
 
-//        if (maxlat == minlat) {
-//            if (maxlon >= lon && lon >= minlon) {
-//                return distance(lat, lon, lon1, lon, "K");
-//            }
-//            return Math.min(
-//                    distance(lat, lon, lat1, lon1, "K"),
-//                    distance(lat, lon, lat1, lon2, "K")
-//            );
-//        } else if (lon1 == lon2) {
-//            if (maxlat >= lat && lat >= minlat) {
-//                return distance(lat, lon, lat, lon1, "K");
-//            }
-//            return Math.min(
-//                    distance(lat, lon, lat1, lon1, "K"),
-//                    distance(lat, lon, lat1, lon2, "K")
-//            );
-//        }
+        if (maxlat == minlat) {
+            if (maxlon >= lon && lon >= minlon) {
+                return distance(lat, lon, lon1, lon, "K");
+            }
+            return Math.min(
+                    distance(lat, lon, lat1, lon1, "K"),
+                    distance(lat, lon, lat1, lon2, "K")
+            );
+        } else if (lon1 == lon2) {
+            if (maxlat >= lat && lat >= minlat) {
+                return distance(lat, lon, lat, lon1, "K");
+            }
+            return Math.min(
+                    distance(lat, lon, lat1, lon1, "K"),
+                    distance(lat, lon, lat1, lon2, "K")
+            );
+        }
         double m = (lat1 - lat2) / (lon1 - lon2);
         double a = m;
         double b = -1;
