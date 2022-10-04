@@ -22,7 +22,7 @@ const getShortestPath = async (map, origin, destination) => {
     DrawLine.pointList = [];
     DrawLine.line = null;
 
-    DrawLine.setMapBound = function () {
+    DrawLine.setMapBound = async function () {
 
         console.log("setMapBound");
         const positionBounds = new Tmapv2.LatLngBounds(); // bounds 인스턴스를 생성합니다.
@@ -87,16 +87,16 @@ const getShortestPath = async (map, origin, destination) => {
             }
         }
 
-        DrawLine.setMapBound();//polyline생성될 바운더리 지정
-
-        DrawLine.drawLine(DrawLine.pointList); //polyline 생성
-
         //결과 출력
         const tDistance = "총 거리 : " + ((resultData[0].properties.totalDistance) / 1000).toFixed(1) + "km,";
         const tTime = " 총 시간 : " + ((resultData[0].properties.totalTime) / 60).toFixed(0) + "분";
         console.log(tDistance, tTime);
 
     }).catch(res => console.log(res));
+
+    await DrawLine.setMapBound();//polyline생성될 바운더리 지정
+
+    DrawLine.drawLine(DrawLine.pointList); //polyline 생성
 
     return { 'omarker': DrawLine.omarker, 'dmarker': DrawLine.dmarker, 'line': DrawLine.line };
 
