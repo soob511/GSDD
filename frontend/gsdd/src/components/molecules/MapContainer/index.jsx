@@ -25,8 +25,8 @@ const MapContainer = () => {
   const latitude = useSelector(state => state.tmapReducer.latitude);
   const longitude = useSelector(state => state.tmapReducer.longitude);
   const markers = useSelector(state => state.tmapReducer.markers);
-  const oplaces = useSelector(state => state.tmapReducer.oplaces);
-  const dplaces = useSelector(state => state.tmapReducer.dplaces);
+  // const oplaces = useSelector(state => state.tmapReducer.oplaces);
+  // const dplaces = useSelector(state => state.tmapReducer.dplaces);
   const origin = useSelector(state => state.tmapReducer.origin);
   const destination = useSelector(state => state.tmapReducer.destination);
   const omarker = useSelector(state => state.tmapReducer.omarker);
@@ -42,6 +42,9 @@ const MapContainer = () => {
   });
 
   const [open, setOpen] = useState(false);
+
+  const [oplaces, setOplaces] = useState([]);
+  const [dplaces, setDplaces] = useState([]);
 
   /// mui ///
 
@@ -189,10 +192,6 @@ const MapContainer = () => {
     getOptionLabel: (option) => option.name,
   };
 
-  // const flatProps = {
-  //   options: places.map((option) => option.name),
-  // };
-
   return (
     <>
       <S.StyledMapContainer>
@@ -234,7 +233,7 @@ const MapContainer = () => {
                 dispatch(SET_ORIGIN(newOrigin));
               }}
               onInputChange={async (_event, newInput) => {
-                dispatch(SET_OPLACES(await getPlaces(newInput)));
+                setOplaces(await getPlaces(newInput));
               }}
             />
             <Autocomplete id="clear-on-escape" {...defaultDProps}
@@ -248,7 +247,7 @@ const MapContainer = () => {
                 dispatch(SET_DESTINATION(newDestination));
               }}
               onInputChange={async (_event, newInput2) => {
-                dispatch(SET_DPLACES(await getPlaces(newInput2)));
+                setDplaces(await getPlaces(newInput2));
               }}
             />
           </Typography>
