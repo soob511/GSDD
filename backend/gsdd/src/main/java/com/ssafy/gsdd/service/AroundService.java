@@ -1,9 +1,6 @@
 package com.ssafy.gsdd.service;
 
-import com.ssafy.gsdd.DTO.AroundDTO;
-import com.ssafy.gsdd.DTO.CCTVDTO;
-import com.ssafy.gsdd.DTO.HouseDTO;
-import com.ssafy.gsdd.DTO.LampDTO;
+import com.ssafy.gsdd.DTO.*;
 import com.ssafy.gsdd.entity.Lamp;
 import com.ssafy.gsdd.repository.CCTVRepository;
 import com.ssafy.gsdd.repository.HouseRepository;
@@ -13,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -103,9 +101,8 @@ public class AroundService {
         double c = (-m) * lon2 + lat2;
 
 
-        double x2 = (lon / m - c) / (a + (1 / m));
-        double y2 = (m * lat + lon + c / a) / (m + (1 / a));
+        double x2 = (b * (b * lon - a * lat) - a * c) / (a * a + b * b);
+        double y2 = (a * (-b * lon + a * lat) - b * c) / (a * a + b * b);
         return distance(lat, lon, y2, x2, "K");
-
     }
 }
