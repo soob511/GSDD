@@ -141,7 +141,7 @@ const getTwoPath = async (map, origin, destination) => {
                 let dist = DrawLine.distance(x1, y1, x2, y2, targetX, targetY);
 
                 if (dist < 0) continue;
-                if (dist < 0.0005) { //(0.00013은 약 15m)
+                if (dist < 0.01) { //(0.00013은 약 15m)
                     let m = (y2 - y1) / (x2 - x1);
                     let randomX = targetX - 1;
                     let randomY = -1 / m * randomX + targetY + (targetX / m);
