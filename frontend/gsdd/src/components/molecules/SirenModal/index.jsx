@@ -25,7 +25,6 @@ const SirenModal = (props) => {
 
   const [count, setCount] = useState(5);
   const [open, setOpen] = useState(false);
-  const [mute, setMute] = useState(false);
 
   const handleOpen = () => {
     stop();
@@ -35,6 +34,7 @@ const SirenModal = (props) => {
   const handleClose = () => {
     setOpen(false);
     setCount(5);
+    stop();
   };
 
   const audioRef = useRef(new Audio(mp3));
@@ -46,16 +46,19 @@ const SirenModal = (props) => {
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
   };
-
-  const audioToggle = () => {
-    if (!mute) {
-      stop();
-      setMute(true);
-    } else {
-      play();
-      setMute(false);
-    }
-  };
+  // const audioToggle = () => {
+  //   if (!mute) {
+  //     if (open) pause();
+  //     else stop();
+  //     setMute(true);
+  //   } else {
+  //     if (open) {
+  //       play();
+  //       setMute(false);
+  //     }
+  //   }
+  //   console.log(mute)
+  // };
 
   const getPositionName = async () => {
     const options = {
@@ -92,14 +95,13 @@ const SirenModal = (props) => {
         setCount(count - 1);
       }, 1000);
       if (count === 0) {
-        if (userContacts.length === 0) alert('비상연락망 1개 이상 등록은 필수 입니다! \n 마이페이지에서 등록하실 수 있습니다 :)');
-        else {
-          // Message API
-          sendMessage();
-        }
-        handleClose();
+        // if (userContacts.length === 0) alert('비상연락망 1개 이상 등록은 필수 입니다! \n 마이페이지에서 등록하실 수 있습니다 :)');
+        // else {
+        //   // Message API
+        //   sendMessage();
+        // }
+        // handleClose();
       }
-
       return () => clearInterval(timer);
     }
   });
@@ -111,20 +113,20 @@ const SirenModal = (props) => {
       <Active onClick={handleOpen}>
         <RiAlarmWarningFill size="40" color="red" />
       </Active>
-      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+      <Modal open={open} onClose={handleClose} onClick={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={S.Box}>
           <S.Container>
             <Typography id="modal-modal-title" variant="h6" component="h2">
               <RiAlarmWarningFill size="200" color="red" />
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {count} 초 후에 메시지가 발송됩니다.
+              {count > 0 ? <span>{count}초 후에 메시지가 발송됩니다.</span> : "문자 메시지가 전송되었습니다."}
             </Typography>
-            <Typography id="modal-modal-button" sx={{ mt: 2 }}>
+            {/* <Typography id="modal-modal-button" sx={{ mt: 2 }}>
               <S.Button mute={mute} onClick={() => audioToggle()}>
                 {mute ? <RiMicOffFill size="25" /> : <RiMicFill size="25" />}
               </S.Button>
-            </Typography>
+            </Typography> */}
           </S.Container>
         </Box>
       </Modal>
