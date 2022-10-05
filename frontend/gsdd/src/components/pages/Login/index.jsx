@@ -8,12 +8,12 @@ import naver from '../../../assets/icons/naver.jpg';
 import google from '../../../assets/icons/google.png';
 
 const Login = () => {
-  const wait = async () => {
-    const token = await localStorage.getItem('accessToken');
-    const getToken = await (token != null);
-    return getToken;
-  }
-  wait().then(() => window.location.reload());
+  // const wait = async () => {
+  //   const token = await localStorage.getItem('accessToken');
+  //   const getToken = await (token != null);
+  //   return getToken;
+  // }
+  // wait().then(() => window.location.reload());
   return (
     <>
       <S.Login>
