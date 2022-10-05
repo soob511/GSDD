@@ -48,7 +48,7 @@ const getSafestPath = async (map, origin, destination) => {
     /*포인트 배열 초기화*/
     const initData = async () => {
         const data = await authAxios
-            .get(apiPath.road.get(origin.lat, origin.lng, destination.lat, destination.lng), {})
+            .get(apiPath.road.get(origin.lat, origin.lon, destination.lat, destination.lon), {})
             .then(res => {
                 console.log(res);
                 const arrays = res.data.road;

@@ -35,7 +35,7 @@ const getPlaces = async (newInput) => {
             places.push({
                 name: name,
                 lat: lat,
-                lng: lon,
+                lon: lon,
             });
         }
 

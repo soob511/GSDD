@@ -1,6 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_TMAPV2, SET_MAP, SET_MARKER, SET_LATITUDE, SET_LONGITUDE, SET_LOCATION, SET_MARKERS, SET_OPLACES, SET_DPLACES, SET_ORIGIN, SET_DESTINATION, SET_OMARKER, SET_DMARKER, SET_LINES } from '../../../reducers/tmapReducer';
+import {
+  SET_TMAPV2,
+  SET_MAP,
+  SET_MARKER,
+  SET_LATITUDE,
+  SET_LONGITUDE,
+  SET_LOCATION,
+  SET_MARKERS,
+  SET_ORIGIN,
+  SET_DESTINATION,
+  SET_OMARKER,
+  SET_DMARKER,
+  SET_LINES,
+} from '../../../reducers/tmapReducer';
 import * as S from './styles';
 import Map from '../../atoms/Map';
 import { Button as Btn } from '../../atoms/Button';
@@ -13,25 +26,23 @@ import { Button, TextField, Autocomplete } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import getShortestPath from './getShortestPath';
 import getSafestPath from './getSafestPath';
+import getTwoPath from './getTwoPath';
 
 const MapContainer = () => {
-
   const dispatch = useDispatch();
 
-  const Tmapv2 = useSelector(state => state.tmapReducer.Tmapv2);
-  const map = useSelector(state => state.tmapReducer.map);
-  const marker = useSelector(state => state.tmapReducer.marker);
-  const location = useSelector(state => state.tmapReducer.location);
-  const latitude = useSelector(state => state.tmapReducer.latitude);
-  const longitude = useSelector(state => state.tmapReducer.longitude);
-  const markers = useSelector(state => state.tmapReducer.markers);
-  const oplaces = useSelector(state => state.tmapReducer.oplaces);
-  const dplaces = useSelector(state => state.tmapReducer.dplaces);
-  const origin = useSelector(state => state.tmapReducer.origin);
-  const destination = useSelector(state => state.tmapReducer.destination);
-  const omarker = useSelector(state => state.tmapReducer.omarker);
-  const dmarker = useSelector(state => state.tmapReducer.dmarker);
-  const lines = useSelector(state => state.tmapReducer.lines);
+  const Tmapv2 = useSelector((state) => state.tmapReducer.Tmapv2);
+  const map = useSelector((state) => state.tmapReducer.map);
+  const marker = useSelector((state) => state.tmapReducer.marker);
+  const location = useSelector((state) => state.tmapReducer.location);
+  const latitude = useSelector((state) => state.tmapReducer.latitude);
+  const longitude = useSelector((state) => state.tmapReducer.longitude);
+  const markers = useSelector((state) => state.tmapReducer.markers);
+  const origin = useSelector((state) => state.tmapReducer.origin);
+  const destination = useSelector((state) => state.tmapReducer.destination);
+  const omarker = useSelector((state) => state.tmapReducer.omarker);
+  const dmarker = useSelector((state) => state.tmapReducer.dmarker);
+  const lines = useSelector((state) => state.tmapReducer.lines);
 
   const [mode, setMode] = useState(false);
 
@@ -43,14 +54,17 @@ const MapContainer = () => {
 
   const [open, setOpen] = useState(false);
 
+  const [oplaces, setOplaces] = useState([]);
+  const [dplaces, setDplaces] = useState([]);
+
   /// mui ///
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleNext = async () => {
-    console.log("출발지", origin);
+    console.log('출발지', origin);
     dispatch(SET_ORIGIN(origin));
-    console.log("목적지", destination);
+    console.log('목적지', destination);
     dispatch(SET_DESTINATION(destination));
 
     //새로운 경로 이전 기존 경로 제거
@@ -74,21 +88,21 @@ const MapContainer = () => {
 
     setOpen(false);
 
-    const shortData = await getShortestPath(map, origin, destination);//최단 경로 탐색
-    console.log("shortData", shortData);
+    // const shortData = await getShortestPath(map, origin, destination);//최단 경로 탐색
+    // console.log("shortData", shortData);
     // data.omarker.setMap(map);
     // data.dmarker.setMap(map);
     // for (let k in data.lines) {
     //   data.lines[k].setMap(map);
     // }
-    dispatch(SET_OMARKER(shortData.omarker));
-    dispatch(SET_DMARKER(shortData.dmarker));
-    dispatch(SET_LINES(shortData.line));
+    // dispatch(SET_OMARKER(shortData.omarker));
+    // dispatch(SET_DMARKER(shortData.dmarker));
+    // dispatch(SET_LINES(shortData.line));
+    // const brightData = await getSafestPath(map, origin, destination);//밝은 길 탐색
+    // console.log("brightData", brightData);
 
-    const brightData = await getSafestPath(map, origin, destination);//밝은 길 탐색
-    console.log("brightData", brightData);
-
-  }
+    await getTwoPath(map, origin, destination);
+  };
 
   const style = {
     position: 'absolute',
@@ -113,8 +127,7 @@ const MapContainer = () => {
     dispatch(SET_LONGITUDE(longitude));
     dispatch(SET_LOCATION(location));
     dispatch(SET_MARKER(marker));
-    console.log("location:", location);
-
+    console.log('location:', location);
   };
 
   const getMode = async () => {
@@ -189,10 +202,6 @@ const MapContainer = () => {
     getOptionLabel: (option) => option.name,
   };
 
-  // const flatProps = {
-  //   options: places.map((option) => option.name),
-  // };
-
   return (
     <>
       <S.StyledMapContainer>
@@ -223,32 +232,32 @@ const MapContainer = () => {
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={style}>
           <Typography id="modal-modal-title">
-            <Autocomplete id="clear-on-escape" {...defaultOProps}
+            <Autocomplete
+              id="clear-on-escape"
+              {...defaultOProps}
               options={oplaces ? oplaces : []}
-              getOptionLabel={option => option.name}
-              renderInput={(params) => (
-                <TextField {...params} label="출발지" variant="standard" />
-              )}
+              getOptionLabel={(option) => option.name}
+              renderInput={(params) => <TextField {...params} label="출발지" variant="standard" />}
               onChange={(_event, newOrigin) => {
-                console.log("newOrigin", newOrigin);
+                console.log('newOrigin', newOrigin);
                 dispatch(SET_ORIGIN(newOrigin));
               }}
               onInputChange={async (_event, newInput) => {
-                dispatch(SET_OPLACES(await getPlaces(newInput)));
+                setOplaces(await getPlaces(newInput));
               }}
             />
-            <Autocomplete id="clear-on-escape" {...defaultDProps}
+            <Autocomplete
+              id="clear-on-escape"
+              {...defaultDProps}
               options={dplaces ? dplaces : []}
-              getOptionLabel={option => option.name}
-              renderInput={(params) => (
-                <TextField {...params} label="목적지" variant="standard" />
-              )}
+              getOptionLabel={(option) => option.name}
+              renderInput={(params) => <TextField {...params} label="목적지" variant="standard" />}
               onChange={(_event, newDestination) => {
-                console.log("newDestination", newDestination);
+                console.log('newDestination', newDestination);
                 dispatch(SET_DESTINATION(newDestination));
               }}
               onInputChange={async (_event, newInput2) => {
-                dispatch(SET_DPLACES(await getPlaces(newInput2)));
+                setDplaces(await getPlaces(newInput2));
               }}
             />
           </Typography>

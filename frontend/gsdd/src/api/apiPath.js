@@ -8,6 +8,9 @@ const INFO = 'info/';
 const NEWS = 'news/';
 const CONTACT = 'contact';
 const AROUND = 'around/';
+const MESSAGE = 'message';
+const NEAR = 'near/';
+const BOUND = 'bound/';
 
 const apiPath = {
   auth: {
@@ -15,7 +18,9 @@ const apiPath = {
     logout: () => HOST + AUTH + 'logout/',
   },
   markers: {
-    get: (lat, lng) => HOST + AROUND + `${lat}/${lng}`,
+    get: (lat, lon) => HOST + AROUND + `${lat}/${lon}`,
+    around: (lat, lon, dist) => HOST + AROUND + `${lat}/${lon}/${dist}`,
+    near: (olat, olon, dlat, dlon, dist) => HOST + AROUND + NEAR + `${olat}/${olon}/${dlat}/${dlon}/${dist}`,
   },
   mypage: {
     get: (userId) => HOST + MYPAGE + `${userId}`,
@@ -28,11 +33,20 @@ const apiPath = {
     get: (city, district) => HOST + INFO + `${city}` + `/${district}`,
   },
   news: {
-    get: (city, district) => HOST + NEWS + `${city}` + `/${district}`
+    get: (city, district) => HOST + NEWS + `${city}` + `/${district}`,
   },
   road: {
-    get: (olat, olng, dlat, dlng) => HOST + ROAD + `${olat}/${olng}/${dlat}/${dlng}`,
-  }
+    get: (olat, olon, dlat, dlon) => HOST + ROAD + `${olat}/${olon}/${dlat}/${dlon}`,
+  },
+  near: {
+    post: (olat, olon, dlat, dlon) => HOST + NEAR + `${olat}/${olon}/${dlat}/${dlon}`,
+  },
+  bound: {
+    get: (olat, olon, dlat, dlon) => HOST + BOUND + `${olat}/${olon}/${dlat}/${dlon}`,
+  },
+  message: {
+    post: () => HOST + MESSAGE,
+  },
 };
 
 export default apiPath;
