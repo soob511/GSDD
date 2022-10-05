@@ -10,9 +10,8 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logout = () => {
-    console.log('logout');
     dispatch(DELETE_TOKEN());
-    navigate('/');
+    window.location.reload();
   };
   const [isOpen, setOpen] = useState(false);
   const [xPosition, setX] = useState(200);
@@ -67,7 +66,7 @@ const Sidebar = () => {
         </S.List>
         <S.List bottom>
           <S.Item>
-            <div style={{ cursor: `pointer`, textDecoration: `none`, fontSize: `20px`, color: `red` }} onClick={() => logout()}>
+            <div style={{ cursor: `pointer`, textDecoration: `none`, fontSize: `20px`, color: `red` }} onClick={logout}>
               로그아웃
             </div>
           </S.Item>
