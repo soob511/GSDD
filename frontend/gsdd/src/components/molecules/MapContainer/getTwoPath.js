@@ -143,7 +143,7 @@ const getTwoPath = async (map, origin, destination) => {
                 console.log(dist);
 
                 if (dist < 0) continue;
-                if (dist < 0.01) { //(0.00013은 약 15m)
+                if (dist < 0.0009) { //(0.00013은 약 15m)
                     let m = (y2 - y1) / (x2 - x1);
                     // let randomX = targetX - 1;
                     // let randomY = -1 / m * randomX + targetY + (targetX / m);
@@ -174,17 +174,17 @@ const getTwoPath = async (map, origin, destination) => {
                 }
             }
 
-            console.log("[" + (i) + " ~ " + (i + 1) + "] lampCount : " + lampCount);
+            console.log("[" + (i + 1) + " ~ " + (i + 2) + "] lampCount : " + lampCount);
             if (partialDistance >= baseDistance || i == DrawLine.shortPointList.length - 2) {
-                console.log("[node " + (startPoint) + " ~ " + (i) + " ] 가로등 갯수 : " + lampCount + "\n");
+                console.log("[node " + (startPoint) + " ~ " + (i + 1) + " ] 가로등 갯수 : " + lampCount + "\n");
                 if (lampCount < 2) {
                     DrawLine.isDetour = true;
                     console.log("탐색하면 안되는 길 입니다");
                     if (firstPoint) {
-                        DrawLine.firstDetourStart = { 'lat': DrawLine.shortPointList[startPoint].lat, 'lon': DrawLine.shortPointList[startPoint].lon };
-                        DrawLine.firstDetourEnd = { 'lat': DrawLine.shortPointList[i + 1].lat, 'lon': DrawLine.shortPointList[i + 1].lon };
-                        DrawLine.firstDetourStartIndex = startPoint;
-                        DrawLine.firstDetourEndIndex = i + 1;
+                        DrawLine.firstDetourStart = { 'lat': DrawLine.shortPointList[startPoint + 1].lat, 'lon': DrawLine.shortPointList[startPoint + 1].lon };
+                        DrawLine.firstDetourEnd = { 'lat': DrawLine.shortPointList[i + 2].lat, 'lon': DrawLine.shortPointList[i + 2].lon };
+                        DrawLine.firstDetourStartIndex = startPoint + 1;
+                        DrawLine.firstDetourEndIndex = i + 2;
                         firstPoint = false;
                     }
                 }
