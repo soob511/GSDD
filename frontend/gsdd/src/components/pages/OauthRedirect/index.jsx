@@ -25,6 +25,7 @@ const OauthRedirect = () => {
     console.log('role' + role);
     if (role === 'ROLE_USER') {
       localStorage.setItem('accessToken', token);
+      window.location.reload();
       navigate('/');
     } else {
       navigate('/process', {
