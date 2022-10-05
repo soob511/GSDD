@@ -292,13 +292,17 @@ const getTwoPath = async (map, origin, destination) => {
 
     //1. 출발지~목적지 최단경로 좌표 가져와서 shortPointList, shortLatLngList에 저장하기
     await DrawLine.getShortPointList(DrawLine.shortPointList, DrawLine.shortLatLngList, origin, destination);
+    //2. 최단경로 그리기
+    DrawLine.drawLine("short", DrawLine.shortLatLngList);
+
+
 
     //밝은 길//
 
-    //2.목적지 이전까지 탐색하며 우회해야할 경로 확인
+    //3.목적지 이전까지 탐색하며 우회해야할 경로 확인
     await DrawLine.getNearLightPointList();
 
-    //2. 가로등이 없는 지점에서 새로운 가로등 탐색
+    //4. 가로등이 없는 지점에서 새로운 가로등 탐색
     await DrawLine.getNewBoundList(DrawLine.firstDetourStartIndex, DrawLine.firstDetourEndIndex);
 
     if (DrawLine.aroundLampList.length > 0) {
@@ -312,11 +316,7 @@ const getTwoPath = async (map, origin, destination) => {
         }
     }
 
-
-    //그리기
-    //1. 최단경로
-    DrawLine.drawLine("short", DrawLine.shortLatLngList);
-    //2. 우회경로
+    //5. 우회경로 그리기
     DrawLine.drawLine("safe", DrawLine.safeLatLngList);
 }
 
