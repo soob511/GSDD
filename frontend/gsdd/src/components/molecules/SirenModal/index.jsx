@@ -3,7 +3,7 @@ import * as S from './styles';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { Typography, TextField } from '@mui/material';
-import { RiAlarmWarningFill, RiMicFill, RiMicOffFill } from 'react-icons/ri';
+import { RiAlarmWarningFill } from 'react-icons/ri';
 import { useEffect } from 'react';
 import Active from '../../atoms/Active';
 import mp3 from '../../../assets/audio/siren.mp3';
@@ -13,9 +13,7 @@ import { authAxios } from '../../../api/common';
 import { SET_POSITION } from '../../../reducers/userReducer';
 
 const SirenModal = (props) => {
-  // console.log(props.siren)
-  // console.log(props)
-
+  
   const dispatch = useDispatch();
   const username = useSelector((state) => state.userReducer.user);
   const userContacts = useSelector((state) => state.userReducer.contacts);
@@ -46,19 +44,7 @@ const SirenModal = (props) => {
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
   };
-  // const audioToggle = () => {
-  //   if (!mute) {
-  //     if (open) pause();
-  //     else stop();
-  //     setMute(true);
-  //   } else {
-  //     if (open) {
-  //       play();
-  //       setMute(false);
-  //     }
-  //   }
-  //   console.log(mute)
-  // };
+  
 
   const getPositionName = async () => {
     const options = {
@@ -95,21 +81,18 @@ const SirenModal = (props) => {
         setCount(count - 1);
       }, 1000);
       if (count === 0) {
-        // if (userContacts.length === 0) alert('비상연락망 1개 이상 등록은 필수 입니다! \n 마이페이지에서 등록하실 수 있습니다 :)');
-        // else {
-        //   // Message API
-        //   sendMessage();
-        // }
-        // handleClose();
+        if (userContacts.length === 0) alert('비상연락망 1개 이상 등록은 필수 입니다! \n 마이페이지에서 등록하실 수 있습니다 :)');
+        else {
+          // Message API
+          sendMessage();
+        }
       }
       return () => clearInterval(timer);
     }
   });
   return (
     <>
-      {/* <div style={{position: `absolute`, top:`50px`, left:`50px`, backgroundColor: `blue`, color: `white`}}>
-            test
-        </div> */}
+      
       <Active onClick={handleOpen}>
         <RiAlarmWarningFill size="40" color="red" />
       </Active>
@@ -122,11 +105,6 @@ const SirenModal = (props) => {
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               {count > 0 ? <span>{count}초 후에 메시지가 발송됩니다.</span> : "문자 메시지가 전송되었습니다."}
             </Typography>
-            {/* <Typography id="modal-modal-button" sx={{ mt: 2 }}>
-              <S.Button mute={mute} onClick={() => audioToggle()}>
-                {mute ? <RiMicOffFill size="25" /> : <RiMicFill size="25" />}
-              </S.Button>
-            </Typography> */}
           </S.Container>
         </Box>
       </Modal>
