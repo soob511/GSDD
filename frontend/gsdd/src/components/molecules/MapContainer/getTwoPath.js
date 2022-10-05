@@ -41,9 +41,29 @@ const getTwoPath = async (map, origin, destination) => {
     DrawLine.aroundLampList = [];
 
 
+    DrawLine.calcDistance = function (lat1, lon1, lat2, lon2) {
+        var theta, dist;
+
+        if (lon1 === lon2 && lat1 === lat2)
+            return 0;
+
+        theta = lon1 - lon2;
+        dist = Math.sin(DrawLine.deg2rad(lat1)) * Math.sin(DrawLine.deg2rad(lat2)) + Math.cos(DrawLine.deg2rad(lat1))
+            * Math.cos(DrawLine.deg2rad(lat2)) * Math.cos(DrawLine.deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = DrawLine.rad2deg(dist);
+
+        dist = dist * 60 * 1.1515;
+        dist = dist * 1.609344; // 단위 mile 에서 km 변환
+        //dist = dist * 1000.0; // 단위  km 에서 m 로 변환
+
+        return Number(Number(dist));
+    }
+
+
     DrawLine.distance = function (x1, y1, x2, y2, targetX, targetY) {
 
-        if (x2 - x1 == 0) return -1;
+        if (x2 - x1 === 0) return -1;
         let m = (y2 - y1) / (x2 - x1);
         let c = y1 - (m * x1);
         let distance = Math.abs(m * targetX - targetY + c) / (Math.sqrt(Math.pow(m, 2) + 1));
@@ -61,7 +81,7 @@ const getTwoPath = async (map, origin, destination) => {
         let D = L1[0] * L2[1] - L1[1] * L2[0];
         let Dx = L1[2] * L2[1] - L1[1] * L2[2];
         let Dy = L1[0] * L2[2] - L1[2] * L2[0];
-        if (D != 0) {
+        if (D !== 0) {
             let x = Dx / D
             let y = Dy / D;
             return [x, y];
@@ -74,7 +94,7 @@ const getTwoPath = async (map, origin, destination) => {
         await authAxios
             .get(apiPath.bound.get(origin.lat, origin.lon, destination.lat, destination.lon), {})
             .then(res => {
-                DrawLine.boundaryPointList = res.data;
+                DrawLine.boundaryPointList = res.data.road;
                 console.log("boundaryPointList", DrawLine.boundaryPointList);
                 for (let i = 0; i < DrawLine.boundaryPointList; i++) {
                     var tempmarkers = new Tmapv2.Marker({
@@ -137,9 +157,9 @@ const getTwoPath = async (map, origin, destination) => {
                 }
             }
 
-            console.log("[" + i + 1 + " ~ " + i + 2 + "] lampCount : " + lampCount);
-            if (partialDistance >= baseDistance || i == DrawLine.shortPointList.length - 2) {
-                console.log("[node " + startPoint + 1 + " ~ " + i + 1 + " ] 가로등 갯수 : " + lampCount + "\n");
+            console.log("[" + (i + 1) + " ~ " + (i + 2) + "] lampCount : " + lampCount);
+            if (partialDistance >= baseDistance || i === DrawLine.shortPointList.length - 2) {
+                console.log("[node " + (startPoint + 1) + " ~ " + (i + 1) + " ] 가로등 갯수 : " + lampCount + "\n");
                 if (lampCount < 2) {
                     DrawLine.isDetour = true;
                     console.log("탐색하면 안되는 길 입니다");
@@ -162,7 +182,8 @@ const getTwoPath = async (map, origin, destination) => {
     }
 
     DrawLine.pointDistance = function (x, y) {
-        return Math.sqrt(Math.pow(x.lon - y.lat, 2) + Math.pow(x.lat - y.lon, 2));
+        console.log(x.lat, x.lon, y.lat, y.lon);
+        return Math.sqrt(Math.pow(x.lat - y.lat, 2) + Math.pow(x.lon - y.lon, 2));
     }
 
     DrawLine.pointDistance2 = function (x, y) {
@@ -170,8 +191,8 @@ const getTwoPath = async (map, origin, destination) => {
     }
 
     DrawLine.contains = function (arr, val) {
-        for (const point in arr) {
-            if (point.lat == val.lat && point.lon == val.lon) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].lat === val.lat && arr[i].lon === val.lon) {
                 return true;
             }
         }
@@ -180,11 +201,11 @@ const getTwoPath = async (map, origin, destination) => {
 
     DrawLine.remove = function (arr, val) {
         let newarr = [];
-        for (const point in arr) {
-            if (point.lat == val.lat && point.lon == val.lon) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].lat === val.lat && arr[i].lon === val.lon) {
                 continue;
             }
-            newarr.push(point);
+            newarr.push(arr[i].lon);
         }
         return newarr;
     }
@@ -193,12 +214,14 @@ const getTwoPath = async (map, origin, destination) => {
         DrawLine.aroundLampList = [];
 
         //다음 경로까지의 길이를 반경 값으로 설정.
-        let radius = DrawLine.pointDistance2(DrawLine.boundaryPointList[src_idx], DrawLine.boundaryPointList[dst_idx]) + 0.0005;
+        let radius = DrawLine.calcDistance(DrawLine.boundaryPointList[src_idx].lat, DrawLine.boundaryPointList[src_idx].lon, DrawLine.boundaryPointList[dst_idx].lat, DrawLine.boundaryPointList[dst_idx].lon) + 0.0005;
+        console.log("radius:", radius);
 
-        for (const point in DrawLine.boundaryPointList) {
-            let dist = DrawLine.pointDistance(point, DrawLine.boundaryPointList[src_idx]);
-            if (dist <= radius && DrawLine.contains(DrawLine.nearLightPointList, point) === false) {
-                DrawLine.aroundLampList.push(point);
+        for (let i = 0; i < DrawLine.boundaryPointList.length; i++) {
+            let dist = DrawLine.calcDistance(DrawLine.boundaryPointList[i].lat, DrawLine.boundaryPointList[i].lon, DrawLine.boundaryPointList[src_idx].lat, DrawLine.boundaryPointList[src_idx].lon);
+            console.log("dist:", dist);
+            if (dist <= radius && DrawLine.contains(DrawLine.nearLightPointList, DrawLine.boundaryPointList[i]) === false) {
+                DrawLine.aroundLampList.push(DrawLine.boundaryPointList[i]);
             }
         }
         console.log("getNewBoundList", DrawLine.aroundLampList);
@@ -217,13 +240,15 @@ const getTwoPath = async (map, origin, destination) => {
             }
         }
 
-        for (const point in DrawLine.aroundLampList) {
-            let dist = DrawLine.pointDistance2(DrawLine.firstDetourStart, point)
+        for (let i = 0; i < DrawLine.aroundLampList.length; i++) {
+            let dist = DrawLine.pointDistance2(DrawLine.firstDetourStart, DrawLine.aroundLampList[i]);
             if (maxCost < dist) {
                 maxCost = dist;
-                result = point;
+                result = DrawLine.aroundLampList[i];
             }
         }
+
+        console.log(result)
 
         return result;
     }
@@ -231,15 +256,14 @@ const getTwoPath = async (map, origin, destination) => {
     DrawLine.drawLine = function (type, arrPointList) {
 
         if (type === "short") {
-            const polyline_ = new Tmapv2.Polyline({
+            const polyline_1 = new Tmapv2.Polyline({
                 path: arrPointList,
                 strokeColor: "#DD0000",
                 strokeWeight: 6,
                 map: DrawLine.map,
             });
-            DrawLine.shortline = polyline_;
         } else if (type === "safe") {
-            const polyline_ = new Tmapv2.Polyline({
+            const polyline_2 = new Tmapv2.Polyline({
                 path: arrPointList,
                 strokeColor: "#0067a3",
                 strokeWeight: 6,
@@ -326,10 +350,11 @@ const getTwoPath = async (map, origin, destination) => {
         const nextLamp = DrawLine.findShortestLamp();
 
         if (DrawLine.isDetour) {
-            DrawLine.safeLatLngList.push(DrawLine.shortLatLngList.slice(0, DrawLine.firstDetourStartIndex));
+            DrawLine.safeLatLngList = DrawLine.shortLatLngList.slice(0, DrawLine.firstDetourStartIndex);
             DrawLine.safePointList.push(DrawLine.shortPointList.slice(0, DrawLine.firstDetourStartIndex)); //이전 최단 경로 저장
             await DrawLine.getShortPointList(DrawLine.safePointList, DrawLine.safeLatLngList, nextLamp, destination);
             console.log("safePointList", DrawLine.safePointList);
+            console.log("safeLatLngList", DrawLine.safeLatLngList);
         }
     }
 
