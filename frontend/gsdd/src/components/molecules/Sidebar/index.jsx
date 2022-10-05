@@ -56,19 +56,13 @@ const Sidebar = () => {
         </S.Item>
         <S.List>
           <S.Item>
-            <Link styleType="TextLink" href="/">
-              홈
-            </Link>
+            <S.Div onClick={() => navigate('/')}>홈</S.Div>
           </S.Item>
           <S.Item>
-            <Link styleType="TextLink" href="/mypage">
-              마이페이지
-            </Link>
+            <S.Div onClick={() => navigate('/mypage')}>마이페이지</S.Div>
           </S.Item>
           <S.Item>
-            <Link styleType="TextLink" href="/information">
-              지역
-            </Link>
+            <S.Div onClick={() => navigate('/information')}>지역</S.Div>
           </S.Item>
         </S.List>
         <S.List bottom>

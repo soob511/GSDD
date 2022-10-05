@@ -3,9 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { parseJwt } from '../../../api/common';
 import { SET_TOKEN } from '../../../reducers/tokenReducer';
-import apiPath from '../../../api/apiPath';
-import { authAxios } from '../../../api/common';
-import { SET_USER } from '../../../reducers/userReducer';
 
 const OauthRedirect = () => {
   let token = useLocation().search.split('=')[1];
@@ -23,20 +20,6 @@ const OauthRedirect = () => {
   };
 
   useEffect(() => {
-    try {
-      const getUserData = async (userId) => {
-        await authAxios
-          .get(apiPath.mypage.get(userId), {})
-          .then((res) => {
-            console.log(res.data);
-            dispatch(SET_USER(res.data));
-          })
-          .catch((err) => console.log(err));
-      };
-      getUserData(userId);
-    } catch (e) {
-      console.log(e);
-    }
     dispatch(SET_TOKEN(data));
 
     console.log('role' + role);
