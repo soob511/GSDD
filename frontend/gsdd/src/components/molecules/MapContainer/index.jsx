@@ -90,7 +90,7 @@ const MapContainer = () => {
     // const brightData = await getSafestPath(map, origin, destination);//밝은 길 탐색
     // console.log("brightData", brightData);
 
-    //await getTwoPath(map, origin, destination);
+    await getTwoPath(map, origin, destination);
 
   }
 
