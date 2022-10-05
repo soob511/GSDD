@@ -8,13 +8,13 @@ const getShortestPath = async (map, origin, destination) => {
 
     DrawLine.map = map;
     DrawLine.omarker = new Tmapv2.Marker({
-        position: new Tmapv2.LatLng(origin.lat, origin.lng),
+        position: new Tmapv2.LatLng(origin.lat, origin.lon),
         icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png",
         iconSize: new Tmapv2.Size(24, 38),
         map: DrawLine.map,
     });
     DrawLine.dmarker = new Tmapv2.Marker({
-        position: new Tmapv2.LatLng(destination.lat, destination.lng),
+        position: new Tmapv2.LatLng(destination.lat, destination.lon),
         icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png",
         iconSize: new Tmapv2.Size(24, 38),
         map: DrawLine.map,
@@ -55,9 +55,9 @@ const getShortestPath = async (map, origin, destination) => {
         },
         data: {
             "appKey": 'l7xxd1c2344c5b154c50a810779b023d8b97',
-            "startX": origin.lng,
+            "startX": origin.lon,
             "startY": origin.lat,
-            "endX": destination.lng,
+            "endX": destination.lon,
             "endY": destination.lat,
             "reqCoordType": "WGS84GEO",
             "resCoordType": "EPSG3857",
@@ -91,6 +91,7 @@ const getShortestPath = async (map, origin, destination) => {
         const tDistance = "총 거리 : " + ((resultData[0].properties.totalDistance) / 1000).toFixed(1) + "km,";
         const tTime = " 총 시간 : " + ((resultData[0].properties.totalTime) / 60).toFixed(0) + "분";
         console.log(tDistance, tTime);
+
 
     }).catch(res => console.log(res));
 
