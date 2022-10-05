@@ -10,7 +10,9 @@ import google from '../../../assets/icons/google.png';
 const Login = () => {
   const wait = async () => {
     const token = await localStorage.getItem('accessToken');
+    console.log(token)
     const getToken = await (token != null);
+    console.log(getToken)
     return getToken;
   }
   wait().then(() => console.log("accessToken received"))
