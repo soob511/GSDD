@@ -40,6 +40,14 @@ const getTwoPath = async (map, origin, destination) => {
 
     DrawLine.aroundLampList = [];
 
+    //도(degree) 값을 라디언으로 변환
+    DrawLine.deg2rad = function (deg) {
+        return (deg * Math.PI / 180);
+    }
+    //라디언(radian) 값을 도(degree) 값으로 변환
+    DrawLine.rad2deg = function (rad) {
+        return (rad * 180 / Math.PI);
+    }
 
     DrawLine.calcDistance = function (lat1, lon1, lat2, lon2) {
         var theta, dist;
