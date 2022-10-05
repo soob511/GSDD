@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_TMAPV2, SET_MAP, SET_MARKER, SET_LATITUDE, SET_LONGITUDE, SET_LOCATION, SET_MARKERS, SET_OPLACES, SET_DPLACES, SET_ORIGIN, SET_DESTINATION, SET_OMARKER, SET_DMARKER, SET_LINES } from '../../../reducers/tmapReducer';
+import { SET_TMAPV2, SET_MAP, SET_MARKER, SET_LATITUDE, SET_LONGITUDE, SET_LOCATION, SET_MARKERS, SET_ORIGIN, SET_DESTINATION, SET_OMARKER, SET_DMARKER, SET_LINES } from '../../../reducers/tmapReducer';
 import * as S from './styles';
 import Map from '../../atoms/Map';
 import { Button as Btn } from '../../atoms/Button';
@@ -13,6 +13,7 @@ import { Button, TextField, Autocomplete } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import getShortestPath from './getShortestPath';
 import getSafestPath from './getSafestPath';
+import getTwoPath from './getTwoPath';
 
 const MapContainer = () => {
 
@@ -25,8 +26,6 @@ const MapContainer = () => {
   const latitude = useSelector(state => state.tmapReducer.latitude);
   const longitude = useSelector(state => state.tmapReducer.longitude);
   const markers = useSelector(state => state.tmapReducer.markers);
-  const oplaces = useSelector(state => state.tmapReducer.oplaces);
-  const dplaces = useSelector(state => state.tmapReducer.dplaces);
   const origin = useSelector(state => state.tmapReducer.origin);
   const destination = useSelector(state => state.tmapReducer.destination);
   const omarker = useSelector(state => state.tmapReducer.omarker);
@@ -42,6 +41,9 @@ const MapContainer = () => {
   });
 
   const [open, setOpen] = useState(false);
+
+  const [oplaces, setOplaces] = useState([]);
+  const [dplaces, setDplaces] = useState([]);
 
   /// mui ///
 
@@ -74,19 +76,21 @@ const MapContainer = () => {
 
     setOpen(false);
 
-    const shortData = await getShortestPath(map, origin, destination);//최단 경로 탐색
-    console.log("shortData", shortData);
+    // const shortData = await getShortestPath(map, origin, destination);//최단 경로 탐색
+    // console.log("shortData", shortData);
     // data.omarker.setMap(map);
     // data.dmarker.setMap(map);
     // for (let k in data.lines) {
     //   data.lines[k].setMap(map);
     // }
-    dispatch(SET_OMARKER(shortData.omarker));
-    dispatch(SET_DMARKER(shortData.dmarker));
-    dispatch(SET_LINES(shortData.line));
+    // dispatch(SET_OMARKER(shortData.omarker));
+    // dispatch(SET_DMARKER(shortData.dmarker));
+    // dispatch(SET_LINES(shortData.line));
 
-    const brightData = await getSafestPath(map, origin, destination);//밝은 길 탐색
-    console.log("brightData", brightData);
+    // const brightData = await getSafestPath(map, origin, destination);//밝은 길 탐색
+    // console.log("brightData", brightData);
+
+    //await getTwoPath(map, origin, destination);
 
   }
 
@@ -189,10 +193,6 @@ const MapContainer = () => {
     getOptionLabel: (option) => option.name,
   };
 
-  // const flatProps = {
-  //   options: places.map((option) => option.name),
-  // };
-
   return (
     <>
       <S.StyledMapContainer>
@@ -234,7 +234,7 @@ const MapContainer = () => {
                 dispatch(SET_ORIGIN(newOrigin));
               }}
               onInputChange={async (_event, newInput) => {
-                dispatch(SET_OPLACES(await getPlaces(newInput)));
+                setOplaces(await getPlaces(newInput));
               }}
             />
             <Autocomplete id="clear-on-escape" {...defaultDProps}
@@ -248,7 +248,7 @@ const MapContainer = () => {
                 dispatch(SET_DESTINATION(newDestination));
               }}
               onInputChange={async (_event, newInput2) => {
-                dispatch(SET_DPLACES(await getPlaces(newInput2)));
+                setDplaces(await getPlaces(newInput2));
               }}
             />
           </Typography>
