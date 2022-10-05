@@ -22,9 +22,11 @@ export const tokenReducer = createSlice({
       };
     },
     DELETE_TOKEN: (state) => {
+      // console.log(state.accessToken)
       state.authenticated = false;
       state.accessToken = null;
       state.expireTime = 0;
+      localStorage.removeItem('accessToken')
     },
   },
 });
