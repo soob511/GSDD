@@ -7,6 +7,7 @@ export const userReducer = createSlice({
     user: '',
     routes: [],
     contacts: [],
+    position: '',
   },
   reducers: {
     SET_USER: (state, { payload }) => {
@@ -22,17 +23,11 @@ export const userReducer = createSlice({
     SET_NAME: (state, { payload: name }) => {
       return { ...state, name };
     },
-    PUSH_USER_CONTACT: (state, { payload: contact }) => {
-      return {
-        ...state,
-        contacts: [...state.contacts, ...contact],
-      };
+    SET_POSITION: (state, { payload: position }) => {
+      return { ...state, position };
     },
-    DELETE_USER_CONTACT: (state, action) => {},
-    SET_USER_ROUTE: (state, action) => {},
-    DELETE_USER_ROUTE: (state, action) => {},
   },
 });
 
-export const { SET_USER, UPDATE_USER_CONTACT, UPDATE_USER_ROUTE, DELETE_USER_CONTACT, DELETE_USER_ROUTE } = userReducer.actions;
+export const { SET_USER, SET_POSITION } = userReducer.actions;
 export default userReducer.reducer;
