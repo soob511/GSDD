@@ -79,24 +79,24 @@ const getTwoPath = async (map, origin, destination) => {
         return distance;
     }
 
-    DrawLine.line = function (p1, p2) {
-        let A = (p1[1] - p2[1]);
-        let B = (p2[0] - p1[0]);
-        let C = (p1[0] * p2[1] - p2[0] * p1[1]);
-        return [A, B, C];
-    }
+    // DrawLine.line = function (p1, p2) {
+    //     let A = (p1[1] - p2[1]);
+    //     let B = (p2[0] - p1[0]);
+    //     let C = (p1[0] * p2[1] - p2[0] * p1[1]);
+    //     return [A, B, C];
+    // }
 
-    DrawLine.intersection = function (L1, L2) {
-        let D = L1[0] * L2[1] - L1[1] * L2[0];
-        let Dx = L1[2] * L2[1] - L1[1] * L2[2];
-        let Dy = L1[0] * L2[2] - L1[2] * L2[0];
-        if (D !== 0) {
-            let x = Dx / D
-            let y = Dy / D;
-            return [x, y];
-        }
-        return null;
-    }
+    // DrawLine.intersection = function (L1, L2) {
+    //     let D = L1[0] * L2[1] - L1[1] * L2[0];
+    //     let Dx = L1[2] * L2[1] - L1[1] * L2[2];
+    //     let Dy = L1[0] * L2[2] - L1[2] * L2[0];
+    //     if (D !== 0) {
+    //         let x = Dx / D
+    //         let y = Dy / D;
+    //         return [x, y];
+    //     }
+    //     return null;
+    // }
 
     DrawLine.getNearLightPointList = async function () {
 
@@ -127,38 +127,46 @@ const getTwoPath = async (map, origin, destination) => {
             const y1 = DrawLine.shortPointList[i].lon;
             const x2 = DrawLine.shortPointList[i + 1].lat;
             const y2 = DrawLine.shortPointList[i + 1].lon;
+            console.log(x1, y1, x2, y2);
 
             let baseDistance = 0.0005; //약 25m
             partialDistance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)) + partialDistance;
             console.log(i + "번째 partialDistance:" + partialDistance);
 
             //경계 내의 가로등 좌표 중 경계 근처에 있는 것 탐색
-            for (const point in DrawLine.boundaryPointList) {
+            for (let i = 0; i < DrawLine.boundaryPointList.length; i++) {
 
-                targetX = point.lat;
-                targetY = point.lon;
+                targetX = DrawLine.boundaryPointList[i].lat;
+                targetY = DrawLine.boundaryPointList[i].lon;
 
                 let dist = DrawLine.distance(x1, y1, x2, y2, targetX, targetY);
+                console.log(dist);
 
                 if (dist < 0) continue;
                 if (dist < 0.01) { //(0.00013은 약 15m)
                     let m = (y2 - y1) / (x2 - x1);
-                    let randomX = targetX - 1;
-                    let randomY = -1 / m * randomX + targetY + (targetX / m);
+                    // let randomX = targetX - 1;
+                    // let randomY = -1 / m * randomX + targetY + (targetX / m);
 
-                    let L1 = DrawLine.line([x1, y1], [x2, y2]);
-                    let L2 = DrawLine.line([targetX, targetY], [randomX, randomY]);
+                    // let L1 = DrawLine.line([x1, y1], [x2, y2]);
+                    // let L2 = DrawLine.line([targetX, targetY], [randomX, randomY]);
 
-                    let R = DrawLine.intersection(L1, L2);
+                    // let R = DrawLine.intersection(L1, L2);
 
-                    let R0 = 0;
-                    if (R != null) {
-                        R0 = R[0];
-                    } else {
-                        continue;
-                    }
+                    // let R0 = 0;
+                    // if (R != null) {
+                    //     R0 = R[0];
+                    // } else {
+                    //     continue;
+                    // }
 
-                    if ((x1 <= R0 && R0 <= x2) || (x2 <= R0 && R0 <= x1)) {
+                    // if ((x1 <= R0 && R0 <= x2) || (x2 <= R0 && R0 <= x1)) {
+                    //     DrawLine.nearLightPointList.push({ targetX, targetY });
+                    //     console.log("nearLightPoint:", { targetX, targetY });
+                    //     lampCount += 1;
+                    // }
+
+                    if ((x1 + m * y1 <= targetX + m * targetY) && (targetX + m * targetY <= x2 + m * y2)) {
                         DrawLine.nearLightPointList.push({ targetX, targetY });
                         console.log("nearLightPoint:", { targetX, targetY });
                         lampCount += 1;
@@ -166,19 +174,18 @@ const getTwoPath = async (map, origin, destination) => {
                 }
             }
 
-            console.log("[" + (i + 1) + " ~ " + (i + 2) + "] lampCount : " + lampCount);
-            if (partialDistance >= baseDistance || i === DrawLine.shortPointList.length - 2) {
-                console.log("[node " + (startPoint + 1) + " ~ " + (i + 1) + " ] 가로등 갯수 : " + lampCount + "\n");
+            console.log("[" + (i) + " ~ " + (i + 1) + "] lampCount : " + lampCount);
+            if (partialDistance >= baseDistance || i == DrawLine.shortPointList.length - 2) {
+                console.log("[node " + (startPoint) + " ~ " + (i) + " ] 가로등 갯수 : " + lampCount + "\n");
                 if (lampCount < 2) {
                     DrawLine.isDetour = true;
                     console.log("탐색하면 안되는 길 입니다");
                     if (firstPoint) {
-                        DrawLine.firstDetourStart = { 'lat': DrawLine.shortPointList[startPoint + 1].lat, 'lon': DrawLine.shortPointList[startPoint + 1].lon };
-                        DrawLine.firstDetourEnd = { 'lat': DrawLine.shortPointList[i + 2].lat, 'lon': DrawLine.shortPointList[i + 2].lon };
-                        DrawLine.firstDetourStartIndex = startPoint + 1;
-                        DrawLine.firstDetourEndIndex = i + 2;
+                        DrawLine.firstDetourStart = { 'lat': DrawLine.shortPointList[startPoint].lat, 'lon': DrawLine.shortPointList[startPoint].lon };
+                        DrawLine.firstDetourEnd = { 'lat': DrawLine.shortPointList[i + 1].lat, 'lon': DrawLine.shortPointList[i + 1].lon };
+                        DrawLine.firstDetourStartIndex = startPoint;
+                        DrawLine.firstDetourEndIndex = i + 1;
                         firstPoint = false;
-                        console.log("firstPoint", DrawLine);
                     }
                 }
                 else {
@@ -248,7 +255,7 @@ const getTwoPath = async (map, origin, destination) => {
         }
 
         for (let i = 0; i < DrawLine.aroundLampList.length; i++) {
-            let dist = DrawLine.pointDistance2(DrawLine.firstDetourStart, DrawLine.aroundLampList[i]);
+            let dist = DrawLine.calcDistance(DrawLine.firstDetourStart.lat, DrawLine.firstDetourStart.lon, DrawLine.aroundLampList[i].lat, DrawLine.aroundLampList[i].lon);
             if (maxCost < dist) {
                 maxCost = dist;
                 result = DrawLine.aroundLampList[i];
