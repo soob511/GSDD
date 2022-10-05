@@ -40,11 +40,12 @@ const getTwoPath = async (map, origin, destination) => {
 
     DrawLine.aroundLampList = [];
 
-    //도(degree) 값을 라디언으로 변환
+    //주어진 도(degree) 값을 라디언으로 변환
     DrawLine.deg2rad = function (deg) {
         return (deg * Math.PI / 180);
     }
-    //라디언(radian) 값을 도(degree) 값으로 변환
+
+    //주어진 라디언(radian) 값을 도(degree) 값으로 변환
     DrawLine.rad2deg = function (rad) {
         return (rad * 180 / Math.PI);
     }
@@ -140,7 +141,7 @@ const getTwoPath = async (map, origin, destination) => {
                 let dist = DrawLine.distance(x1, y1, x2, y2, targetX, targetY);
 
                 if (dist < 0) continue;
-                if (dist < 0.00013) { //약 15m
+                if (dist < 0.0005) { //(0.00013은 약 15m)
                     let m = (y2 - y1) / (x2 - x1);
                     let randomX = targetX - 1;
                     let randomY = -1 / m * randomX + targetY + (targetX / m);
@@ -360,6 +361,7 @@ const getTwoPath = async (map, origin, destination) => {
         if (DrawLine.isDetour) {
             DrawLine.safeLatLngList = DrawLine.shortLatLngList.slice(0, DrawLine.firstDetourStartIndex);
             DrawLine.safePointList.push(DrawLine.shortPointList.slice(0, DrawLine.firstDetourStartIndex)); //이전 최단 경로 저장
+            await DrawLine.getShortPointList(DrawLine.safePointList, DrawLine.safeLatLngList, origin, nextLamp);
             await DrawLine.getShortPointList(DrawLine.safePointList, DrawLine.safeLatLngList, nextLamp, destination);
             console.log("safePointList", DrawLine.safePointList);
             console.log("safeLatLngList", DrawLine.safeLatLngList);
