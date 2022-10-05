@@ -8,6 +8,12 @@ import naver from '../../../assets/icons/naver.jpg';
 import google from '../../../assets/icons/google.png';
 
 const Login = () => {
+  const wait = async () => {
+    const token = await localStorage.getItem('accessToken');
+    const getToken = await (token != null);
+    return getToken;
+  }
+  wait().then(() => console.log("accessToken received"))
   return (
     <>
       <S.Login>
@@ -22,8 +28,7 @@ const Login = () => {
             <br />
           </span>
         </S.Text>
-        <Button styleType="login" kakao href="https://j7b209.p.ssafy.io:8080/api/oauth2/authorization/kakao" 
-        onClick={() => {window.location.reload();}}>
+        <Button styleType="login" kakao href="https://j7b209.p.ssafy.io:8080/api/oauth2/authorization/kakao">
           <S.BtnLogo src={kakao}></S.BtnLogo>
           <S.BtnText>카카오톡으로 시작하기</S.BtnText>
         </Button>
