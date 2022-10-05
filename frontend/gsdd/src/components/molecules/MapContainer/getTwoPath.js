@@ -135,8 +135,8 @@ const getTwoPath = async (map, origin, destination) => {
             //경계 내의 가로등 좌표 중 경계 근처에 있는 것 탐색
             for (const point in DrawLine.boundaryPointList) {
 
-                targetX = point.lon;
-                targetY = point.lat;
+                targetX = point.lat;
+                targetY = point.lon;
 
                 let dist = DrawLine.distance(x1, y1, x2, y2, targetX, targetY);
 
@@ -224,11 +224,9 @@ const getTwoPath = async (map, origin, destination) => {
 
         //다음 경로까지의 길이를 반경 값으로 설정.
         let radius = DrawLine.calcDistance(DrawLine.boundaryPointList[src_idx].lat, DrawLine.boundaryPointList[src_idx].lon, DrawLine.boundaryPointList[dst_idx].lat, DrawLine.boundaryPointList[dst_idx].lon) + 0.0005;
-        console.log("radius:", radius);
-
         for (let i = 0; i < DrawLine.boundaryPointList.length; i++) {
             let dist = DrawLine.calcDistance(DrawLine.boundaryPointList[i].lat, DrawLine.boundaryPointList[i].lon, DrawLine.boundaryPointList[src_idx].lat, DrawLine.boundaryPointList[src_idx].lon);
-            console.log("dist:", dist);
+
             if (dist <= radius && DrawLine.contains(DrawLine.nearLightPointList, DrawLine.boundaryPointList[i]) === false) {
                 DrawLine.aroundLampList.push(DrawLine.boundaryPointList[i]);
             }
