@@ -36,7 +36,7 @@ const apiPath = {
     get: (city, district) => HOST + NEWS + `${city}` + `/${district}`,
   },
   road: {
-    get: (olat, olng, dlat, dlng) => HOST + ROAD + `${olat}/${olng}/${dlat}/${dlng}`,
+    get: (olat, olon, dlat, dlon) => HOST + ROAD + `${olat}/${olon}/${dlat}/${dlon}`,
   },
   near: {
     post: (olat, olon, dlat, dlon) => HOST + NEAR + `${olat}/${olon}/${dlat}/${dlon}`,
