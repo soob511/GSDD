@@ -8,17 +8,6 @@ import naver from '../../../assets/icons/naver.jpg';
 import google from '../../../assets/icons/google.png';
 
 const Login = () => {
-  // const flex_center = {
-  //     "display": 'flex',
-  //     "flexDirection": 'column',
-  //     "justifyContent": 'center',
-  //     "alignItems": 'center',
-  //     "marginBottom": '1.5rem',
-  // }
-  // const font_bold = (size) => {
-  //     "fontSize": size,
-  //     "fontWeight": 'bold',
-  // }
   return (
     <>
       <S.Login>
@@ -33,7 +22,8 @@ const Login = () => {
             <br />
           </span>
         </S.Text>
-        <Button styleType="login" kakao href="https://j7b209.p.ssafy.io:8080/api/oauth2/authorization/kakao">
+        <Button styleType="login" kakao href="https://j7b209.p.ssafy.io:8080/api/oauth2/authorization/kakao" 
+        onClick={() => {window.location.reload();}}>
           <S.BtnLogo src={kakao}></S.BtnLogo>
           <S.BtnText>카카오톡으로 시작하기</S.BtnText>
         </Button>
