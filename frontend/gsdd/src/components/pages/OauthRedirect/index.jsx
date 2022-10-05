@@ -31,7 +31,7 @@ const OauthRedirect = () => {
         state: token,
       });
     }
-
+    window.location.reload();
     // dispatch(setEmail(email));
   });
 

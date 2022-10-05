@@ -8,17 +8,12 @@ import naver from '../../../assets/icons/naver.jpg';
 import google from '../../../assets/icons/google.png';
 
 const Login = () => {
-  // const flex_center = {
-  //     "display": 'flex',
-  //     "flexDirection": 'column',
-  //     "justifyContent": 'center',
-  //     "alignItems": 'center',
-  //     "marginBottom": '1.5rem',
+  // const wait = async () => {
+  //   const token = await localStorage.getItem('accessToken');
+  //   const getToken = await (token != null);
+  //   return getToken;
   // }
-  // const font_bold = (size) => {
-  //     "fontSize": size,
-  //     "fontWeight": 'bold',
-  // }
+  // wait().then(() => window.location.reload());
   return (
     <>
       <S.Login>
