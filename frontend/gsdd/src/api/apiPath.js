@@ -8,12 +8,9 @@ const INFO = 'info/';
 const NEWS = 'news/';
 const CONTACT = 'contact';
 const AROUND = 'around/';
-<<<<<<< HEAD
 const MESSAGE = 'message';
-=======
 const NEAR = 'near/';
-const BOUND = 'bound/'
->>>>>>> 8075dab2e7db51fcf206065faeda42bcbf8a73b4
+const BOUND = 'bound/';
 
 const apiPath = {
   auth: {
@@ -39,14 +36,7 @@ const apiPath = {
     get: (city, district) => HOST + NEWS + `${city}` + `/${district}`,
   },
   road: {
-<<<<<<< HEAD
     get: (olat, olng, dlat, dlng) => HOST + ROAD + `${olat}/${olng}/${dlat}/${dlng}`,
-  },
-  message: {
-    post: () => HOST + MESSAGE,
-  },
-=======
-    get: (olat, olon, dlat, dlon) => HOST + ROAD + `${olat}/${olon}/${dlat}/${dlon}`,
   },
   near: {
     post: (olat, olon, dlat, dlon) => HOST + NEAR + `${olat}/${olon}/${dlat}/${dlon}`,
@@ -54,8 +44,9 @@ const apiPath = {
   bound: {
     get: (olat, olon, dlat, dlon) => HOST + BOUND + `${olat}/${olon}/${dlat}/${dlon}`,
   },
-
->>>>>>> 8075dab2e7db51fcf206065faeda42bcbf8a73b4
+  message: {
+    post: () => HOST + MESSAGE,
+  },
 };
 
 export default apiPath;
