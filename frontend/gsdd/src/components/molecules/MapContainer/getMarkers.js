@@ -17,7 +17,7 @@ const getMarkers = async (map, latitude, longitude) => {
     markers.houses = [];
 
     const data = await authAxios
-        .get(apiPath.markers.get(latitude, longitude), {})
+        .get(apiPath.markers.around(latitude, longitude, 5), {})
         .then(res => {
             res = res.data;
 
