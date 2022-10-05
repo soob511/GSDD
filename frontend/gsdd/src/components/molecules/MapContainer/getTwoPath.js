@@ -75,7 +75,17 @@ const getTwoPath = async (map, origin, destination) => {
             .get(apiPath.bound.get(origin.lat, origin.lon, destination.lat, destination.lon), {})
             .then(res => {
                 DrawLine.boundaryPointList = res.data;
+                console.log("boundaryPointList", DrawLine.boundaryPointList);
+                for (let i = 0; i < DrawLine.boundaryPointList; i++) {
+                    var tempmarkers = new Tmapv2.Marker({
+                        position: new Tmapv2.LatLng(DrawLine.boundaryPointList[i].lat, DrawLine.boundaryPointList[i].lon),
+                        icon: "http://topopen.tmap.co.kr/imgs/point.png",
+                        iconSize: new Tmapv2.Size(10, 10),
+                        map: DrawLine.map,
+                    });
+                }
             });
+
 
         let startPoint = 0;
         let lampCount = 0;
@@ -91,6 +101,7 @@ const getTwoPath = async (map, origin, destination) => {
 
             let baseDistance = 0.0005; //약 25m
             partialDistance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)) + partialDistance;
+            console.log(i + "번째 partialDistance:" + partialDistance);
 
             //경계 내의 가로등 좌표 중 경계 근처에 있는 것 탐색
             for (const point in DrawLine.boundaryPointList) {
@@ -120,13 +131,15 @@ const getTwoPath = async (map, origin, destination) => {
 
                     if ((x1 <= R0 && R0 <= x2) || (x2 <= R0 && R0 <= x1)) {
                         DrawLine.nearLightPointList.push({ targetX, targetY });
+                        console.log("nearLightPoint:", { targetX, targetY });
                         lampCount += 1;
                     }
                 }
             }
 
+            console.log("[" + i + 1 + " ~ " + i + 2 + "] lampCount : " + lampCount);
             if (partialDistance >= baseDistance || i == DrawLine.shortPointList.length - 2) {
-                console.log("[node " + startPoint + 1 + " ~ " + i + 2 + " ] 가로등 갯수 : " + lampCount + "\n");
+                console.log("[node " + startPoint + 1 + " ~ " + i + 1 + " ] 가로등 갯수 : " + lampCount + "\n");
                 if (lampCount < 2) {
                     DrawLine.isDetour = true;
                     console.log("탐색하면 안되는 길 입니다");
@@ -136,6 +149,7 @@ const getTwoPath = async (map, origin, destination) => {
                         DrawLine.firstDetourStartIndex = startPoint + 1;
                         DrawLine.firstDetourEndIndex = i + 2;
                         firstPoint = false;
+                        console.log("firstPoint", DrawLine);
                     }
                 }
                 else {
@@ -187,6 +201,7 @@ const getTwoPath = async (map, origin, destination) => {
                 DrawLine.aroundLampList.push(point);
             }
         }
+        console.log("getNewBoundList", DrawLine.aroundLampList);
 
     }
 
@@ -256,7 +271,7 @@ const getTwoPath = async (map, origin, destination) => {
         }).then(res => {
 
             const resultData = res.data.features;
-            console.log(resultData);
+            console.log("data", resultData);
 
             //결과 출력
             const tDistance = "총 거리 : " + ((resultData[0].properties.totalDistance) / 1000).toFixed(1) + "km,";
@@ -282,6 +297,8 @@ const getTwoPath = async (map, origin, destination) => {
                 }
             }
 
+            console.log("shortest arr", arr);
+
         }).catch(res => console.log(res));
 
     };
@@ -294,7 +311,6 @@ const getTwoPath = async (map, origin, destination) => {
     await DrawLine.getShortPointList(DrawLine.shortPointList, DrawLine.shortLatLngList, origin, destination);
     //2. 최단경로 그리기
     DrawLine.drawLine("short", DrawLine.shortLatLngList);
-
 
 
     //밝은 길//
@@ -313,6 +329,7 @@ const getTwoPath = async (map, origin, destination) => {
             DrawLine.safeLatLngList.push(DrawLine.shortLatLngList.slice(0, DrawLine.firstDetourStartIndex));
             DrawLine.safePointList.push(DrawLine.shortPointList.slice(0, DrawLine.firstDetourStartIndex)); //이전 최단 경로 저장
             await DrawLine.getShortPointList(DrawLine.safePointList, DrawLine.safeLatLngList, nextLamp, destination);
+            console.log("safePointList", DrawLine.safePointList);
         }
     }
 
