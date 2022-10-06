@@ -17,10 +17,16 @@ import { Button as Btn } from '../../atoms/Button';
 import mapInfo from './mapInfo';
 import getMarkers from './getMarkers';
 import getPlaces from './getPlaces';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import { Button, TextField, Autocomplete } from '@mui/material';
-import Typography from '@mui/material/Typography';
+import { Modal, Box, Button, TextField, Autocomplete, Fab, Typography } from '@mui/material';
+import NavigationIcon from "@mui/icons-material/Navigation";
+import { TbDeviceCctv } from "react-icons/tb";
+import { GiPositionMarker } from "react-icons/gi";
+import { AiOutlineSafety } from "react-icons/ai";
+import { GiStreetLight } from "react-icons/gi";
+import { BsLightbulb } from "react-icons/bs";
+import { FaRegLightbulb } from "react-icons/fa";
+import { GiCeilingLight } from "react-icons/gi";
+import { GiDoubleStreetLights } from "react-icons/gi";
 import getTwoPath from './getTwoPath';
 
 const MapContainer = () => {
@@ -43,6 +49,12 @@ const MapContainer = () => {
     lights: false,
     cameras: false,
     houses: false,
+  });
+
+  const [color, setColor] = useState({
+    lights: "primary",
+    cameras: "primary",
+    houses: "primary",
   });
 
   const [open, setOpen] = useState(false);
@@ -156,6 +168,9 @@ const MapContainer = () => {
     setBtnActive((prevState) => {
       return { ...prevState, lights: !prevState.lights };
     });
+    setColor((prevState) => {
+      return { ...prevState, lights: prevState.lights === "primary" ? "secondary" : "primary" };
+    });
     console.log('가로등', markers.lights);
     if (btnActive.lights) {
       console.log('가로등 끈다');
@@ -170,6 +185,9 @@ const MapContainer = () => {
     setBtnActive((prevState) => {
       return { ...prevState, cameras: !prevState.cameras };
     });
+    setColor((prevState) => {
+      return { ...prevState, cameras: prevState.cameras === "primary" ? "secondary" : "primary" };
+    });
     console.log('시시티비', markers.cameras);
     if (btnActive.cameras) {
       console.log('시시티비 끈다');
@@ -183,6 +201,9 @@ const MapContainer = () => {
   const getHouses = () => {
     setBtnActive((prevState) => {
       return { ...prevState, houses: !prevState.houses };
+    });
+    setColor((prevState) => {
+      return { ...prevState, houses: prevState.houses === "primary" ? "secondary" : "primary" };
     });
     console.log('안심집', markers.houses);
     if (btnActive.houses) {
@@ -212,7 +233,7 @@ const MapContainer = () => {
       <S.StyledMapContainer>
         <Map map={map} />
         <S.StyledButtonHorizontalContainer className={mode ? 'show-mode' : 'hide-mode'}>
-          <Btn styleType="round" onClick={getLights} active={btnActive.lights}>
+          {/* <Btn styleType="round" onClick={getLights} active={btnActive.lights}>
             가로등
           </Btn>
           <Btn styleType="round" onClick={getCameras} active={btnActive.cameras}>
@@ -220,18 +241,38 @@ const MapContainer = () => {
           </Btn>
           <Btn styleType="round" onClick={getHouses} active={btnActive.houses}>
             안전집
-          </Btn>
+          </Btn> */}
+
+          <Box sx={{ "& > :not(style)": { m: 1 } }}>
+            <Fab color={color.lights} onClick={getLights} active={btnActive.lights}>
+              <GiStreetLight size="30" />
+            </Fab>
+          </Box>
+          <Box sx={{ "& > :not(style)": { m: 1 } }}>
+            <Fab color={color.cameras} onClick={getCameras} active={btnActive.cameras}>
+              <TbDeviceCctv size="30" />
+            </Fab>
+          </Box>
+          <Box sx={{ "& > :not(style)": { m: 1 } }}>
+            <Fab color={color.houses} onClick={getHouses} active={btnActive.houses}>
+              <AiOutlineSafety size="30" />
+            </Fab>
+          </Box>
         </S.StyledButtonHorizontalContainer>
         <S.StyledButtonVerticalContainer>
-          <Btn styleType="round" onClick={movCurrPos}>
-            현위치
-          </Btn>
-          <Btn styleType="round" onClick={handleOpen}>
-            길찾기
-          </Btn>
-          <Btn styleType="round" onClick={getMode}>
-            모드
-          </Btn>
+          <Box sx={{ "& > :not(style)": { m: 1 } }}>
+            <Fab color="primary" onClick={movCurrPos} >
+              <GiPositionMarker size="30" />
+            </Fab>
+          </Box>
+          <Box sx={{ "& > :not(style)": { m: 1 } }}>
+            <Fab color="primary" onClick={handleOpen} >
+              <NavigationIcon />
+            </Fab>
+          </Box>
+          <Box sx={{ "& > :not(style)": { m: 1 } }}>
+            <Fab color="primary" onClick={getMode} >MODE </Fab>
+          </Box>
         </S.StyledButtonVerticalContainer>
       </S.StyledMapContainer>
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
