@@ -8,7 +8,6 @@ export const userReducer = createSlice({
     routes: [],
     contacts: [],
     position: '',
-    display: false,
   },
   reducers: {
     SET_USER: (state, { payload }) => {
@@ -26,12 +25,9 @@ export const userReducer = createSlice({
     },
     SET_POSITION: (state, { payload: position }) => {
       return { ...state, position };
-    },
-    SET_DISPLAY: (state, { payload: display }) => {
-      return { ...state, display };
     }
   },
 });
 
-export const { SET_USER, SET_POSITION, SET_DISPLAY } = userReducer.actions;
+export const { SET_USER, SET_POSITION } = userReducer.actions;
 export default userReducer.reducer;

@@ -10,12 +10,10 @@ import RouteModal from '../RouteModal';
 import { MdAssistantNavigation } from 'react-icons/md';
 import mapInfo from '../MapContainer/mapInfo';
 import getTwoPath from '../MapContainer/getTwoPath';
-import { SET_DISPLAY } from '../../../reducers/userReducer';
 import Map from '../../atoms/Map';
 
 const MyPageListCard = ({ type }) => {
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const userData = useSelector((state) => state.userReducer);
@@ -59,7 +57,6 @@ const MyPageListCard = ({ type }) => {
 
   const handleNavButtonClick = async (dlat, dlon) => {
     console.log('NavButton Clicked');
-    // dispatch(SET_DISPLAY(true));
     navigate("/");
     const { Tmapv2, map, latitude, longitude, location, marker } = await mapInfo("TMapApp");
     await getTwoPath(map, { 'lat': latitude, 'lon': longitude }, { 'lat': dlat, 'lon': dlon });
