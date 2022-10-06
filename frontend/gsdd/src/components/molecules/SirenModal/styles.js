@@ -41,7 +41,7 @@ export const Button = styled.button`
 `
 
 export const Span = styled.span`
-    font-size: 18px;
+    font-size: 14px;
     font-family: SUIT-Light;
     font-weight: bold;
 `
