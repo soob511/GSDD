@@ -1,14 +1,26 @@
 import React from 'react';
 import * as S from './styles';
 import { AiFillMinusCircle } from 'react-icons/ai';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { SET_MAP } from '../../../reducers/tmapReducer';
 import ContactModal from '../ContactModal';
 import apiPath from '../../../api/apiPath';
 import { authAxios } from '../../../api/common';
 import RouteModal from '../RouteModal';
 import { MdAssistantNavigation } from 'react-icons/md';
+import getTwoPath from '../MapContainer/getTwoPath';
+
+
 const MyPageListCard = ({ type }) => {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const userData = useSelector((state) => state.userReducer);
+  const map = useSelector((state) => state.tmapReducer.map);
+  const latitude = useSelector((state) => state.tmapReducer.latitude);
+  const longitude = useSelector((state) => state.tmapReducer.longitude);
 
   const handleContactDeleteClick = async (contactId) => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
@@ -30,6 +42,7 @@ const MyPageListCard = ({ type }) => {
   };
 
   const handleRouteDeleteClick = async (routeId) => {
+    console.log("삭제할 routeId", routeId);
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
         await authAxios
@@ -47,8 +60,15 @@ const MyPageListCard = ({ type }) => {
     }
   };
 
-  const handleNavButtonClick = () => {
+  const handleNavButtonClick = async (dlat, dlon) => {
     console.log('NavButton Clicked');
+    const prevmap = map;
+    console.log("이전", prevmap);
+    navigate('/');
+    dispatch(SET_MAP(prevmap));
+    console.log("새로", map, latitude, longitude, dlat, dlon);
+    await getTwoPath(map, { 'lat': latitude, 'lon': longitude }, { 'lat': dlat, 'lon': dlon });
+
   };
 
   const tags = (data, margin) => {
@@ -69,7 +89,7 @@ const MyPageListCard = ({ type }) => {
             <span>{data.name}</span>
           </S.NickNameWrapper>
           <S.AddressWrapper>{data.address}</S.AddressWrapper>
-          <div onClick={handleNavButtonClick}>
+          <div onClick={() => handleNavButtonClick(+data.lat, +data.lon)}>
             <MdAssistantNavigation color="#02588B" />
           </div>
           <div onClick={() => handleRouteDeleteClick(data.id)}>
