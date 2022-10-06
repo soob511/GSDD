@@ -66,7 +66,7 @@ const Sidebar = () => {
         </S.List>
         <S.List bottom>
           <S.Item>
-            <div style={{ cursor: `pointer`, textDecoration: `none`, fontSize: `20px`, color: `red` }} onClick={logout}>
+            <div style={{ cursor: `pointer`, textDecoration: `none`, fontSize: `20px`, color: `red`, fontFamily: "ONEMobilePOP" }} onClick={logout}>
               로그아웃
             </div>
           </S.Item>
