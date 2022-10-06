@@ -30,8 +30,8 @@ const RouteModal = () => {
           userId: userId,
           name: info.nickname,
           address: input.name,
-          lat: input.lat.toString(),
-          lon: input.lon.toString(),
+          lat: input.lat,
+          lon: input.lon,
         })
         .then((res) => {
           console.log(res);
