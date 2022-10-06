@@ -135,7 +135,12 @@ const MapContainer = () => {
   };
 
   const movCurrPos = () => {
-    window.location.reload();
+    //window.location.reload();
+    const { Tmapv2 } = window;
+    const positionBounds = new Tmapv2.LatLngBounds();
+    positionBounds.extend(location);
+    console.log(positionBounds);
+    map.panToBounds(positionBounds);
   }
 
   const getMode = async () => {
