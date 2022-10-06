@@ -344,6 +344,27 @@ const getTwoPath = async (map, origin, destination) => {
 
     };
 
+    DrawLine.setMapBound = async () => {
+
+        console.log("setMapBound");
+        const positionBounds = new Tmapv2.LatLngBounds();
+        const omarker_position = new Tmapv2.LatLng(origin.lat, origin.lon);
+        positionBounds.extend(omarker_position);
+
+        const dmarker_position = new Tmapv2.LatLng(destination.lat, destination.lon);
+        positionBounds.extend(dmarker_position);
+
+        for (let i = 0; i < DrawLine.shortLatLngList; i++) {
+            positionBounds.extend(DrawLine.shortLatLngList[i]);
+        }
+
+        for (let i = 0; i < DrawLine.safeLatLngList; i++) {
+            positionBounds.extend(DrawLine.safeLatLngList[i]);
+        }
+
+        DrawLine.map.panToBounds(positionBounds); // 매칭전 좌표가 한눈에 들어올 수 있는 지도 중심과 줌레벨 설정
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //최단경로//
@@ -379,6 +400,7 @@ const getTwoPath = async (map, origin, destination) => {
     //5. 우회경로 그리기
     DrawLine.drawLine("safe", DrawLine.safeLatLngList);
 
+    await DrawLine.setMapBound;
 
     return { 'omarker': DrawLine.omarker, 'dmarker': DrawLine.dmarker, 'short': DrawLine.polyline_short, 'safe': DrawLine_safe };
 }
