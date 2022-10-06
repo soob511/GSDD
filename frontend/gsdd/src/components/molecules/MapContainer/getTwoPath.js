@@ -400,7 +400,7 @@ const getTwoPath = async (map, origin, destination) => {
     //5. 우회경로 그리기
     DrawLine.drawLine("safe", DrawLine.safeLatLngList);
 
-    await DrawLine.setMapBound;
+    await DrawLine.setMapBound();
 
     return { 'omarker': DrawLine.omarker, 'dmarker': DrawLine.dmarker, 'short': DrawLine.polyline_short, 'safe': DrawLine.polyline_safe };
 }
