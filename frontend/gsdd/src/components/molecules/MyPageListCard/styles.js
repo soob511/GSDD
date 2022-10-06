@@ -17,6 +17,7 @@ export const Container = styled.div`
 
 export const Label = styled.span`
   font-size: 1.5rem;
+  font-family: DalseoHealingBold;
 `;
 
 export const ListCard = styled.div`
@@ -26,6 +27,7 @@ export const ListCard = styled.div`
   border-radius: 10px;
   background: white;
   overflow: auto;
+  font-family: EFDiary;
 `;
 
 export const TitleWrapper = styled.div`
@@ -61,6 +63,10 @@ export const MainWrapper = styled.div`
 
 export const Line = styled.hr`
   width: 80%;
+  height: 1px;
+  background-color: ${({theme}) => css`
+    ${theme.colors['gray2']}
+  `};
   margin: 0 0 0 10%;
 `;
 
@@ -75,6 +81,7 @@ export const SpanWrapper = styled.div`
   width: 60%;
   display: flex;
   justify-content: space-around;
+  font-family: CookieRunRegular;
   margin-left: 5%;
 `;
 
