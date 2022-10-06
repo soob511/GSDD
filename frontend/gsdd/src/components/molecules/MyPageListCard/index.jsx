@@ -62,13 +62,9 @@ const MyPageListCard = ({ type }) => {
 
   const handleNavButtonClick = async (dlat, dlon) => {
     console.log('NavButton Clicked');
-    const prevmap = map;
-    console.log("이전", prevmap);
     navigate('/');
-    dispatch(SET_MAP(prevmap));
     console.log("새로", map, latitude, longitude, dlat, dlon);
     await getTwoPath(map, { 'lat': latitude, 'lon': longitude }, { 'lat': dlat, 'lon': dlon });
-
   };
 
   const tags = (data, margin) => {
