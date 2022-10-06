@@ -8,7 +8,8 @@ export const tokenReducer = createSlice({
     authenticated: false, // 현재 로그인 여부
     accessToken: null, // 토큰
     expireTime: 0, // 토큰 만료시간
-    userId: 2,
+    userId: 0,
+    // userId: 2,
   },
   reducers: {
     SET_TOKEN: (state, { payload }) => {
