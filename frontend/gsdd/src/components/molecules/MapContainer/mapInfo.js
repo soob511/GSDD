@@ -36,9 +36,8 @@ const mapInfo = async () => {
         position: location,
         map: map
     });
-    const latlngBounds = new Tmapv2.LatLngBounds(location);
 
-    return { TmapV2: Tmapv2, map: map, latitude: position.coords.latitude, longitude: position.coords.longitude, location: location, marker: marker, latlngBounds: latlngBounds };
+    return { TmapV2: Tmapv2, map: map, latitude: position.coords.latitude, longitude: position.coords.longitude, location: location, marker: marker };
 }
 
 export default mapInfo;

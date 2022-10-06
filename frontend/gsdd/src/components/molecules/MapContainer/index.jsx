@@ -44,6 +44,8 @@ const MapContainer = () => {
   const dmarker = useSelector((state) => state.tmapReducer.dmarker);
   const lines = useSelector((state) => state.tmapReducer.lines);
 
+
+
   const [mode, setMode] = useState(false);
 
   const [btnActive, setBtnActive] = useState({
@@ -119,15 +121,18 @@ const MapContainer = () => {
   ///mui ///
 
   const getMapInfo = async () => {
-    const { Tmapv2, map, latitude, longitude, location, marker, latLngBounds } = await mapInfo();
+    const { Tmapv2, map, latitude, longitude, location, marker } = await mapInfo();
     dispatch(SET_TMAPV2(Tmapv2));
     dispatch(SET_MAP(map));
     dispatch(SET_LATITUDE(latitude));
     dispatch(SET_LONGITUDE(longitude));
     dispatch(SET_LOCATION(location));
     dispatch(SET_MARKER(marker));
-    map.fitBounds(latLngBounds, 50);
   };
+
+  const movCurrPos = () => {
+    window.location.reload();
+  }
 
   const getMode = async () => {
     setMode(!mode);
@@ -217,7 +222,7 @@ const MapContainer = () => {
           </Btn>
         </S.StyledButtonHorizontalContainer>
         <S.StyledButtonVerticalContainer>
-          <Btn styleType="round" onClick={getMapInfo}>
+          <Btn styleType="round" onClick={movCurrPos}>
             현위치
           </Btn>
           <Btn styleType="round" onClick={handleOpen}>
