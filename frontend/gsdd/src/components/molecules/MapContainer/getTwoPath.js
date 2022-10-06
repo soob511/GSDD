@@ -140,7 +140,6 @@ const getTwoPath = async (map, origin, destination) => {
                 targetY = DrawLine.boundaryPointList[i].lon;
 
                 let dist = DrawLine.distance(x1, y1, x2, y2, targetX, targetY);
-                console.log(dist);
 
                 if (dist < 0) continue;
                 if (dist < 0.0009) { //(0.00013은 약 15m)
@@ -181,12 +180,13 @@ const getTwoPath = async (map, origin, destination) => {
                     DrawLine.isDetour = true;
                     console.log("탐색하면 안되는 길 입니다");
                     if (firstPoint) {
+                        console.log(DrawLine.shortPointList);
                         console.log({ 'lat': DrawLine.shortPointList[startPoint + 1].lat, 'lon': DrawLine.shortPointList[startPoint + 1].lon });
                         console.log({ 'lat': DrawLine.shortPointList[i + 2].lat, 'lon': DrawLine.shortPointList[i + 2].lon });
                         DrawLine.firstDetourStart = { 'lat': DrawLine.shortPointList[startPoint + 1].lat, 'lon': DrawLine.shortPointList[startPoint + 1].lon };
-                        DrawLine.firstDetourEnd = { 'lat': DrawLine.shortPointList[i + 2].lat, 'lon': DrawLine.shortPointList[i + 2].lon };
+                        DrawLine.firstDetourEnd = { 'lat': DrawLine.shortPointList[i + 1].lat, 'lon': DrawLine.shortPointList[i + 1].lon };
                         DrawLine.firstDetourStartIndex = startPoint + 1;
-                        DrawLine.firstDetourEndIndex = i + 2;
+                        DrawLine.firstDetourEndIndex = i + 1;
                         firstPoint = false;
                     }
                 }
