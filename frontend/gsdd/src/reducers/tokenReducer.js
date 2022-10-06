@@ -26,7 +26,7 @@ export const tokenReducer = createSlice({
       state.authenticated = false;
       state.accessToken = null;
       state.expireTime = 0;
-      localStorage.removeItem('accessToken')
+      localStorage.removeItem('accessToken');
     },
   },
 });

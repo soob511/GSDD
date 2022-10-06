@@ -75,11 +75,15 @@ export const SpanWrapper = styled.div`
   width: 60%;
   display: flex;
   justify-content: space-around;
-  margin-left: 30px;
+  margin-left: 5%;
 `;
 
 export const Error = styled.div`
   ${flexRow}
   width: 100%;
   height: 40%;
+`;
+
+export const NickNameWrapper = styled.div`
+  width: 25%;
 `;
