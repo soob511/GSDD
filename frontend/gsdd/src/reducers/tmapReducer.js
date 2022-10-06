@@ -12,9 +12,6 @@ export const tmapReducer = createSlice({
         markers: [],
         origin: null,
         destination: null,
-        omarker: null,
-        dmarker: null,
-        lines: null,
     },
     reducers: {
         SET_TMAPV2: (state, { payload: Tmapv2 }) => {
@@ -47,18 +44,9 @@ export const tmapReducer = createSlice({
         SET_DESTINATION: (state, { payload: destination }) => {
             return { ...state, destination: destination };
         },
-        SET_OMARKER: (state, { payload: omarker }) => {
-            return { ...state, omarker: omarker };
-        },
-        SET_DMARKER: (state, { payload: dmarker }) => {
-            return { ...state, dmarker: dmarker };
-        },
-        SET_LINES: (state, { payload: lines }) => {
-            return { ...state, lines: lines };
-        },
     }
 
 });
 
-export const { SET_TMAPV2, SET_MAP, SET_LATITUDE, SET_LONGITUDE, SET_LOCATION, SET_MARKER, SET_MARKERS, SET_ORIGIN, SET_DESTINATION, SET_OMARKER, SET_DMARKER, SET_LINES } = tmapReducer.actions;
+export const { SET_TMAPV2, SET_MAP, SET_LATITUDE, SET_LONGITUDE, SET_LOCATION, SET_MARKER, SET_MARKERS, SET_ORIGIN, SET_DESTINATION } = tmapReducer.actions;
 export default tmapReducer.reducer;
