@@ -13,4 +13,5 @@ export const ArticleCard = styled.div`
   background: white;
   font-weight: bold;
   font-size: 20px;
+  font-family: KyoboHandwriting;
 `;

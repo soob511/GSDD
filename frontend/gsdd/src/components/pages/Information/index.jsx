@@ -32,13 +32,9 @@ const Information = () => {
       setInfoVisible(true)
     }
   }
-  // {city: provided => ({...provided, width: 140, height: 40, marginRight: 8})}
-  // {district: provided => ({...provided, width: 108, height: 40})}
+
   const [selectCity, setSelectCity] = useState("");
   const [selectDistrict, setSelectDistrict] = useState("");
-  // const [safetyValue, setSafetyValue] = useState("");
-  // const [infoData, setInfoData] = useState("");
-  // 구 바뀔때마다 해당 구 내의 데이터 불러오는 API 실행 예정
 
   
   const fetchArea = async (selectCity, selectDistrict) => {
@@ -70,8 +66,6 @@ const Information = () => {
     try{
       setSelectCity(selectCity)
       setSelectDistrict(selectDistrict)
-      console.log(selectCity.value)     // 안전지수 및 그 외 정보 load API 실행
-      console.log(selectDistrict.value) // 해당 지역 뉴스 기사 load API 실행
       fetchArea(selectCity, selectDistrict)
     } catch(e) {
       console.log(e)
@@ -82,17 +76,6 @@ const Information = () => {
 
   }, [onInfoVisible])
   
-  // const news = [
-  //   {title : "뉴스 기사1 뉴스 기사1 뉴스 기사1 뉴스 기사1 뉴스 기사1", content: "내용1"},
-  //   {title : "뉴스 기사2", content: "내용2"},
-  //   {title : "뉴스 기사3", content: "내용3"},
-  //   {title : "뉴스 기사4", content: "내용4"},
-  //   {title : "뉴스 기사5", content: "내용5"},
-  //   {title : "뉴스 기사6", content: "내용6"},
-  //   {title : "뉴스 기사7", content: "내용7"},
-  //   {title : "뉴스 기사8", content: "내용8"},
-  //   {title : "뉴스 기사9", content: "내용9"},
-  // ]
   const info = [
     "행정안전부에서 지역별 안전수준과 안전의식을 지표별로 객관적으로 도출해낸 지수입니다. 총 6개의 가중치(교통사고, 화재, 범죄, 생활안전, 자살, 감염병)가 위해지표로 사용되었으며 본 서비스에서 제공하는 안전지수의 지표는 [",
     "2021",
@@ -116,7 +99,7 @@ const Information = () => {
             <S.StyledSelect district placeholder="구" options={district} onChange={setSelectDistrict}/>
           </S.RowBox>
           <S.RowBox>
-            <span style={{fontSize:'13px'}}>안전지수란?</span>
+            <span style={{fontSize:'12px', fontFamily:'KyoboHandwriting'}}>안전지수란?</span>
             <S.Button onClick={onInfoVisible}><img src={imgInfo} style={{alignItems: 'center'}}></img></S.Button>
           </S.RowBox>
         </S.Header>
@@ -142,7 +125,7 @@ const Information = () => {
           </S.ColumnBox>
         </S.Content>
 
-        <div style={{fontSize: "24px", fontWeight: "bold"}}>우리 동네 기사</div>
+        <div style={{fontSize: "24px", fontWeight: "bold", fontFamily: "DalseoHealingBold"}}>우리 동네 기사</div>
         <S.Content news>
           {newsList}
         </S.Content>
