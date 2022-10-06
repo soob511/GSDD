@@ -15,3 +15,4 @@ export const ArticleCard = styled.div`
   font-size: 20px;
   font-family: ONEMobilePOP;
 `;
+

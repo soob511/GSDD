@@ -64,7 +64,7 @@ export const MainWrapper = styled.div`
 export const Line = styled.hr`
   width: 80%;
   height: 1px;
-  background-color: ${({theme}) => css`
+  background-color: ${({ theme }) => css`
     ${theme.colors['gray2']}
   `};
   margin: 0 0 0 10%;
@@ -94,4 +94,12 @@ export const Error = styled.div`
 
 export const NickNameWrapper = styled.div`
   width: 25%;
+`;
+
+
+export const MapWrapper = styled.div`
+  position="relative";
+  width=100%;
+  height=100%
+  overflow: visible;
 `;
