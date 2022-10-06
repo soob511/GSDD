@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import * as S from './styles';
 import { FcLike } from 'react-icons/fc';
 import MypageCard from '../../molecules/MypageCard';
-import Navbar from '../../molecules/Navbar';
 import Sidebar from '../../molecules/Sidebar';
 import { authAxios } from '../../../api/common';
 import apiPath from '../../../api/apiPath';
@@ -36,7 +35,7 @@ const MyPage = () => {
       <Sidebar />
       <S.ArticleCard>
         {username}님! 오늘도 안전길 다니세요
-        <FcLike size="2rem" />
+        <FcLike size="1.3rem" />
       </S.ArticleCard>
       <MypageCard />
     </>
