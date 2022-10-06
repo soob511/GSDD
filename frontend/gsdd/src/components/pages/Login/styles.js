@@ -28,4 +28,7 @@ export const BtnText = styled.div`
   width: 100%;
   text-align: center;
   padding-right: 16px;
+  font-family: SUIT-light;
+  font-size: 16px;
+  font-weight: bold;
 `;

@@ -76,7 +76,7 @@ export const Item = styled.div`
     font-size: 24px;
     margin-top: 24px;
     font-weight: normal;
-    font-family: ONEMobileBold;
+    font-family: SUIT-light;
     `}
     ${(props) => props.safety && css `
     font-size: 50px;
