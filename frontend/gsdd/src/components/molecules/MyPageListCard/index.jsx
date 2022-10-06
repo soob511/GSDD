@@ -42,7 +42,6 @@ const MyPageListCard = ({ type }) => {
   };
 
   const handleRouteDeleteClick = async (routeId) => {
-    console.log("삭제할 routeId", routeId);
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
         await authAxios

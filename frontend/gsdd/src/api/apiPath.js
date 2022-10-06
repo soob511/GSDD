@@ -27,7 +27,7 @@ const apiPath = {
     post: () => HOST + MYPAGE + CONTACT,
     del: (contactId) => HOST + MYPAGE + CONTACT + `/${contactId}`,
     routePost: () => HOST + MYPAGE + ROUTE,
-    routeDel: (routeId) => HOST + MYPAGE + ROUTE + `/${routeId}`,
+    routeDel: (routeId) => HOST + MYPAGE + ROUTE + `${routeId}`,
   },
   info: {
     get: (city, district) => HOST + INFO + `${city}` + `/${district}`,
