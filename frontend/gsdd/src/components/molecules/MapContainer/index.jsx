@@ -9,10 +9,7 @@ import {
   SET_LOCATION,
   SET_MARKERS,
   SET_ORIGIN,
-  SET_DESTINATION,
-  SET_OMARKER,
-  SET_DMARKER,
-  SET_LINES,
+  SET_DESTINATION
 } from '../../../reducers/tmapReducer';
 import * as S from './styles';
 import Map from '../../atoms/Map';
@@ -24,8 +21,6 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { Button, TextField, Autocomplete } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import getShortestPath from './getShortestPath';
-import getSafestPath from './getSafestPath';
 import getTwoPath from './getTwoPath';
 
 const MapContainer = () => {
@@ -40,9 +35,7 @@ const MapContainer = () => {
   const markers = useSelector((state) => state.tmapReducer.markers);
   const origin = useSelector((state) => state.tmapReducer.origin);
   const destination = useSelector((state) => state.tmapReducer.destination);
-  const omarker = useSelector((state) => state.tmapReducer.omarker);
-  const dmarker = useSelector((state) => state.tmapReducer.dmarker);
-  const lines = useSelector((state) => state.tmapReducer.lines);
+
 
   const [mode, setMode] = useState(false);
 
@@ -57,6 +50,13 @@ const MapContainer = () => {
   const [oplaces, setOplaces] = useState([]);
   const [dplaces, setDplaces] = useState([]);
 
+  const [paths, setPaths] = useState({
+    omarker: null,
+    dmarker: null,
+    short: null,
+    safe: null,
+  });
+
   /// mui ///
 
   const handleOpen = () => setOpen(true);
@@ -68,40 +68,37 @@ const MapContainer = () => {
     dispatch(SET_DESTINATION(destination));
 
     //새로운 경로 이전 기존 경로 제거
-    // if (omarker) {
-    //   console.log("set omarker null");
-    //   omarker.setMap(null);
-    //   dispatch(SET_OMARKER(null));
-    // }
-    // if (dmarker) {
-    //   console.log("set dmarker null");
-    //   dmarker.setMap(null);
-    //   dispatch(SET_DMARKER(null));
-    // }
-    // if (lines) {
-    //   console.log("set lines null");
-    //   for (let k in lines) {
-    //     lines[k].setMap(null);
-    //   }
-    //   dispatch(SET_LINES(null));
-    // }
+    if (paths.omarker) {
+      console.log("set omarker null");
+      paths.omarker.setMap(null);
+      paths.omarker = null;
+    }
+    if (paths.dmarker) {
+      console.log("set dmarker null");
+      paths.dmarker.setMap(null);
+      paths.dmarker = null;
+    }
+    if (paths.short) {
+      console.log("set shortline null");
+      paths.short.setMap(null);
+      paths.short = null;
+    }
+    if (paths.safe) {
+      console.log("set safeline null");
+      paths.safe.setMap(null);
+      paths.safe = null;
+    }
 
     setOpen(false);
 
-    // const shortData = await getShortestPath(map, origin, destination);//최단 경로 탐색
-    // console.log("shortData", shortData);
-    // data.omarker.setMap(map);
-    // data.dmarker.setMap(map);
-    // for (let k in data.lines) {
-    //   data.lines[k].setMap(map);
-    // }
-    // dispatch(SET_OMARKER(shortData.omarker));
-    // dispatch(SET_DMARKER(shortData.dmarker));
-    // dispatch(SET_LINES(shortData.line));
-    // const brightData = await getSafestPath(map, origin, destination);//밝은 길 탐색
-    // console.log("brightData", brightData);
+    const { omarker, dmarker, short, safe } = await getTwoPath(map, origin, destination);
 
-    await getTwoPath(map, origin, destination);
+    setPaths({
+      omarker: omarker,
+      dmarker: dmarker,
+      short: short,
+      safe: safe,
+    })
   };
 
   const style = {
@@ -120,15 +117,23 @@ const MapContainer = () => {
 
   const getMapInfo = async () => {
     const { Tmapv2, map, latitude, longitude, location, marker } = await mapInfo();
-    map.panTo(location);
     dispatch(SET_TMAPV2(Tmapv2));
     dispatch(SET_MAP(map));
     dispatch(SET_LATITUDE(latitude));
     dispatch(SET_LONGITUDE(longitude));
     dispatch(SET_LOCATION(location));
     dispatch(SET_MARKER(marker));
-    console.log('location:', location);
   };
+
+  const movCurrPos = () => {
+    //window.location.reload();
+    const { Tmapv2 } = window;
+    const positionBounds = new Tmapv2.LatLngBounds();
+    positionBounds.extend(location);
+    console.log(positionBounds);
+    map.panToBounds(positionBounds);
+    map.setZoom(15);
+  }
 
   const getMode = async () => {
     setMode(!mode);
@@ -218,7 +223,7 @@ const MapContainer = () => {
           </Btn>
         </S.StyledButtonHorizontalContainer>
         <S.StyledButtonVerticalContainer>
-          <Btn styleType="round" onClick={getMapInfo}>
+          <Btn styleType="round" onClick={movCurrPos}>
             현위치
           </Btn>
           <Btn styleType="round" onClick={handleOpen}>

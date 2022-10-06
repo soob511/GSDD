@@ -13,7 +13,7 @@ import { authAxios } from '../../../api/common';
 import { SET_POSITION } from '../../../reducers/userReducer';
 
 const SirenModal = (props) => {
-  
+
   const dispatch = useDispatch();
   const username = useSelector((state) => state.userReducer.user);
   const userContacts = useSelector((state) => state.userReducer.contacts);
@@ -44,12 +44,12 @@ const SirenModal = (props) => {
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
   };
-  
+
 
   const getPositionName = async () => {
     const options = {
       method: 'GET',
-      headers: { accept: 'application/json', appKey: 'l7xxa68d7a9afe2c4fdc80fbe37befe86098' },
+      headers: { accept: 'application/json', appKey: 'l7xx49e27051d70e475a8285bb568e35a081' },
     };
     await fetch(
       `https://apis.openapi.sk.com/tmap/geo/reversegeocoding?version=1&lat=${currentLat}&lon=${currentLng}&coordType=WGS84GEO&addressType=A02&newAddressExtend=Y`,
@@ -92,7 +92,7 @@ const SirenModal = (props) => {
   });
   return (
     <>
-      
+
       <Active onClick={handleOpen}>
         <RiAlarmWarningFill size="40" color="red" />
       </Active>
