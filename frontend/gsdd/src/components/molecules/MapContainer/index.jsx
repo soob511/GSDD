@@ -141,6 +141,7 @@ const MapContainer = () => {
     positionBounds.extend(location);
     console.log(positionBounds);
     map.panToBounds(positionBounds);
+    map.setZoom(15);
   }
 
   const getMode = async () => {
