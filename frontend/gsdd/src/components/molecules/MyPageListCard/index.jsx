@@ -101,7 +101,6 @@ const MyPageListCard = ({ type }) => {
 
   return (
     <>
-
       <S.Container>
         <S.Label>{type}</S.Label>
         <S.ListCard>
