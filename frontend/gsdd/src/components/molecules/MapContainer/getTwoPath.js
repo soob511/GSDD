@@ -181,6 +181,8 @@ const getTwoPath = async (map, origin, destination) => {
                     DrawLine.isDetour = true;
                     console.log("탐색하면 안되는 길 입니다");
                     if (firstPoint) {
+                        console.log({ 'lat': DrawLine.shortPointList[startPoint + 1].lat, 'lon': DrawLine.shortPointList[startPoint + 1].lon });
+                        console.log({ 'lat': DrawLine.shortPointList[i + 2].lat, 'lon': DrawLine.shortPointList[i + 2].lon });
                         DrawLine.firstDetourStart = { 'lat': DrawLine.shortPointList[startPoint + 1].lat, 'lon': DrawLine.shortPointList[startPoint + 1].lon };
                         DrawLine.firstDetourEnd = { 'lat': DrawLine.shortPointList[i + 2].lat, 'lon': DrawLine.shortPointList[i + 2].lon };
                         DrawLine.firstDetourStartIndex = startPoint + 1;
