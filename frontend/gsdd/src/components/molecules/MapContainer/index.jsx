@@ -116,7 +116,7 @@ const MapContainer = () => {
   ///mui ///
 
   const getMapInfo = async () => {
-    const { Tmapv2, map, latitude, longitude, location, marker } = await mapInfo();
+    const { Tmapv2, map, latitude, longitude, location, marker } = await mapInfo("TMapApp");
     dispatch(SET_TMAPV2(Tmapv2));
     dispatch(SET_MAP(map));
     dispatch(SET_LATITUDE(latitude));
@@ -210,7 +210,7 @@ const MapContainer = () => {
   return (
     <>
       <S.StyledMapContainer>
-        <Map map={map} />
+        <Map type='home' />
         <S.StyledButtonHorizontalContainer className={mode ? 'show-mode' : 'hide-mode'}>
           <Btn styleType="round" onClick={getLights} active={btnActive.lights}>
             가로등

@@ -8,8 +8,8 @@ export const tokenReducer = createSlice({
     authenticated: false, // 현재 로그인 여부
     accessToken: null, // 토큰
     expireTime: 0, // 토큰 만료시간
-    userId: 0,
-    // userId: 2,
+    // userId: 0,
+    userId: 2,
   },
   reducers: {
     SET_TOKEN: (state, { payload }) => {
@@ -29,16 +29,16 @@ export const tokenReducer = createSlice({
       state.expireTime = 0;
       localStorage.removeItem('accessToken');
     },
-    // SET_TEST: (state) => {
-    //   state.authenticated = true;
-    //   state.accessToken =
-    //     'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkdWNreWdyYWNlQGdtYWlsLmNvbSIsImlkIjoyLCJlbWFpbCI6ImR1Y2t5Z3JhY2VAZ21haWwuY29tIiwibmFtZSI6Iuq5gOyjvOydgCIsInByb3ZpZGVyIjoia2FrYW8iLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJpYXQiOjE2NjUwMzc4MTIsImV4cCI6MTY2NTEyNDIxMn0.oOFKtIB49CEatM5ndjPUVm_1pSRiGrMM6Gf9-3Am_hE';
-    //   state.expireTime = new Date().getTime() + TOKEN_TIME_OUT;
-    //   state.userId = 2;
-    // },
+    SET_TEST: (state) => {
+      state.authenticated = true;
+      state.accessToken =
+        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkdWNreWdyYWNlQGdtYWlsLmNvbSIsImlkIjoyLCJlbWFpbCI6ImR1Y2t5Z3JhY2VAZ21haWwuY29tIiwibmFtZSI6Iuq5gOyjvOydgCIsInByb3ZpZGVyIjoia2FrYW8iLCJyb2xlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn1dLCJpYXQiOjE2NjUwMzc4MTIsImV4cCI6MTY2NTEyNDIxMn0.oOFKtIB49CEatM5ndjPUVm_1pSRiGrMM6Gf9-3Am_hE';
+      state.expireTime = new Date().getTime() + TOKEN_TIME_OUT;
+      state.userId = 2;
+    },
   },
 });
 
-export const { SET_TOKEN, DELETE_TOKEN } = tokenReducer.actions;
+export const { SET_TOKEN, DELETE_TOKEN, SET_TEST } = tokenReducer.actions;
 
 export default tokenReducer.reducer;

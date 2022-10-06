@@ -14,3 +14,8 @@ export const ArticleCard = styled.div`
   font-weight: bold;
   font-size: 20px;
 `;
+
+export const MapWrapper = styled.div`
+  bottom:0;
+  overflow: visible;
+`;
