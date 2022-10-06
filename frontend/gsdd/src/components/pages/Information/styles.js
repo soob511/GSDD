@@ -76,12 +76,12 @@ export const Item = styled.div`
     font-size: 24px;
     margin-top: 24px;
     font-weight: normal;
-    font-family: SUIT-light;
+    font-family: SUIT-Light;
     `}
     ${(props) => props.safety && css `
     font-size: 50px;
     font-weight: normal;
-    padding-top: 6px;
+    padding-top: 4px;
     `}
     ${(props) => props.value == "1" && css `
         color: #0000ff;

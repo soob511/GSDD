@@ -19,7 +19,7 @@ const Login = () => {
       <S.Login>
         <img src={logo} width="300px"></img>
         <S.Text>
-          <span style={{ fontSize: '1.3rem', fontWeight: 'bold', fontFamily: "SUIT-light"}}>
+          <span style={{ fontSize: '1.3rem', fontWeight: 'bold', fontFamily: "SUIT-Light"}}>
             간편하게 로그인하고
             <br />
           </span>

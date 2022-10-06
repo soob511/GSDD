@@ -40,5 +40,5 @@ export const Space = styled.div`
 
 export const FontSize = styled.div`
   font-size: 1.5rem;
-  font-family: SUIT-light;
+  font-family: SUIT-Light;
 `;
