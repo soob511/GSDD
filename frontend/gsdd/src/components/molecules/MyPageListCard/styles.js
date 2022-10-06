@@ -27,7 +27,7 @@ export const ListCard = styled.div`
   border-radius: 10px;
   background: white;
   overflow: auto;
-  font-family: EFDiary;
+  font-family: SUIT-Light;
 `;
 
 export const TitleWrapper = styled.div`
@@ -81,7 +81,8 @@ export const SpanWrapper = styled.div`
   width: 60%;
   display: flex;
   justify-content: space-around;
-  font-family: CookieRunRegular;
+  font-family: SUIT-Light;
+  font-weight: bold;
   margin-left: 5%;
 `;
 
