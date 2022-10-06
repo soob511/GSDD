@@ -13,9 +13,6 @@ export const ArticleCard = styled.div`
   background: white;
   font-weight: bold;
   font-size: 20px;
+  font-family: ONEMobilePOP;
 `;
 
-export const MapWrapper = styled.div`
-  bottom:0;
-  overflow: visible;
-`;

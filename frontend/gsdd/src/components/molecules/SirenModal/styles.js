@@ -39,3 +39,9 @@ export const Button = styled.button`
     justify-content: center;
     align-items: center;
 `
+
+export const Span = styled.span`
+    font-size: 14px;
+    font-family: SUIT-Light;
+    font-weight: bold;
+`

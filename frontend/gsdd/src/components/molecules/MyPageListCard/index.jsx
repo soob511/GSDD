@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as S from './styles';
 import { AiFillMinusCircle } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import ContactModal from '../ContactModal';
 import apiPath from '../../../api/apiPath';
 import { authAxios } from '../../../api/common';
@@ -10,11 +11,12 @@ import { MdAssistantNavigation } from 'react-icons/md';
 import mapInfo from '../MapContainer/mapInfo';
 import getTwoPath from '../MapContainer/getTwoPath';
 import { SET_DISPLAY } from '../../../reducers/userReducer';
-
+import Map from '../../atoms/Map';
 
 const MyPageListCard = ({ type }) => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userData = useSelector((state) => state.userReducer);
 
@@ -38,7 +40,6 @@ const MyPageListCard = ({ type }) => {
   };
 
   const handleRouteDeleteClick = async (routeId) => {
-    console.log("삭제할 routeId", routeId);
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
         await authAxios
@@ -58,8 +59,9 @@ const MyPageListCard = ({ type }) => {
 
   const handleNavButtonClick = async (dlat, dlon) => {
     console.log('NavButton Clicked');
-    dispatch(SET_DISPLAY(true));
-    const { Tmapv2, map, latitude, longitude, location, marker } = await mapInfo("TMapAppMypage");
+    // dispatch(SET_DISPLAY(true));
+    navigate("/");
+    const { Tmapv2, map, latitude, longitude, location, marker } = await mapInfo("TMapApp");
     await getTwoPath(map, { 'lat': latitude, 'lon': longitude }, { 'lat': dlat, 'lon': dlon });
   };
 
@@ -76,24 +78,30 @@ const MyPageListCard = ({ type }) => {
       );
     } else if (type !== '비상연락망') {
       return (
-        <S.TitleWrapper key={data.id} margin={margin}>
-          <S.NickNameWrapper>
-            <span>{data.name}</span>
-          </S.NickNameWrapper>
-          <S.AddressWrapper>{data.address}</S.AddressWrapper>
-          <div onClick={() => handleNavButtonClick(+data.lat, +data.lon)}>
-            <MdAssistantNavigation color="#02588B" />
-          </div>
-          <div onClick={() => handleRouteDeleteClick(data.id)}>
-            <AiFillMinusCircle color="red" />
-          </div>
-        </S.TitleWrapper>
+        <>
+          <S.MapWrapper>
+            <Map type='mypage' />
+          </S.MapWrapper>
+          <S.TitleWrapper key={data.id} margin={margin}>
+            <S.NickNameWrapper>
+              <span>{data.name}</span>
+            </S.NickNameWrapper>
+            <S.AddressWrapper>{data.address}</S.AddressWrapper>
+            <div onClick={() => handleNavButtonClick(+data.lat, +data.lon)}>
+              <MdAssistantNavigation color="#02588B" />
+            </div>
+            <div onClick={() => handleRouteDeleteClick(data.id)}>
+              <AiFillMinusCircle color="red" />
+            </div>
+          </S.TitleWrapper>
+        </>
       );
     }
   };
 
   return (
     <>
+
       <S.Container>
         <S.Label>{type}</S.Label>
         <S.ListCard>
@@ -116,7 +124,6 @@ const MyPageListCard = ({ type }) => {
           {type === '비상연락망' ? <ContactModal type={type}></ContactModal> : <RouteModal />}
         </S.ListCard>
       </S.Container>
-
     </>
   );
 };

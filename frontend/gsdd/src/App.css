@@ -44,11 +44,31 @@
 }
 
 .show-mode {
-  right: 60px;
+  right: 68px;
   /* transition: 1s; */
 }
 
 .hide-mode {
-  right: -180px;
+  right: -220px;
   /* transition: 1s; */
+}
+
+@font-face {
+  font-family: "DalseoHealingBold";
+  src: url("./assets/fonts/DalseoHealingBold.ttf")
+}
+
+@font-face {
+  font-family: "ONEMobilePOP";
+  src: url("./assets/fonts/ONE\ Mobile\ POP.ttf")
+}
+
+@font-face {
+  font-family: "ONEMobileTitle";
+  src: url("./assets/fonts/ONE\ Mobile\ Title.ttf")
+}
+
+@font-face {
+  font-family: "SUIT-Light";
+  src: url("./assets/fonts/SUIT-Light.ttf")
 }

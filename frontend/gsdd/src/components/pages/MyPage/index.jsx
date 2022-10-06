@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import * as S from './styles';
 import { FcLike } from 'react-icons/fc';
 import MypageCard from '../../molecules/MypageCard';
-import Navbar from '../../molecules/Navbar';
 import Sidebar from '../../molecules/Sidebar';
 import { authAxios } from '../../../api/common';
 import apiPath from '../../../api/apiPath';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { SET_USER } from '../../../reducers/userReducer';
-import Map from '../../atoms/Map';
+// import Map from '../../atoms/Map';
 
 const MyPage = () => {
   const dispatch = useDispatch();
@@ -34,28 +33,27 @@ const MyPage = () => {
 
   const username = useSelector((state) => state.userReducer.user);
 
-  if (display == true) {
-    return (
-      <>
-        <Sidebar />
-        <S.MapWrapper>
-          <Map type='mypage' />
-        </S.MapWrapper>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Sidebar />
-        <S.ArticleCard>
-          {username}님! 오늘도 안전길 다니세요
-          <FcLike size="2rem" />
-        </S.ArticleCard>
-        <MypageCard />
-      </>
-    );
-  }
-
+  // if (display == true) {
+  //   return (
+  //     <>
+  //       <Sidebar />
+  //       <S.MapWrapper>
+  //         <Map type='mypage' />
+  //       </S.MapWrapper>
+  //     </>
+  //   );
+  // } else {
+  return (
+    <>
+      <Sidebar />
+      <S.ArticleCard>
+        {username}님! 오늘도 안전길 다니세요
+        <FcLike size="1.3rem" />
+      </S.ArticleCard>
+      <MypageCard />
+    </>
+  );
+  // }
 };
 
 export default MyPage;

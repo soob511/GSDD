@@ -17,6 +17,7 @@ export const Container = styled.div`
 
 export const Label = styled.span`
   font-size: 1.5rem;
+  font-family: DalseoHealingBold;
 `;
 
 export const ListCard = styled.div`
@@ -26,6 +27,7 @@ export const ListCard = styled.div`
   border-radius: 10px;
   background: white;
   overflow: auto;
+  font-family: SUIT-Light;
 `;
 
 export const TitleWrapper = styled.div`
@@ -61,6 +63,10 @@ export const MainWrapper = styled.div`
 
 export const Line = styled.hr`
   width: 80%;
+  height: 1px;
+  background-color: ${({ theme }) => css`
+    ${theme.colors['gray2']}
+  `};
   margin: 0 0 0 10%;
 `;
 
@@ -75,6 +81,8 @@ export const SpanWrapper = styled.div`
   width: 60%;
   display: flex;
   justify-content: space-around;
+  font-family: SUIT-Light;
+  font-weight: bold;
   margin-left: 5%;
 `;
 
@@ -86,4 +94,12 @@ export const Error = styled.div`
 
 export const NickNameWrapper = styled.div`
   width: 25%;
+`;
+
+
+export const MapWrapper = styled.div`
+  position="relative";
+  width=100%;
+  height=100%
+  overflow: visible;
 `;

@@ -42,4 +42,5 @@ export const Div = styled.div`
       ${theme.colors['blue']}
     `};
   font-size: 1.2rem;
+  font-family: "ONEMobilePOP";
 `;

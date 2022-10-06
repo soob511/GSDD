@@ -24,6 +24,7 @@ export const Content = styled.div`
         margin-top: 4px;
         overflow-y: scroll;
         height: 230px;
+        font-family: SUIT-Light;
     `}
     ${(props) => props.info && css`
         display: inline;
@@ -62,7 +63,7 @@ export const RowBox = styled.div`
 export const ColumnBox = styled.div`    
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 30px;
 `
 export const Item = styled.div`
     display: flex;
@@ -70,14 +71,17 @@ export const Item = styled.div`
     font-size: 16px;
     font-weight: bold;
     margin-top: 10px;
+    font-family: ONEMobileTitle;
     ${(props) => props.number && css`
     font-size: 24px;
-    margin-top: 30px;
+    margin-top: 24px;
     font-weight: normal;
+    font-family: SUIT-Light;
     `}
     ${(props) => props.safety && css `
     font-size: 50px;
     font-weight: normal;
+    padding-top: 4px;
     `}
     ${(props) => props.value == "1" && css `
         color: #0000ff;
