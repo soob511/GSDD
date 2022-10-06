@@ -26,7 +26,7 @@ export const CardWrapper = styled.div`
       ${theme.colors['blue']}
     `};
   color: white;
-  font-family: DalseoHealingMedium;
+  font-family: DalseoHealingBold;
 `;
 
 export const Count = styled.div`
@@ -40,5 +40,5 @@ export const Space = styled.div`
 
 export const FontSize = styled.div`
   font-size: 1.5rem;
-  margin-top: 4px;
+  font-family: SUIT-light;
 `;
