@@ -60,7 +60,7 @@ const RouteModal = () => {
     setInput({
       name: newInput.name,
       lat: newInput.lat,
-      lon: newInput.lng,
+      lon: newInput.lon,
     });
   };
 

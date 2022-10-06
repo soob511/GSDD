@@ -363,6 +363,7 @@ const getTwoPath = async (map, origin, destination) => {
         }
 
         DrawLine.map.panToBounds(positionBounds); // 매칭전 좌표가 한눈에 들어올 수 있는 지도 중심과 줌레벨 설정
+        DrawLine.map.setZoom(10);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////

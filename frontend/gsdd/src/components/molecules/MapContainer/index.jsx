@@ -9,10 +9,7 @@ import {
   SET_LOCATION,
   SET_MARKERS,
   SET_ORIGIN,
-  SET_DESTINATION,
-  SET_OMARKER,
-  SET_DMARKER,
-  SET_LINES,
+  SET_DESTINATION
 } from '../../../reducers/tmapReducer';
 import * as S from './styles';
 import Map from '../../atoms/Map';
@@ -24,8 +21,6 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { Button, TextField, Autocomplete } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import getShortestPath from './getShortestPath';
-import getSafestPath from './getSafestPath';
 import getTwoPath from './getTwoPath';
 
 const MapContainer = () => {
@@ -40,10 +35,6 @@ const MapContainer = () => {
   const markers = useSelector((state) => state.tmapReducer.markers);
   const origin = useSelector((state) => state.tmapReducer.origin);
   const destination = useSelector((state) => state.tmapReducer.destination);
-  const omarker = useSelector((state) => state.tmapReducer.omarker);
-  const dmarker = useSelector((state) => state.tmapReducer.dmarker);
-  const lines = useSelector((state) => state.tmapReducer.lines);
-
 
 
   const [mode, setMode] = useState(false);
