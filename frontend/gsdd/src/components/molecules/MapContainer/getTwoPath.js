@@ -29,8 +29,8 @@ const getTwoPath = async (map, origin, destination) => {
     DrawLine.boundaryPointList = [];
     DrawLine.safePointList = [];
     DrawLine.safeLatLngList = [];
-    DrawLine.shortline = null;
-    DrawLine.safeline = null;
+    DrawLine.polyline_short = null;
+    DrawLine.polyline_safe = null;
 
     DrawLine.firstDetourStart = {};
     DrawLine.firstDetourEnd = {};
@@ -272,16 +272,17 @@ const getTwoPath = async (map, origin, destination) => {
     DrawLine.drawLine = function (type, arrPointList) {
 
         if (type === "short") {
-            const polyline_1 = new Tmapv2.Polyline({
+            DrawLine.polyline_short = new Tmapv2.Polyline({
                 path: arrPointList,
                 strokeColor: "#DD0000",
                 strokeWeight: 6,
                 map: DrawLine.map,
             });
         } else if (type === "safe") {
-            const polyline_2 = new Tmapv2.Polyline({
+            DrawLine.polyline_safe = new Tmapv2.Polyline({
                 path: arrPointList,
-                strokeColor: "#0067a3",
+                //strokeColor: "#0067a3",
+                strokeColor: "#00FF00",
                 strokeWeight: 6,
                 map: DrawLine.map,
             });
@@ -294,10 +295,10 @@ const getTwoPath = async (map, origin, destination) => {
             method: 'POST',
             url: 'https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1&callback=function',
             headers: {
-                appKey: 'l7xxd1c2344c5b154c50a810779b023d8b97'
+                appKey: 'l7xx49e27051d70e475a8285bb568e35a081'
             },
             data: {
-                "appKey": 'l7xxd1c2344c5b154c50a810779b023d8b97',
+                "appKey": 'l7xx49e27051d70e475a8285bb568e35a081',
                 "startX": origin.lon,
                 "startY": origin.lat,
                 "endX": destination.lon,
@@ -343,6 +344,27 @@ const getTwoPath = async (map, origin, destination) => {
 
     };
 
+    DrawLine.setMapBound = async () => {
+
+        console.log("setMapBound");
+        const positionBounds = new Tmapv2.LatLngBounds();
+        const omarker_position = new Tmapv2.LatLng(origin.lat, origin.lon);
+        positionBounds.extend(omarker_position);
+
+        const dmarker_position = new Tmapv2.LatLng(destination.lat, destination.lon);
+        positionBounds.extend(dmarker_position);
+
+        for (let i = 0; i < DrawLine.shortLatLngList; i++) {
+            positionBounds.extend(DrawLine.shortLatLngList[i]);
+        }
+
+        for (let i = 0; i < DrawLine.safeLatLngList; i++) {
+            positionBounds.extend(DrawLine.safeLatLngList[i]);
+        }
+
+        DrawLine.map.panToBounds(positionBounds); // 매칭전 좌표가 한눈에 들어올 수 있는 지도 중심과 줌레벨 설정
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //최단경로//
@@ -377,6 +399,10 @@ const getTwoPath = async (map, origin, destination) => {
 
     //5. 우회경로 그리기
     DrawLine.drawLine("safe", DrawLine.safeLatLngList);
+
+    await DrawLine.setMapBound;
+
+    return { 'omarker': DrawLine.omarker, 'dmarker': DrawLine.dmarker, 'short': DrawLine.polyline_short, 'safe': DrawLine.polyline_safe };
 }
 
 export default getTwoPath;

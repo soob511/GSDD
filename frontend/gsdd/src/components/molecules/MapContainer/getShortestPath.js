@@ -51,10 +51,10 @@ const getShortestPath = async (map, origin, destination) => {
         method: 'POST',
         url: 'https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1&callback=function',
         headers: {
-            appKey: 'l7xxd1c2344c5b154c50a810779b023d8b97'
+            appKey: 'l7xx49e27051d70e475a8285bb568e35a081'
         },
         data: {
-            "appKey": 'l7xxd1c2344c5b154c50a810779b023d8b97',
+            "appKey": 'l7xx49e27051d70e475a8285bb568e35a081',
             "startX": origin.lon,
             "startY": origin.lat,
             "endX": destination.lon,
