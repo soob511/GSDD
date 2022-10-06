@@ -7,10 +7,12 @@ import { authAxios } from '../../../api/common';
 import apiPath from '../../../api/apiPath';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { SET_USER } from '../../../reducers/userReducer';
+// import Map from '../../atoms/Map';
 
 const MyPage = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.tokenReducer.userId);
+  const display = useSelector((state) => state.tokenReducer.display);
 
   useEffect(() => {
     try {
@@ -30,6 +32,17 @@ const MyPage = () => {
   }, []);
 
   const username = useSelector((state) => state.userReducer.user);
+
+  // if (display == true) {
+  //   return (
+  //     <>
+  //       <Sidebar />
+  //       <S.MapWrapper>
+  //         <Map type='mypage' />
+  //       </S.MapWrapper>
+  //     </>
+  //   );
+  // } else {
   return (
     <>
       <Sidebar />
@@ -40,6 +53,7 @@ const MyPage = () => {
       <MypageCard />
     </>
   );
+  // }
 };
 
 export default MyPage;

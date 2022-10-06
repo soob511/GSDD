@@ -13,7 +13,6 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const side = useRef(null);
-  console.log(side);
   const userId = useSelector((state) => state.tokenReducer.userId);
 
   useEffect(() => {
@@ -33,13 +32,6 @@ const Home = () => {
       console.log(e);
     }
   }, []);
-  // const onSidebarToggle = useCallback(() => {
-  //   sidebarToggle.current.toggleMenu()
-  // })
-  // console.log(sidebarToggle.current.toggleMenu)
-  // useEffect(() => {
-  //   sidebarToggle.current.toggleMenu();
-  // }, []);
   return (
     <>
       {/* <Sidebar ref={side} /> */}

@@ -2,7 +2,7 @@ import Geolocation from 'react-native-geolocation-service';
 import pos from '../../../assets/pos.png';
 
 
-const mapInfo = async () => {
+const mapInfo = async (mapType) => {
 
     function getMyGps() {
 
@@ -30,7 +30,7 @@ const mapInfo = async () => {
         zoom: 15,
         scrollwheel: true
     }
-    const map = new Tmapv2.Map("TMapApp", mapOptions);
+    const map = new Tmapv2.Map(mapType, mapOptions);
     const marker = new Tmapv2.Marker({
         icon: pos,
         position: location,
