@@ -395,8 +395,6 @@ const getTwoPath = async (map, origin, destination) => {
             DrawLine.safePointList = DrawLine.shortPointList.slice(0, DrawLine.shortPointList - 1);
             DrawLine.safeLatLngList = DrawLine.shortLatLngList.slice(0, DrawLine.shortLatLngList.length - 1);
             await DrawLine.getShortPointList(DrawLine.safePointList, DrawLine.safeLatLngList, nextLamp, destination);
-            DrawLine.safePointList = DrawLine.shortPointList.slice(1, DrawLine.shortPointList);
-            DrawLine.safeLatLngList = DrawLine.shortLatLngList.slice(1, DrawLine.shortLatLngList.length);
             console.log("safePointList", DrawLine.safePointList);
             console.log("safeLatLngList", DrawLine.safeLatLngList);
         }
