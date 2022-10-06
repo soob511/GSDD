@@ -103,7 +103,8 @@ const SirenModal = (props) => {
               <RiAlarmWarningFill size="200" color="red" />
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {count > 0 ? <span>{count}초 후에 메시지가 발송됩니다.</span> : "문자 메시지가 전송되었습니다."}
+              {count > 0 ? <S.Span>{count}초 후에 메시지가 발송됩니다.</S.Span>
+               : <S.Span>문자 메시지가 전송되었습니다.</S.Span>}
             </Typography>
           </S.Container>
         </Box>
