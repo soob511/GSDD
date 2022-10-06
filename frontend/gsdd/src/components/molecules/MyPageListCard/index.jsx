@@ -6,7 +6,7 @@ import ContactModal from '../ContactModal';
 import apiPath from '../../../api/apiPath';
 import { authAxios } from '../../../api/common';
 import RouteModal from '../RouteModal';
-
+import { MdAssistantNavigation } from 'react-icons/md';
 const MyPageListCard = ({ type }) => {
   const userData = useSelector((state) => state.userReducer);
 
@@ -47,6 +47,10 @@ const MyPageListCard = ({ type }) => {
     }
   };
 
+  const handleNavButtonClick = () => {
+    console.log('NavButton Clicked');
+  };
+
   const tags = (data, margin) => {
     if (type === '비상연락망') {
       return (
@@ -61,8 +65,13 @@ const MyPageListCard = ({ type }) => {
     } else if (type !== '비상연락망') {
       return (
         <S.TitleWrapper key={data.id} margin={margin}>
-          <span>{data.name}</span>
+          <S.NickNameWrapper>
+            <span>{data.name}</span>
+          </S.NickNameWrapper>
           <S.AddressWrapper>{data.address}</S.AddressWrapper>
+          <div onClick={handleNavButtonClick}>
+            <MdAssistantNavigation color="#02588B" />
+          </div>
           <div onClick={() => handleRouteDeleteClick(data.id)}>
             <AiFillMinusCircle color="red" />
           </div>
