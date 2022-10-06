@@ -29,8 +29,8 @@ const getTwoPath = async (map, origin, destination) => {
     DrawLine.boundaryPointList = [];
     DrawLine.safePointList = [];
     DrawLine.safeLatLngList = [];
-    DrawLine.shortline = null;
-    DrawLine.safeline = null;
+    DrawLine.polyline_short = null;
+    DrawLine.polyline_safe = null;
 
     DrawLine.firstDetourStart = {};
     DrawLine.firstDetourEnd = {};
@@ -272,16 +272,17 @@ const getTwoPath = async (map, origin, destination) => {
     DrawLine.drawLine = function (type, arrPointList) {
 
         if (type === "short") {
-            const polyline_1 = new Tmapv2.Polyline({
+            DrawLine.polyline_short = new Tmapv2.Polyline({
                 path: arrPointList,
                 strokeColor: "#DD0000",
                 strokeWeight: 6,
                 map: DrawLine.map,
             });
         } else if (type === "safe") {
-            const polyline_2 = new Tmapv2.Polyline({
+            DrawLine.polyline_safe = new Tmapv2.Polyline({
                 path: arrPointList,
-                strokeColor: "#0067a3",
+                //strokeColor: "#0067a3",
+                strokeColor: "#00FF00",
                 strokeWeight: 6,
                 map: DrawLine.map,
             });
@@ -377,6 +378,9 @@ const getTwoPath = async (map, origin, destination) => {
 
     //5. 우회경로 그리기
     DrawLine.drawLine("safe", DrawLine.safeLatLngList);
+
+
+    return { 'omarker': DrawLine.omarker, 'dmarker': DrawLine.dmarker, 'short': DrawLine.polyline_short, 'safe': DrawLine_safe };
 }
 
 export default getTwoPath;
