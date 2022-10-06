@@ -99,7 +99,7 @@ const Information = () => {
             <S.StyledSelect district placeholder="구" options={district} onChange={setSelectDistrict}/>
           </S.RowBox>
           <S.RowBox>
-            <span style={{fontSize:'12px', fontFamily:'KyoboHandwriting'}}>안전지수란?</span>
+            <span style={{fontSize:'11px', fontFamily:'SUIT-Light'}}>안전지수란?</span>
             <S.Button onClick={onInfoVisible}><img src={imgInfo} style={{alignItems: 'center'}}></img></S.Button>
           </S.RowBox>
         </S.Header>
