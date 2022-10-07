@@ -68,7 +68,7 @@
 ### ERD
 ![erd](readme-asset/erd.png)
 
-### 🖥️ 포팅 매뉴얼(./exec/포팅_메뉴얼.pdf)
+### [🖥️ 포팅 매뉴얼](./exec/포팅_메뉴얼.pdf)
 
 ### [🔎 시나리오 보기](/exec/scenario.md)
 
