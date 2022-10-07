@@ -1,8 +1,8 @@
-![transparent](./readme-asset/logo.png)
+<img src = './readme-asset/logo.png' />
 
 # 기세등등
 
-[![Video Label]()
+[![Video Label]]()
 
 ## 목차
 
