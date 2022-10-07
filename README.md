@@ -1,5 +1,4 @@
-![transparent]()
-
+![transparent](./readme-asset/logo.png)
 
 # 기세등등
 
@@ -42,19 +41,19 @@
 #### Front-end
 - __Framework__ : [React](https://ko.reactjs.org/)
 - __지원 환경__ : Web
-- __담당자__ :
+- __담당자__ : 김주은 박성현 허혜진
 
 #### Back-end
 - __Framework__ : [Spring boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
 - __Database__ : [MySQL](https://dev.mysql.com/doc/)
-- __담당자__ :
+- __담당자__ : 오정환 전수빈
 
 #### Design 
 - __Design Tool 사용__ : [Figma](https://www.figma.com/)
-- __담당자__ : 
+- __담당자__ : 김주은 박성현 허혜진 오정환 전수빈
 
 ### 핵심 라이브러리 
-- Front : 
+- Front : React
 - Back : JPA, Hiberate, QueryDSL, Lombok
 
 
