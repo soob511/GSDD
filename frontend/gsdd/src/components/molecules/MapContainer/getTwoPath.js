@@ -392,8 +392,6 @@ const getTwoPath = async (map, origin, destination) => {
             DrawLine.safeLatLngList = DrawLine.shortLatLngList.slice(0, DrawLine.firstDetourStartIndex);
             DrawLine.safePointList.push(DrawLine.shortPointList.slice(0, DrawLine.firstDetourStartIndex)); //이전 최단 경로 저장
             await DrawLine.getShortPointList(DrawLine.safePointList, DrawLine.safeLatLngList, origin, nextLamp);
-            DrawLine.safePointList = DrawLine.shortPointList.slice(0, DrawLine.shortPointList - 1);
-            DrawLine.safeLatLngList = DrawLine.shortLatLngList.slice(0, DrawLine.shortLatLngList.length - 1);
             await DrawLine.getShortPointList(DrawLine.safePointList, DrawLine.safeLatLngList, nextLamp, destination);
             console.log("safePointList", DrawLine.safePointList);
             console.log("safeLatLngList", DrawLine.safeLatLngList);
