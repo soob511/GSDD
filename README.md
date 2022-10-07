@@ -54,7 +54,7 @@
 - __담당자__ : 
 
 ### 핵심 라이브러리 
-- Front : Vuex, Vue Router, Element Plus, CSS media queries, Axios
+- Front : 
 - Back : JPA, Hiberate, QueryDSL, Lombok
 
 
@@ -64,11 +64,11 @@
 - [Figma](https://www.figma.com/file/6CPEvepGjPPIExcrsBqPp2/%EA%B8%B0%EC%84%B8%EB%93%B1%EB%93%B1)
 
 ### 서비스 구조
-<img src="" width="80%">
+![architecture](readme-asset/architecture.png)
 
 ### ERD
 
-<img src="" width="80%">
+![erd](readme-asset/erd.png)
 
 ## 🖥️ 포팅 매뉴얼
 - [Getting Started & Running the tests](./exec/README.md)
