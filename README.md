@@ -71,7 +71,7 @@
 ![erd](readme-asset/erd.png)
 
 ## 🖥️ 포팅 매뉴얼
-- [Getting Started & Running the tests](./exec/README.md)
+- [포팅 매뉴얼](./exec/포팅_메뉴얼.pdf)
 - [Test Senario](./exec/senario.md)
 
 
